@@ -10,8 +10,7 @@ import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import Popper from "../Popper"
 
 
 
@@ -57,11 +56,9 @@ export default function HideAppBar(props) {
       <HideOnScroll {...props}>
       <AppBar>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
+          <Popper/>
           <Typography variant="h6" className={classes.title}>
-            News
+            On The Fly Staffing
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

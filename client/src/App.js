@@ -9,9 +9,9 @@ class App extends Component {
       <React.Fragment>
       <CssBaseline />
       <HideAppBar/>
-      {[...new Array(100)].map(item =>(<p>item</p>))}
+      {[...new Array(100)].map(item =>(<p>item</p>))} {/*here temporarily to show hiding feature of appbar on scrolling*/}
 
-      {/* The rest of your application */}
+     
     </React.Fragment>
     );
   }
