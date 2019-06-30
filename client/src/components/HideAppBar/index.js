@@ -8,8 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Slide from "@material-ui/core/Slide";
 import { makeStyles } from "@material-ui/core/styles";
+import SearchForm from "../SearchForm";
 // import Button from "@material-ui/core/Button";
-import Popper from "../Popper";
+// import Popper from "../Popper";
 import style from "./style.module.css";
 
 
@@ -41,9 +42,13 @@ const useStyles = makeStyles(theme => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
-    title: {
-        flexGrow: 1,
+    title: {    
+        width: "fit-content"
     },
+    centerBar: {
+        flexGrow: 1,
+        alignContent: "center"    
+    },   
 }));
 
 export default withRouter(function HideAppBar(props) {
@@ -53,14 +58,27 @@ export default withRouter(function HideAppBar(props) {
             <HideOnScroll {...props}>
                 <AppBar>
                     <Toolbar>
-                        <Popper/>
+                        {/* <Popper/> */}
                         <Typography variant="h6" className={classes.title}>
-                            <NavLink to="/" exact={true} className={`${style.inheritLink}`}>
-                            On The Fly Staffing
-                            </NavLink>
+                            {props.loggedIn ? 
+                                <NavLink to="/list-view" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
+                                :
+                                <NavLink to="/" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
+                            }
                         </Typography>
-                        <Typography variant="h6">
-                            <NavLink to="/login" exact={true}  className={`${style.inheritLink}`} color="inherit">Login</NavLink>
+                        <div className={classes.centerBar}>
+                            {props.loggedIn ? 
+                                <SearchForm />
+                                :
+                                null
+                            }
+                        </div>
+                        <Typography variant="h6" className={classes.linkRight}>
+                            {props.loggedIn ? 
+                                <NavLink to="/" exact={true}  className={`${style.inheritLink}`} onClick={props.logOut} color="inherit">Log Out</NavLink>
+                                :                            
+                                <NavLink to="/login" exact={true}  className={`${style.inheritLink}`} color="inherit">Login</NavLink>
+                            }
                         </Typography>
                     </Toolbar>
                 </AppBar>

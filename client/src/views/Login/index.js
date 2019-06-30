@@ -11,10 +11,11 @@ const useStyles = makeStyles(theme => ({
 
 class Login extends Component {
     state = {
-        array: new Array(100)
     };
     handleSubmit = () => {
-        this.props.history.push("/list-view")
+        console.log(this.props)
+        this.props.login();
+        this.props.history.push("/list-view");
     };
     render(){
         const classes = () => useStyles();

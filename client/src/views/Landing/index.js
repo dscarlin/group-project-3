@@ -18,7 +18,7 @@ export default function Landing(props) {
             <h1>&nbsp;</h1>
             <h1>Landing Page</h1>
             <Button variant="contained" className={`${classes.button} `} >
-                <NavLink to="/application" exact={true} className={`${style.inherit}`}>
+                <NavLink to="/apply" exact={true} className={`${style.inherit}`}>
                 Apply
                 </NavLink>
             </Button>
