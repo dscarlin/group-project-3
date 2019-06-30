@@ -1,0 +1,11 @@
+/* .brand {
+    font-size: r
+} */
+.inheritLink {
+    all: inherit;
+    cursor: pointer
+};
+
+.inherit a:hover {
+    
+};
