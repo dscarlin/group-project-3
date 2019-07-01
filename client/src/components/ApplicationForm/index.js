@@ -14,14 +14,12 @@ import { TextField } from "@material-ui/core";
 
 const styles = () => ({
     form: {
-        flexWrap: "wrap",
         margin: "2em auto",
         width: "fit-content",
         maxWidth: "90vw",
-        // border: "1px grey solid",
+        minWidth: "50vw",
         boxShadow: "5px 5px 20px 5px grey",
         padding: "2em"
-        // display: "block"
     },
     formControl: {
         width: "100%"
@@ -197,7 +195,7 @@ class ApplicationForm extends Component {
                 </FormControl>
                 <TextField className={classes.formControl} id="wh-details-3" multiline label="Details" name="whDetails3" onChange={this.handleChange} value={this.state.whDetails3}/>
                 &nbsp;
-                <hr/>             
+                           
                 <h3>Message To Employer:</h3>
                 <TextField className={classes.formControl} id="coverLetter" multiline label="CoverLetter" name="coverLetter" onChange={this.handleChange} value={this.state.coverLetter}/>
 
