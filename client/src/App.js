@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import { CssBaseline } from "@material-ui/core";
 import HideAppBar from "./components/HideAppBar";
 import Login from "./views/Login";
 import Landing from "./views/Landing";
