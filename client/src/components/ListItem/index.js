@@ -43,10 +43,10 @@ export default function ListItem() {
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1">
-                                Standard license
+                                Applicant Name
                                 </Typography>
                                 <Typography variant="body2" gutterBottom>
-                                    Full resolution 1920x1080 • JPEG
+                                    Experience: X months
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
                                 ID: 1030114
