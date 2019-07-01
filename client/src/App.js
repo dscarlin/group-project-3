@@ -1,21 +1,51 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React, {Component} from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import HideAppBar from "./components/HideAppBar";
+import Login from "./views/Login";
+import Landing from "./views/Landing";
+import Apply from "./views/Apply";
+import ListAndDetailContainer from "./views/ListAndDetailContainer";
 import "./App.css";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+    state = {
+        loggedIn: false
+    }
+    login = () => {
+        this.setState({loggedIn: true})
+    };
+    logOut = () => {
 
+        this.setState({loggedIn: false})
+    };
+    render() {
+        return (
+            <React.Fragment>
+                <CssBaseline />
+                <Router>
+                    <HideAppBar 
+                        loggedIn={this.state.loggedIn}
+                        logOut={this.logOut}
+                    />
+                    <Route 
+                        exact path="/" 
+                        component={ Landing } 
+                    />   
+                    <Route
+                        exact path="/login"
+                        render={ props => 
+                            <Login
+                            login={this.login}
+                            {...props} 
+                            />
+                        }
+                    />   
+                    <Route exact path="/Apply" component={ Apply}/>
+                    <Route exact path="/list-view" component={ ListAndDetailContainer }/>
+                </Router>
+            </React.Fragment>
+        );
+    };
+};
 export default App;
