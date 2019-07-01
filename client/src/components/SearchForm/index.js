@@ -1,13 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import ListItemText from "@material-ui/core/ListItemText";
-import Select from "@material-ui/core/Select";
-import Checkbox from "@material-ui/core/Checkbox";
-import Button from "@material-ui/core/button";
+import { Input, InputLabel, MenuItem, FormControl, ListItemText, Select, Checkbox, Button } from "@material-ui/core/Input";
+
 
 
 const useStyles = makeStyles(() => ({
