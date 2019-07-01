@@ -1,0 +1,211 @@
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import ListItemText from "@material-ui/core/ListItemText";
+import Select from "@material-ui/core/Select";
+import Checkbox from "@material-ui/core/Checkbox";
+import Button from "@material-ui/core/button";
+import { TextField } from "@material-ui/core";
+
+
+
+const styles = () => ({
+    form: {
+        flexWrap: "wrap",
+        margin: "2em auto",
+        width: "fit-content",
+        maxWidth: "90vw",
+        // border: "1px grey solid",
+        boxShadow: "5px 5px 20px 5px grey",
+        padding: "2em"
+        // display: "block"
+    },
+    formControl: {
+        width: "100%"
+    },
+    button: {
+        display: "block",
+        margin: "2em auto"        
+    }
+});
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: "auto",
+        },
+    }
+};
+  
+const positionOptions = [
+    "Server",
+    "Bar Tender",
+    "Busser",
+    "FOH Manager",
+    "BOH Manager",
+    "Line Cook",
+    "Dishwasher",
+    "Prep Cook"
+];
+
+class ApplicationForm extends Component {
+    state = {
+        selectedPositions: [],
+        name: "",
+        email: "",
+        positionsWorked1: [],
+        whMonths1: "",
+        whDetails1: "",
+        positionsWorked2: [],
+        whMonths2: "",
+        whDetails2: "",
+        positionsWorked3: [],
+        whMonths3: "",
+        whDetails3: "",
+        coverLetter: ""
+    };
+    handleChange = event => {
+        let { name, value } = event.target;
+        this.setState({ [name]: value });
+    };
+    handleSubmit = e => {
+        e.preventDefault();
+        const { name, email, selectedPositions, positionsWorked1, whMonths1, whDetails1, 
+            positionsWorked2, whMonths2, whDetails2, positionsWorked3, whMonths3, whDetails3, coverLetter } = this.state
+        console.log(name, email, selectedPositions, positionsWorked1, whMonths1, whDetails1, 
+            positionsWorked2, whMonths2, whDetails2, positionsWorked3, whMonths3, whDetails3, coverLetter );
+        this.setState({name: "", email: "", selectedPositions: [], positionsWorked1: [], whMonths1:"", whDetails1: "", 
+            positionsWorked2: [], whMonths2:"", whDetails2: "", positionsWorked3: [], whMonths3:"", whDetails3: "", coverLetter: ""})
+    };
+    render() {
+        const { classes } = this.props;
+        return (
+            <form className={classes.form}>
+
+                <h3>Applicant Details:</h3>
+                <FormControl className={`${classes.formControl}`}>
+                    <InputLabel  htmlFor="name">Name</InputLabel>
+                    <Input id="name" name="name" onChange={this.handleChange} value={this.state.name}/>
+                </FormControl>
+                <FormControl className={`${classes.formControl}`}>
+                    <InputLabel htmlFor="email">Email</InputLabel>
+                    <Input id="email" name="email" onChange={this.handleChange} value={this.state.email}/>
+                </FormControl>
+                <FormControl className={`${classes.formControl}`}>
+                    <InputLabel  htmlFor="select-multiple-checkbox">Position Applying For</InputLabel>
+                    <Select
+                        multiple
+                        value={this.state.selectedPositions}
+                        onChange={this.handleChange}
+                        name="selectedPositions"
+                        input={<Input className={classes.white} id="select-multiple-checkbox" />}
+                        renderValue={selected => selected.join(", ")}
+                        MenuProps={MenuProps}
+                    >
+                        {positionOptions.map(name => (
+                            <MenuItem key={name} value={name}>
+                                <Checkbox checked={this.state.selectedPositions.indexOf(name) > -1} />
+                                <ListItemText primary={name} />
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+                <h3>Work History:</h3>
+                <h1>&#10112;</h1>
+                <FormControl className={` ${classes.formControl}`}>
+                    <InputLabel  htmlFor="wh-position-1">Positions Worked</InputLabel>
+                    <Select
+                        multiple
+                        value={this.state.positionsWorked1}
+                        onChange={this.handleChange}
+                        name="positionsWorked1"
+                        input={<Input className={classes.white} id="wh-position-1" />}
+                        renderValue={selected => selected.join(", ")}
+                        MenuProps={MenuProps}
+                    >
+                        {positionOptions.map(name => (
+                            <MenuItem key={name} value={name}>
+                                <Checkbox checked={this.state.positionsWorked1.indexOf(name) > -1} />
+                                <ListItemText primary={name} />
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControl className={` ${classes.formControl}`} >
+                    <InputLabel htmlFor="wh-months-1">Months of Experience</InputLabel>
+                    <Input id="wh-months-1" type="number" name="whMonths1" onChange={this.handleChange} value={this.state.whMonths1}/>
+                </FormControl>
+                <TextField className={classes.formControl} id="wh-details-1" multiline label="Details" name="whDetails1" onChange={this.handleChange} value={this.state.whDetails1}/>
+                &nbsp;
+                <hr/>             
+                <h1>&#10113;</h1>
+                <FormControl className={` ${classes.formControl}`}>
+                    <InputLabel  htmlFor="wh-position-2">Positions Worked</InputLabel>
+                    <Select
+                        multiple
+                        value={this.state.positionsWorked2}
+                        onChange={this.handleChange}
+                        name="positionsWorked2"
+                        input={<Input className={classes.white} id="wh-position-2" />}
+                        renderValue={selected => selected.join(", ")}
+                        MenuProps={MenuProps}
+                    >
+                        {positionOptions.map(name => (
+                            <MenuItem key={name} value={name}>
+                                <Checkbox checked={this.state.positionsWorked2.indexOf(name) > -1} />
+                                <ListItemText primary={name} />
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControl className={` ${classes.formControl}`} >
+                    <InputLabel htmlFor="wh-months-2">Months of Experience</InputLabel>
+                    <Input id="wh-months-2" type="number" name="whMonths2" onChange={this.handleChange} value={this.state.whMonths2}/>
+                </FormControl>
+                <TextField className={classes.formControl} id="wh-details-2" multiline label="Details" name="whDetails2" onChange={this.handleChange} value={this.state.whDetails2}/>
+                &nbsp;
+                <hr/>             
+                <h1>&#10114;</h1>
+                <FormControl className={` ${classes.formControl}`}>
+                    <InputLabel  htmlFor="wh-position-3">Positions Worked</InputLabel>
+                    <Select
+                        multiple
+                        value={this.state.positionsWorked3}
+                        onChange={this.handleChange}
+                        name="positionsWorked3"
+                        input={<Input className={classes.white} id="wh-position-3" />}
+                        renderValue={selected => selected.join(", ")}
+                        MenuProps={MenuProps}
+                    >
+                        {positionOptions.map(name => (
+                            <MenuItem key={name} value={name}>
+                                <Checkbox checked={this.state.positionsWorked3.indexOf(name) > -1} />
+                                <ListItemText primary={name} />
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControl className={` ${classes.formControl}`} >
+                    <InputLabel htmlFor="wh-months-3">Months of Experience</InputLabel>
+                    <Input id="wh-months-3" type="number" name="whMonths3" onChange={this.handleChange} value={this.state.whMonths3}/>
+                </FormControl>
+                <TextField className={classes.formControl} id="wh-details-3" multiline label="Details" name="whDetails3" onChange={this.handleChange} value={this.state.whDetails3}/>
+                &nbsp;
+                <hr/>             
+                <h3>Message To Employer:</h3>
+                <TextField className={classes.formControl} id="coverLetter" multiline label="CoverLetter" name="coverLetter" onChange={this.handleChange} value={this.state.coverLetter}/>
+
+
+                <Button onClick={this.handleSubmit} className={`${classes.white} ${classes.button}`} >Search</Button>
+            </form>
+    
+        );
+    };
+}
+export default withStyles(styles)(ApplicationForm);
