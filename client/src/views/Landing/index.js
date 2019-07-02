@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/button";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
 import Paper from "@material-ui/core/paper";

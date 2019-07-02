@@ -1,10 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import { Grid } from "@material-ui/core";
 import ListItem from "../../components/ListItem";
-// import { width, height } from "@material-ui/system";
 
-const useStyles = makeStyles(theme => ({
+
+const useStyles = makeStyles(() => ({
     root: {
         flexGrow: 1,
         position: "relative"
@@ -34,5 +34,5 @@ export default function ListAndDetailContainer() {
                 <h1>detail</h1>
             </Grid>
         </Grid>
-    )
+    );
 }
