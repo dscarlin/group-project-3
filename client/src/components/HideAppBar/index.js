@@ -42,13 +42,13 @@ const useStyles = makeStyles(theme => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
-    title: {    
+    title: {
         width: "fit-content"
     },
     centerBar: {
         flexGrow: 1,
-        alignContent: "center"    
-    },   
+        alignContent: "center"
+    }
 }));
 
 export default withRouter(function HideAppBar(props) {
