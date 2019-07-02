@@ -48,6 +48,7 @@ class ApplicationForm extends Component {
         selectedPositions: [],
         name: "",
         email: "",
+        phone: "",
         positionsWorked1: [],
         whMonths1: "",
         whDetails1: "",
@@ -59,17 +60,31 @@ class ApplicationForm extends Component {
         whDetails3: "",
         coverLetter: ""
     };
+    
     handleChange = event => {
         let { name, value } = event.target;
-        this.setState({ [name]: value });
+        if (name === "phone"){
+            let phoneNumber = value
+            phoneNumber = phoneNumber.split('').filter(char => char.match(/[0-9]/g));
+            if (phoneNumber.length > 9){
+                phoneNumber.splice(0,0,'(');
+                phoneNumber.splice(4,0,')');
+                phoneNumber.splice(5,0,' ');
+                phoneNumber.splice(9,0,'-');
+            }
+            phoneNumber = phoneNumber.join('').slice(0,14);
+            this.setState({phone: phoneNumber})
+        }
+        else
+            this.setState({ [name]: value });
     };
     handleSubmit = e => {
         e.preventDefault();
-        const { name, email, selectedPositions, positionsWorked1, whMonths1, whDetails1, 
+        const { name, email, phone, selectedPositions, positionsWorked1, whMonths1, whDetails1, 
             positionsWorked2, whMonths2, whDetails2, positionsWorked3, whMonths3, whDetails3, coverLetter } = this.state
-        console.log(name, email, selectedPositions, positionsWorked1, whMonths1, whDetails1, 
+        console.log(name, email, phone, selectedPositions, positionsWorked1, whMonths1, whDetails1, 
             positionsWorked2, whMonths2, whDetails2, positionsWorked3, whMonths3, whDetails3, coverLetter );
-        this.setState({name: "", email: "", selectedPositions: [], positionsWorked1: [], whMonths1:"", whDetails1: "", 
+        this.setState({name: "", email: "", phone: "", selectedPositions: [], positionsWorked1: [], whMonths1:"", whDetails1: "", 
             positionsWorked2: [], whMonths2:"", whDetails2: "", positionsWorked3: [], whMonths3:"", whDetails3: "", coverLetter: ""})
     };
     render() {
@@ -85,6 +100,10 @@ class ApplicationForm extends Component {
                 <FormControl className={`${classes.formControl}`}>
                     <InputLabel htmlFor="email">Email</InputLabel>
                     <Input id="email" name="email" onChange={this.handleChange} value={this.state.email}/>
+                </FormControl>
+                <FormControl className={`${classes.formControl}`}>
+                    <InputLabel htmlFor="phone">Phone Number</InputLabel>
+                    <Input id="phone" name="phone" onChange={this.handleChange} value={this.state.phone}/>
                 </FormControl>
                 <FormControl className={`${classes.formControl}`}>
                     <InputLabel  htmlFor="select-multiple-checkbox">Position Applying For</InputLabel>
