@@ -12,7 +12,9 @@ import SearchForm from "../SearchForm";
 // import Button from "@material-ui/core/Button";
 // import Popper from "../Popper";
 import style from "./style.module.css";
-
+import { useAuth0 } from "../../react-auth0-wrapper";
+import createAuth0Client from '@auth0/auth0-spa-js';
+import { Link } from "react-router-dom";
 
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -34,6 +36,8 @@ HideOnScroll.propTypes = {
     // You won't need it on your project.
     window: PropTypes.func,
 };
+
+const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -60,24 +64,26 @@ export default withRouter(function HideAppBar(props) {
                     <Toolbar>
                         {/* <Popper/> */}
                         <Typography variant="h6" className={classes.title}>
-                            {props.loggedIn ? 
+                            {isAuthenticated ? 
                                 <NavLink to="/list-view" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                                 :
                                 <NavLink to="/" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                             }
                         </Typography>
                         <div className={classes.centerBar}>
-                            {props.loggedIn ? 
+                            {isAuthenticated ? 
                                 <SearchForm />
                                 :
                                 null
                             }
                         </div>
                         <Typography variant="h6" className={classes.linkRight}>
-                            {props.loggedIn ? 
-                                <NavLink to="/" exact={true}  className={`${style.inheritLink}`} onClick={props.logOut} color="inherit">Log Out</NavLink>
+                            {isAuthenticated ? 
+                                <NavLink to="/" exact={true} className={`${style.inheritLink}`} onClick={() => logout()} color="inherit">Log Out</NavLink>
                                 :                            
-                                <NavLink to="/login" exact={true}  className={`${style.inheritLink}`} color="inherit">Login</NavLink>
+                                <NavLink to="/login" exact={true} className={`${style.inheritLink}`} onClick={() =>
+                                    loginWithRedirect({})
+                                } color="inherit">Login</NavLink>
                             }
                         </Typography>
                     </Toolbar>
