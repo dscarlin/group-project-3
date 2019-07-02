@@ -47,8 +47,15 @@ const useStyles = makeStyles(theme => ({
     },
     centerBar: {
         flexGrow: 1,
-        alignContent: "center"    
-    },   
+        alignContent: "center"
+    },
+    MuiToolbar: {
+        palette: {
+            primary: {
+                main: "#FF966C"
+            }
+        }
+    }
 }));
 
 export default withRouter(function HideAppBar(props) {

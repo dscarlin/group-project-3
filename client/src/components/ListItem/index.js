@@ -5,6 +5,11 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 
+// Icons
+import Star from "@material-ui/icons/StarRounded";
+import Message from "@material-ui/icons/Message";
+import Delete from "@material-ui/icons/Delete";
+
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -14,34 +19,43 @@ const useStyles = makeStyles(theme => ({
         // padding: theme.spacing(2),
         margin: "1em 0",
         maxWidth: "90%",
-    },
-    image: {
-        width: 128,
-        height: 128,
-    },
-    img: {
-        margin: "auto",
-        display: "block",
-        maxWidth: "100%",
-        maxHeight: "100%",
-    },
+    }
 }));
+
 
 export default function ListItem() {
     const classes = useStyles();
-
+    const favoriteApplicant = (e) => {
+        e.preventDefault();
+        return console.log("Save this Item to Employer's Favorites");
+    };
+    const removeApplicant = (e) => {
+        e.preventDefault();
+        return console.log("Delete this Item from List View");
+    };
+    const showApplicantDetail = (e) => {
+        e.preventDefault();
+        return console.log("On List Item click, display the detail page for this applicant");
+    };
+    const messageApplicant= (e) => {
+        e.preventDefault();
+        return console.log("*Twilio Message Ping*");
+    };
     return (
         <li className={classes.root}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
-                        <ButtonBase className={classes.image}>
-                            <img className={classes.img} alt="complex" src="" />
+                        <ButtonBase> 
+                            <Star style={{color:"gray"}} onClick={favoriteApplicant}></Star>
+                        </ButtonBase>
+                        <ButtonBase> 
+                            <Delete style={{color:"gray"}} onClick={removeApplicant}></Delete>
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs>
+                            <Grid item xs onClick={showApplicantDetail}>
                                 <Typography gutterBottom variant="subtitle1">
                                 Applicant Name
                                 </Typography>
@@ -49,17 +63,21 @@ export default function ListItem() {
                                     Experience: X months
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                ID: 1030114
+                                Available: (Date)
                                 </Typography>
                             </Grid>
-                            <Grid item>
-                                <Typography variant="body2" style={{ cursor: "pointer" }}>
-                                Remove
+                        </Grid>
+                        <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs onClick={showApplicantDetail}>
+                                <Typography gutterBottom variant="subtitle1">
+                                Worked For: (Employers Here)
                                 </Typography>
                             </Grid>
                         </Grid>
                         <Grid item>
-                            <Typography variant="subtitle1">$19.00</Typography>
+                            <ButtonBase>
+                                <Message style={{color:"gray"}} onClick={messageApplicant}></Message>
+                            </ButtonBase>
                         </Grid>
                     </Grid>
                 </Grid>
