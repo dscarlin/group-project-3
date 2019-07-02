@@ -34,5 +34,5 @@ export default function ListAndDetailContainer() {
                 <h1>detail</h1>
             </Grid>
         </Grid>
-    )
+    );
 }
