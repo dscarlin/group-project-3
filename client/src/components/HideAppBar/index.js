@@ -42,19 +42,12 @@ const useStyles = makeStyles(theme => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
-    title: {    
+    title: {
         width: "fit-content"
     },
     centerBar: {
         flexGrow: 1,
         alignContent: "center"
-    },
-    MuiToolbar: {
-        palette: {
-            primary: {
-                main: "#FF966C"
-            }
-        }
     }
 }));
 
