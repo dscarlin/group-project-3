@@ -15,7 +15,7 @@ class Login extends Component {
     handleSubmit = () => {
         console.log(this.props)
         this.props.login();
-        this.props.history.push("/list-view");
+        this.props.history.push("/list-view/saved");
     };
     render(){
         const classes = () => useStyles();

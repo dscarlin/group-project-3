@@ -84,6 +84,7 @@ class ApplicationForm extends Component {
             positionsWorked2, whMonths2, whDetails2, positionsWorked3, whMonths3, whDetails3, coverLetter } = this.state
         console.log(name, email, phone, selectedPositions, positionsWorked1, whMonths1, whDetails1, 
             positionsWorked2, whMonths2, whDetails2, positionsWorked3, whMonths3, whDetails3, coverLetter );
+            
         this.setState({name: "", email: "", phone: "", selectedPositions: [], positionsWorked1: [], whMonths1:"", whDetails1: "", 
             positionsWorked2: [], whMonths2:"", whDetails2: "", positionsWorked3: [], whMonths3:"", whDetails3: "", coverLetter: ""})
     };
@@ -211,7 +212,7 @@ class ApplicationForm extends Component {
                 <TextField className={classes.formControl} id="coverLetter" multiline label="CoverLetter" name="coverLetter" onChange={this.handleChange} value={this.state.coverLetter}/>
 
 
-                <Button onClick={this.handleSubmit} className={`${classes.white} ${classes.button}`} >Search</Button>
+                <Button onClick={this.handleSubmit} className={`${classes.white} ${classes.button}`} >Submit</Button>
             </form>
     
         );

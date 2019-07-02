@@ -60,6 +60,7 @@ export default function SearchForm() {
         e.preventDefault();
         //SelectedPositions is the array of 
         console.log(SelectedPositions);
+        // this.props.history.push("/list-view/searched"); Throwing error regarding undefined this
     };
     return (
         <form className={classes.root} >

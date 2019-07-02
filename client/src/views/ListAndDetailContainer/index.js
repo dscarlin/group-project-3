@@ -23,11 +23,20 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListAndDetailContainer() {
     const classes = useStyles();
+    
     return(
         <Grid container spacing={0} className={classes.root}>
             <Grid item xs={6} className={classes.control}>
                 <ul>
-                    {[...new Array(15)].map((i,x) => <ListItem key={x}/>) }
+                    {[...new Array(15)].map((i,x) => 
+                        <ListItem 
+                            key={x}
+                            applicantName="Applicant Name"
+                            expInMonths="Experience: X Months"
+                            availableWhen="Available: Date"
+                            workHistory="Work History: Employer1, Employer2, Employer3"
+                        />
+                    )}
                 </ul>
             </Grid>
             <Grid  item xs={6   } className={`${classes.control} ${classes.fixed}`}>
