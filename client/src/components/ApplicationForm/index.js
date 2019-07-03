@@ -238,7 +238,7 @@ class ApplicationForm extends Component {
                 <TextField className={classes.formControl} id="coverLetter" multiline label="CoverLetter" name="coverLetter" onChange={this.handleChange} value={this.state.coverLetter}/>
 
 
-                <Button onClick={this.handleSubmit} className={`${classes.white} ${classes.button}`} >Search</Button>
+                <Button onClick={this.handleSubmit} className={`${classes.white} ${classes.button}`} >Submit</Button>
             </form>
     
         );

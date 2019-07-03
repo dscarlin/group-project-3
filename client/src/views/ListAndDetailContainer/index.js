@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import ListItem from "../../components/ListItem";
+import applicants from "../../dummyApps.json";
 
 
 const useStyles = makeStyles(theme => ({
@@ -23,14 +24,23 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListAndDetailContainer() {
     const classes = useStyles();
+    console.log(applicants);
     return(
         <Grid container spacing={0} className={classes.root}>
             <Grid item xs={6} className={classes.control}>
                 <ul>
-                    {[...new Array(15)].map((i,x) => <ListItem key={x}/>) }
+                    {applicants.map(applicant => 
+                        <ListItem 
+                            key={applicant + applicant._id}
+                            applicantName={applicant.applicantName}
+                            expInMonths={`Experience: ${applicant.cumulativeExperience}`}
+                            availableWhen={`Available: ${applicant.dateAvailable}`}
+                            workHistory={`Work History: ${applicant.workHistory}`}
+                        />
+                    )}
                 </ul>
             </Grid>
-            <Grid  item xs={6   } className={`${classes.control} ${classes.fixed}`}>
+            <Grid  id="detailView" item xs={6   } className={`${classes.control} ${classes.fixed}`}>
                 <h1>detail</h1>
                 <h1>detail</h1>
             </Grid>
