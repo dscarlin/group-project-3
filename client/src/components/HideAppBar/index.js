@@ -37,7 +37,7 @@ HideOnScroll.propTypes = {
     window: PropTypes.func,
 };
 
-const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -56,6 +56,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default withRouter(function HideAppBar(props) {
+    const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -81,9 +82,7 @@ export default withRouter(function HideAppBar(props) {
                             {isAuthenticated ? 
                                 <NavLink to="/" exact={true} className={`${style.inheritLink}`} onClick={() => logout()} color="inherit">Log Out</NavLink>
                                 :                            
-                                <NavLink to="/login" exact={true} className={`${style.inheritLink}`} onClick={() =>
-                                    loginWithRedirect({})
-                                } color="inherit">Login</NavLink>
+                                <button exact={true} className={`${style.inheritLink}`} onClick={() => loginWithRedirect({})} color="inherit">Login</button>
                             }
                         </Typography>
                     </Toolbar>

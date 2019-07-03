@@ -20,7 +20,7 @@ const onRedirectCallback = appState => {
 
 ReactDOM.render(
  <Auth0Provider
-     domain={config.domain}
+    domain={config.domain}
     client_id={config.clientId}
     redirect_uri={window.location.origin}
     onRedirectCallback={onRedirectCallback}

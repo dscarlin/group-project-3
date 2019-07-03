@@ -2,11 +2,11 @@ import React, {Component} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import HideAppBar from "./components/HideAppBar";
-import Login from "./views/Login";
 import Landing from "./views/Landing";
 import Apply from "./views/Apply";
 import ListAndDetailContainer from "./views/ListAndDetailContainer";
-// import Profile from "./components/Profile";
+import Profile from "./components/Profile";
+import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 
 class App extends Component {
@@ -21,10 +21,10 @@ class App extends Component {
                         exact path="/" 
                         component={ Landing } 
                     />
-                    {/* <Switch>
+                    { <Switch>
                         <Route path="/" exact />
-                        <Route path="/profile" component={Profile} />
-                    </Switch>    */}
+                        <PrivateRoute path="/profile" component={Profile} />
+                    </Switch>    }
                     {/* <Route
                         exact path="/login"
                         render={ props => 
