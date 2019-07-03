@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        minHeight: 400
+        minHeight: 400,
     },
     overlay: {
         position: "absolute",
@@ -32,12 +32,8 @@ const useStyles = makeStyles(theme => ({
     },
     welcomeMessage: {
         position: "relative", 
-        padding: theme.spacing(3),
-        [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(8),
-            paddingRight: 0,
-        },
-        textShadow: 1
+        padding: 64,
+        marginTop: 60,
     },
     overview: {
         position: "relative",
@@ -60,9 +56,9 @@ export default function Landing(props) {
                         <Grid item md={12}>
                             <div className={classes.welcomeMessage}>
                                 <Typography variant="h1" color="inherit" align="center" >
-                                    Welcome to On The Fly Staffing
+                                    On The Fly Staffing
                                 </Typography>
-                                <Typography variant="h3" color="inherit" align="center" >
+                                <Typography variant="h5" color="inherit" align="center" >
                                     Helping the hospitality industry apply and hire with ease.
                                 </Typography>
                             </div>
@@ -70,18 +66,18 @@ export default function Landing(props) {
                     </Grid>
                 </Paper>
                 <div className={classes.overview}>
-                    <Typography variant="p" color="inherit">
+                    <Typography variant="body1" color="inherit">
                         Our goal is to make the hiring process in the restaurant industry easier for all involved.  Applicants can apply to all of our member restaurants at once by submitting our easy online questionaire.  Restaurant managers are then able to search our talent pool to find the perfect candidates to fufill their needs.   
                     </Typography>
                     <br />
-                    <Button variant="contained" className={`${classes.button} `} >
+                    <Button variant="contained" color="inherit" className={`${classes.button} `} >
                         <NavLink to="/apply" exact={true} className={`${style.inherit}`}>
                             Apply for Jobs
                         </NavLink>
                     </Button>
-                    <Button variant="contained" className={`${classes.button} `} >
+                    <Button variant="contained" color="inherit" className={`${classes.button} `} >
                         <NavLink to="/login" exact={true} className={`${style.inherit}`}>
-                            Find Applicants
+                            Find Candidates
                         </NavLink>
                     </Button>
                 </div>
