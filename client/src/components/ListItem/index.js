@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function ListItem() {
+export default function ListItem(props) {
     const classes = useStyles();
     const favoriteApplicant = (e) => {
         e.preventDefault();
@@ -57,20 +57,20 @@ export default function ListItem() {
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs onClick={showApplicantDetail}>
                                 <Typography gutterBottom variant="subtitle1">
-                                Applicant Name
+                                    {props.applicantName}
                                 </Typography>
                                 <Typography variant="body2" gutterBottom>
-                                    Experience: X months
+                                    {props.expInMonths}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                Available: (Date)
+                                    {props.availableWhen}
                                 </Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs onClick={showApplicantDetail}>
                                 <Typography gutterBottom variant="subtitle1">
-                                Worked For: (Employers Here)
+                                    {props.workHistory}
                                 </Typography>
                             </Grid>
                         </Grid>

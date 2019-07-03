@@ -11,9 +11,10 @@ const useStyles = makeStyles(() => ({
         margin: "auto",
     },
     formControl: {
-        minWidth: 120,
+        minWidth:180,
         maxWidth: 300,
         verticalAlign: "center",
+        margin: "0 1em"
         // margin: "auto"
     },  
     white: {
@@ -47,19 +48,30 @@ const positionOptions = [
     "Prep Cook"
 ];
   
-
+const availabilityOptions = [
+    "Breakfast",
+    "Lunch",
+    "Dinner",
+    "Late Night"
+]
   
 export default function SearchForm() {
     const classes = useStyles();
-    const [SelectedPositions, setSelectedPositions] = React.useState([]);
+    const [SelectedPositions, setSelectedPositions,] = React.useState([]);
+    const [selectedAvailability, setSelectedAvailability] = React.useState([]);
   
     function handleChange(event) {
-        setSelectedPositions(event.target.value);
+        if(event.target.name === "pos")
+            setSelectedPositions(event.target.value);
+        else
+            setSelectedAvailability(event.target.value);
     }
     const handleSubmit = e => {
         e.preventDefault();
+        console.log(SelectedPositions, selectedAvailability);
+        setSelectedPositions([]);
+        setSelectedAvailability([]);
         //SelectedPositions is the array of 
-        console.log(SelectedPositions);
     };
     return (
         <form className={classes.root} >
@@ -67,6 +79,7 @@ export default function SearchForm() {
                 <InputLabel className={`${classes.white}`} htmlFor="select-multiple-checkbox">Position to fill</InputLabel>
                 <Select
                     multiple
+                    name="pos"
                     className={classes.white}
                     value={SelectedPositions}
                     onChange={handleChange}
@@ -77,6 +90,26 @@ export default function SearchForm() {
                     {positionOptions.map(name => (
                         <MenuItem key={name} value={name}>
                             <Checkbox checked={SelectedPositions.indexOf(name) > -1} />
+                            <ListItemText primary={name} />
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+                <InputLabel className={`${classes.white}`} htmlFor="select-multiple-checkbox">Availability Needed</InputLabel>
+                <Select
+                    multiple
+                    name="avail"
+                    className={classes.white}
+                    value={selectedAvailability}
+                    onChange={handleChange}
+                    input={<Input className={classes.white} id="select-multiple-checkbox" />}
+                    renderValue={selected => selected.join(", ")}
+                    MenuProps={MenuProps}
+                >
+                    {availabilityOptions.map(name => (
+                        <MenuItem key={name} value={name}>
+                            <Checkbox checked={selectedAvailability.indexOf(name) > -1} />
                             <ListItemText primary={name} />
                         </MenuItem>
                     ))}

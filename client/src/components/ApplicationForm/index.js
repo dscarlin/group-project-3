@@ -43,9 +43,17 @@ const positionOptions = [
     "Prep Cook"
 ];
 
+const availabilityOptions = [
+    "Breakfast",
+    "Lunch",
+    "Dinner",
+    "Late Night"
+]
+
 class ApplicationForm extends Component {
     state = {
         selectedPositions: [],
+        availability: [],
         name: "",
         email: "",
         phone: "",
@@ -80,11 +88,11 @@ class ApplicationForm extends Component {
     };
     handleSubmit = e => {
         e.preventDefault();
-        const { name, email, phone, selectedPositions, positionsWorked1, whMonths1, whDetails1, 
+        const { name, email, phone, selectedPositions, availability, positionsWorked1, whMonths1, whDetails1, 
             positionsWorked2, whMonths2, whDetails2, positionsWorked3, whMonths3, whDetails3, coverLetter } = this.state
-        console.log(name, email, phone, selectedPositions, positionsWorked1, whMonths1, whDetails1, 
+        console.log(name, email, phone, selectedPositions, availability, positionsWorked1, whMonths1, whDetails1, 
             positionsWorked2, whMonths2, whDetails2, positionsWorked3, whMonths3, whDetails3, coverLetter );
-        this.setState({name: "", email: "", phone: "", selectedPositions: [], positionsWorked1: [], whMonths1:"", whDetails1: "", 
+        this.setState({name: "", email: "", phone: "", selectedPositions: [], availability: [], positionsWorked1: [], whMonths1:"", whDetails1: "", 
             positionsWorked2: [], whMonths2:"", whDetails2: "", positionsWorked3: [], whMonths3:"", whDetails3: "", coverLetter: ""})
     };
     render() {
@@ -119,6 +127,25 @@ class ApplicationForm extends Component {
                         {positionOptions.map(name => (
                             <MenuItem key={name} value={name}>
                                 <Checkbox checked={this.state.selectedPositions.indexOf(name) > -1} />
+                                <ListItemText primary={name} />
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControl className={`${classes.formControl}`}>
+                    <InputLabel  htmlFor="select-multiple-checkbox">Availability</InputLabel>
+                    <Select
+                        multiple
+                        value={this.state.availability}
+                        onChange={this.handleChange}
+                        name="availability"
+                        input={<Input className={classes.white} id="select-multiple-checkbox" />}
+                        renderValue={selected => selected.join(", ")}
+                        MenuProps={MenuProps}
+                    >
+                        {availabilityOptions.map(name => (
+                            <MenuItem key={name} value={name}>
+                                <Checkbox checked={this.state.availability.indexOf(name) > -1} />
                                 <ListItemText primary={name} />
                             </MenuItem>
                         ))}
@@ -211,7 +238,7 @@ class ApplicationForm extends Component {
                 <TextField className={classes.formControl} id="coverLetter" multiline label="CoverLetter" name="coverLetter" onChange={this.handleChange} value={this.state.coverLetter}/>
 
 
-                <Button onClick={this.handleSubmit} className={`${classes.white} ${classes.button}`} >Search</Button>
+                <Button onClick={this.handleSubmit} className={`${classes.white} ${classes.button}`} >Submit</Button>
             </form>
     
         );
