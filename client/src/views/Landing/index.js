@@ -1,10 +1,7 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Paper, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
-import Paper from "@material-ui/core/paper";
-import Grid from "@material-ui/core/grid";
-import Typography from "@material-ui/core/grid";
 import { NavLink } from "react-router-dom";
 
 
@@ -34,8 +31,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "rgba(0,0,0,.3)",
     },
     welcomeMessage: {
-        position: "relative",
-        
+        position: "relative", 
         padding: theme.spacing(3),
         [theme.breakpoints.up("md")]: {
             padding: theme.spacing(8),
@@ -63,16 +59,18 @@ export default function Landing(props) {
                     <Grid container>
                         <Grid item md={12}>
                             <div className={classes.welcomeMessage}>
-                                <Typography component="h1" variant="h3" color="inherit" align="center" >
-                                    <h1>Welcome to On The Fly Staffing</h1>
-                                    <h5>Helping the hospitality industry apply and hire with ease.</h5>
+                                <Typography variant="h1" color="inherit" align="center" >
+                                    Welcome to On The Fly Staffing
+                                </Typography>
+                                <Typography variant="h3" color="inherit" align="center" >
+                                    Helping the hospitality industry apply and hire with ease.
                                 </Typography>
                             </div>
                         </Grid>
                     </Grid>
                 </Paper>
                 <div className={classes.overview}>
-                    <Typography variant="h5" color="inherit" paragraph="true">
+                    <Typography variant="p" color="inherit">
                         Our goal is to make the hiring process in the restaurant industry easier for all involved.  Applicants can apply to all of our member restaurants at once by submitting our easy online questionaire.  Restaurant managers are then able to search our talent pool to find the perfect candidates to fufill their needs.   
                     </Typography>
                     <br />
