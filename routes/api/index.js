@@ -1,14 +1,12 @@
 const router = require("express").Router();
-const candidateRoutes = require("./candidates");
-const applicantRoutes = require("./applicants");
-const accountRoutes = require("./accounts");
+const employerRoutes = require("./employer");
+const applicantRoutes = require("./applicant");
 
-// Candidate routes (saved applicants)
-router.use("/candidates", candidateRoutes);
-// Applicant routes (all applicants)
-router.use("/applicants", applicantRoutes);
-// Account information routes
-router.use("/accounts", accountRoutes);
+
+// Employer routes 
+// router.use("/employer", employerRoutes);
+// Applicant routes 
+router.use("/applicant", applicantRoutes);
 
 
 module.exports = router;

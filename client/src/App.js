@@ -10,7 +10,7 @@ import ListAndDetailContainer from "./views/ListAndDetailContainer";
 import "./App.css";
 
 class App extends Component {
-
+    
     render() {
         return (
             <React.Fragment>
@@ -35,10 +35,13 @@ class App extends Component {
                         }
                     />    */}
                     <Route exact path="/Apply" component={ Apply}/>
-                    <Route exact path="/list-view" component={ ListAndDetailContainer }/>
+                    {/* Need solution for rendering list item based on whether user wants saved or search */}
+                    {/* Initial idea is to first render saved on Login, and searched on click of search button */}
+                    <Route exact path="/list-view/searched" component={ ListAndDetailContainer }/>
+                    <Route exact path="/list-view/saved" component={ ListAndDetailContainer }/>
                 </Router>
             </React.Fragment>
         );
-    };
-};
+    }
+}
 export default App;
