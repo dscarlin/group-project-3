@@ -95,7 +95,7 @@ class EmployerSignupForm extends Component {
         return (
             <form className={classes.form}>
 
-                <h3>Required Account Information:</h3>
+                <h1>Account Information:</h1>
                 <FormControl className={`${classes.formControl}`}>
                     <InputLabel  htmlFor="businessName">Business Name</InputLabel>
                     <Input id="businessName" name="businessName" onChange={this.handleChange} value={this.state.businessName}/>
@@ -106,7 +106,7 @@ class EmployerSignupForm extends Component {
                 </FormControl>
                 <FormControl className={`${classes.formControl}`}>
                     <InputLabel htmlFor="email">Email address</InputLabel>
-                    <Input value={this.state.email} id="email" aria-describedby="email-helper-text" />
+                    <Input value={this.state.email} onChange={this.handleChange} name="email" id="email" aria-describedby="email-helper-text" />
                     <FormHelperText id="email-helper-text">We'll never share your email.</FormHelperText>
                 </FormControl>
                 &nbsp;
