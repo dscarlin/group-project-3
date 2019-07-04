@@ -80,7 +80,7 @@ export default function Landing(props) {
                         </NavLink>
                     </Button>
                     <Button variant="contained" className={`${classes.button} `} >
-                        <NavLink to="/login" exact={true} className={`${style.inherit}`}>
+                        <NavLink to="/list-view" exact={true} className={`${style.inherit}`}>
                             Find Applicants
                         </NavLink>
                     </Button>

@@ -5,12 +5,9 @@ import PropTypes from "prop-types";
 import { AppBar, Toolbar, Typography, useScrollTrigger, Slide } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchForm from "../SearchForm";
-// import Button from "@material-ui/core/Button";
-// import Popper from "../Popper";
 import style from "./style.module.css";
 import { useAuth0 } from "../../react-auth0-wrapper";
-import createAuth0Client from '@auth0/auth0-spa-js';
-import { Link } from "react-router-dom";
+
 
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -53,6 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 export default withRouter(function HideAppBar(props) {
     const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    console.log("user: ", user);
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -76,9 +74,9 @@ export default withRouter(function HideAppBar(props) {
                         </div>
                         <Typography variant="h6" className={classes.linkRight}>
                             {isAuthenticated ? 
-                                <NavLink to="/" exact={true} className={`${style.inheritLink}`} onClick={() => logout()} color="inherit">Log Out</NavLink>
-                                :                            
-                                <NavLink to="/login" exact={true} className={`${style.inheritLink}`} onClick={() => loginWithRedirect({})} color="inherit">Login</NavLink>
+                                <button  className={`${style.inheritLink}`} onClick={() => logout()} color="inherit">Log Out</button>
+                                :         
+                                <button  className={`${style.inheritLink}`} onClick={() => loginWithRedirect({})} color="inherit">Login</button>
                             }
                         </Typography>
                     </Toolbar>

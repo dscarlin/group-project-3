@@ -3,8 +3,13 @@ const Schema = mongoose.Schema;
 const Applicant = require("./applicant")
 
 const employerSchema = new Schema({
-  businessName: { type: String, required: true },
-  email: { type: String, required: true},
+  businessName: { type: String  },
+  streetAddress: { type: String  },
+  city: { type: String  },
+  state: {type: String },
+  zipcode: {type: String},
+  email: { type: String },
+  phoneNumber: { type: String },
   savedApplicants: [
     {
         // Store ObjectIds in the array

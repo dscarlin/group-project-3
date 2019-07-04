@@ -123,7 +123,7 @@ class ApplicationForm extends Component {
 
                 <h3>Applicant Details:</h3>
                 <FormControl className={`${classes.formControl}`}>
-                    <InputLabel  htmlFor="name">Name</InputLabel>
+                    <InputLabel  htmlFor="name">Full Name</InputLabel>
                     <Input id="name" name="name" onChange={this.handleChange} value={this.state.name}/>
                 </FormControl>
                 <FormControl className={`${classes.formControl}`}>
