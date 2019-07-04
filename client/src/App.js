@@ -21,10 +21,10 @@ class App extends Component {
                         exact path="/" 
                         component={ Landing } 
                     />
-                    {/* { <Switch>
+                    <Switch>
                         <Route path="/" exact />
-                        <PrivateRoute path="/profile" component={Profile} />
-                    </Switch>    } */}
+                        <Route path="/profile" component={Profile} />
+                    </Switch>
                     {/* <Route
                         exact path="/login"
                         render={ props => 
@@ -33,7 +33,7 @@ class App extends Component {
                             {...props} 
                             />
                         }
-                    />    */}
+                    />     */}
                     <Route exact path="/Apply" component={ Apply}/>
                     {/* Need solution for rendering list item based on whether user wants saved or search */}
                     {/* Initial idea is to first render saved on Login, and searched on click of search button */}

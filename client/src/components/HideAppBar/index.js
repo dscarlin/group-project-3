@@ -79,8 +79,8 @@ export default withRouter(function HideAppBar(props) {
                         </div>
                         <Typography variant="h6" className={classes.linkRight}>
                             {isAuthenticated ? 
-                                <NavLink to="/" exact={true} className={`${style.inheritLink}`} onClick={() => logout()} color="inherit">Log Out</NavLink>
-                                :                            
+                                <button  className={`${style.inheritLink}`} onClick={() => logout()} color="inherit">Log Out</button>
+                                :         
                                 <button  className={`${style.inheritLink}`} onClick={() => loginWithRedirect({})} color="inherit">Login</button>
                             }
                         </Typography>
