@@ -24,6 +24,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListAndDetailContainer() {
     const classes = useStyles();
+    
+    const [SelectedApplicant, setSelectedApplicant] = React.useState({});
+    
+    function handleChange(event) {
+        setSelectedApplicant(event.target.key);
+        console.log(event.target.key)
+    }
+
     console.log(applicants);
     return(
         <Grid container spacing={0} className={classes.root}>
@@ -31,11 +39,12 @@ export default function ListAndDetailContainer() {
                 <ul>
                     {applicants.map(applicant => 
                         <ListItem 
-                            key={applicant + applicant._id}
+                            key={applicant._id}
                             applicantName={applicant.applicantName}
                             expInMonths={`Experience: ${applicant.cumulativeExperience}`}
                             availableWhen={`Available: ${applicant.dateAvailable}`}
                             workHistory={`Work History: ${applicant.workHistory}`}
+                            selectApplicant={this.state.handleChange}
                         />
                     )}
                 </ul>

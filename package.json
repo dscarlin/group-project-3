@@ -20,6 +20,8 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "@salesforce-ux/design-system": "^2.9.4",
+    "@salesforce/design-system-react": "^0.10.7",
     "express": "^4.16.3",
     "if-env": "^1.0.4"
   }

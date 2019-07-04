@@ -68,7 +68,7 @@ export default function ListItem(props) {
                             </Grid>
                         </Grid>
                         <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs onClick={showApplicantDetail}>
+                            <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1">
                                     {props.workHistory}
                                 </Typography>
