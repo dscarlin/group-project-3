@@ -13,7 +13,6 @@ import SearchForm from "../SearchForm";
 // import Popper from "../Popper";
 import style from "./style.module.css";
 import { useAuth0 } from "../../react-auth0-wrapper";
-import createAuth0Client from '@auth0/auth0-spa-js';
 import { Link } from "react-router-dom";
 
 function HideOnScroll(props) {
@@ -65,13 +64,8 @@ export default withRouter(function HideAppBar(props) {
                     <Toolbar>
                         {/* <Popper/> */}
                         <Typography variant="h6" className={classes.title}>
-<<<<<<< HEAD
                             {isAuthenticated ? 
-                                <NavLink to="/list-view" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
-=======
-                            {props.loggedIn ? 
-                                <NavLink to="/list-view/saved" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
->>>>>>> master
+                                <NavLink to="/list-view/" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                                 :
                                 <NavLink to="/" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                             }
@@ -87,7 +81,7 @@ export default withRouter(function HideAppBar(props) {
                             {isAuthenticated ? 
                                 <NavLink to="/" exact={true} className={`${style.inheritLink}`} onClick={() => logout()} color="inherit">Log Out</NavLink>
                                 :                            
-                                <button exact={true} className={`${style.inheritLink}`} onClick={() => loginWithRedirect({})} color="inherit">Login</button>
+                                <button  className={`${style.inheritLink}`} onClick={() => loginWithRedirect({})} color="inherit">Login</button>
                             }
                         </Typography>
                     </Toolbar>
