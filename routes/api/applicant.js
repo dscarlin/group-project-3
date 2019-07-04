@@ -4,13 +4,13 @@ const applicantController = require("../../controllers/applicantController");
 //Matches with "/api/applicant"
 router
     .route("/")
-    .get(applicantController.findAll)
+    .get(checkJwt, applicantController.findAll)
     .post(applicantController.create);
     
 
 router
     .route("/:_id")
-    .delete(applicantController.remove);
+    .delete(checkJwt, applicantController.remove);
 
 
 module.exports = router;
