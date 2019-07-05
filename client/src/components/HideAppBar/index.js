@@ -4,10 +4,8 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { AppBar, Toolbar, Typography, useScrollTrigger, Slide } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import SearchForm from "../SearchForm";
 import style from "./style.module.css";
-import { useAuth0 } from "../../react-auth0-wrapper";
-
+import auth0Client from "../../auth";
 
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -15,7 +13,7 @@ function HideOnScroll(props) {
     // will default to window.
     // This is only being set here because the demo is in an iframe.
     const trigger = useScrollTrigger({ target: window ? window() : undefined });
-
+   
     return (
         <Slide appear={false} direction="down" in={!trigger}>
             {children}
@@ -49,34 +47,39 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default withRouter(function HideAppBar(props) {
-    const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
-    console.log("user: ", user);
     const classes = useStyles();
-    return (
+    const signOut = () => {
+        auth0Client.signOut();
+        props.history.replace("/");
+    };
+    return (          
         <React.Fragment>
+            {console.log(auth0Client)}
+            {/* {console.log(auth0Client.isAuthenticated())}  {console.log(auth0Client.handleAuthentication())} */}
             <HideOnScroll {...props}>
                 <AppBar>
                     <Toolbar>
                         {/* <Popper/> */}
-                        <Typography variant="h6" className={classes.title}>
-                            {isAuthenticated ? 
+                        <Typography variant="h6" className={`${classes.title} ${classes.root}`}>
+                            {auth0Client.isAuthenticated() ? 
                                 <NavLink to="/list-view" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                                 :
                                 <NavLink to="/" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                             }
                         </Typography>
-                        <div className={classes.centerBar}>
-                            {isAuthenticated ? 
+                        {/* <div className={classes.centerBar}>
+                            {auth0Client.isAuthenticated() && props.location.pathname != "/signup" ? 
                                 <SearchForm />
                                 :
                                 null
                             }
-                        </div>
+                        </div> */}
                         <Typography variant="h6" className={classes.linkRight}>
-                            {isAuthenticated ? 
-                                <button  className={`${style.inheritLink}`} onClick={() => logout()} color="inherit">Log Out</button>
+                            {console.log(props.location.pathname)}
+                            {auth0Client.isAuthenticated() ? 
+                                <button  className={`${style.inheritLink}`} onClick={() => signOut()} color="inherit">Log Out</button>
                                 :         
-                                <button  className={`${style.inheritLink}`} onClick={() => loginWithRedirect({})} color="inherit">Login</button>
+                                <button  className={`${style.inheritLink}`} onClick={auth0Client.signIn} color="inherit">Login</button>
                             }
                         </Typography>
                     </Toolbar>

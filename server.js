@@ -2,6 +2,10 @@
 const express = require("express");
 const PORT = process.env.PORT || 3001;
 const app = express();
+require("dotenv").config();
+
+//http dev logs
+const logger = require("morgan");
 
 //Mongoose Database -- 
 const mongoose = require("mongoose");
@@ -18,11 +22,13 @@ const routes = require("./routes")
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(logger("dev"));
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
 
 //Send all api requests through these routes
 app.use(routes);

@@ -9,7 +9,7 @@ const employerSchema = new Schema({
   state: {type: String },
   zipcode: {type: String},
   email: { type: String },
-  phoneNumber: { type: String },
+  phone: { type: String },
   savedApplicants: [
     {
         // Store ObjectIds in the array

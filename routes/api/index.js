@@ -4,7 +4,7 @@ const applicantRoutes = require("./applicant");
 
 
 // Employer routes 
-// router.use("/employer", employerRoutes);
+router.use("/employer", employerRoutes);
 // Applicant routes 
 router.use("/applicant", applicantRoutes);
 

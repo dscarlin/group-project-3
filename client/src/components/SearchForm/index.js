@@ -1,6 +1,11 @@
 import React from "react";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Input, InputLabel, MenuItem, FormControl, FormControlLabel, ListItemText, Select, Checkbox, Button } from "@material-ui/core";
+import { Input, InputLabel, MenuItem, FormControl, 
+    FormControlLabel, ListItemText, Select, 
+    Checkbox, Button } from "@material-ui/core";
+import auth0Client from "../../auth";
 
 
 
@@ -54,7 +59,7 @@ const availabilityOptions = [
     "Late Night"
 ];
   
-export default function SearchForm() {
+export default withRouter(function SearchForm(props) {
     const classes = useStyles();
     // const [SelectedPositions, setSelectedPositions,] = React.useState([]);
     // const [selectedAvailability, setSelectedAvailability] = React.useState([]);
@@ -79,14 +84,26 @@ export default function SearchForm() {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(state);
-        // setSelectedPositions([]);
-        // setSelectedAvailability([]);
-
-        setState({
-            selectedPositions: [],
-            selectedAvailability: [],
-            checkbox: false,
-        });
+        let positions = state.selectedPositions.join();
+        let checkbox = state.checkbox ? "$all" : "$in";
+        let availability = state.selectedAvailability.join();
+        let url = `/api/applicant?selectedPositions=${positions}`+
+            `&availability=${availability}&checkbox=${checkbox}`;
+        async function submitForm() {
+            await setState({
+                selectedPositions: [],
+                selectedAvailability: [],
+                checkbox: false,
+            });
+            const response =  await axios.get(url, {headers: 
+                { "Authorization": `Bearer ${auth0Client.getIdToken()}` }});
+            let searchResult = response.data;
+            console.log("search: ",searchResult);
+            await props.appState({ searchResult });
+            if(props.redirect)
+                props.history.push("/list-view");
+        }
+        submitForm();        
     };
     return (
         <form className={classes.root} >
@@ -135,10 +152,10 @@ export default function SearchForm() {
                 control={
                     <Checkbox   checked={state.checkbox} onChange={handleChange} name="checkbox" value={state.checkbox} />
                 }
-                label="Secondary"
+                label="Match All Availability"
             />            
             <Button onClick={handleSubmit} className={`${classes.white} ${classes.button}`} >Search</Button>             
         </form>
 
     );
-}
+});
