@@ -7,7 +7,7 @@ function SecuredRoute(props) {
     
     return (
 
-        <Route path={path} render={() => {
+        <Route  path={path} render={() => {
             if (!auth0Client.isAuthenticated()) {
                 auth0Client.signIn();
                 return <div></div>;

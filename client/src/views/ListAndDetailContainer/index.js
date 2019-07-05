@@ -1,7 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
+import { Grid, Container } from "@material-ui/core";
 import ListItem from "../../components/ListItem";
+import SearchForm from "../../components/SearchForm";
 import applicants from "../../dummyApps.json";
 
 
@@ -9,8 +10,9 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         position: "relative",
-        marginTop: theme.spacing(5)
+        marginTop: theme.spacing(8),
     },
+    
     control: {
         border: "solid black 1px",
     },
@@ -18,32 +20,45 @@ const useStyles = makeStyles(theme => ({
         position: "fixed",
         right: "0",
         width: "50%", 
-        height: "100vh"     
+        height: "100vh"
+     
     }
 }));
 
-export default function ListAndDetailContainer() {
+export default function ListAndDetailContainer(props) {
     const classes = useStyles();
     console.log(applicants);
     return(
-        <Grid container spacing={0} className={classes.root}>
-            <Grid item xs={6} className={classes.control}>
-                <ul>
-                    {applicants.map(applicant => 
-                        <ListItem 
-                            key={applicant + applicant._id}
-                            applicantName={applicant.applicantName}
-                            expInMonths={`Experience: ${applicant.cumulativeExperience}`}
-                            availableWhen={`Available: ${applicant.dateAvailable}`}
-                            workHistory={`Work History: ${applicant.workHistory}`}
-                        />
-                    )}
-                </ul>
+        <Container>
+            <Grid className={`${classes.root}`}>
+                <SearchForm appState={props.appState}/>
             </Grid>
-            <Grid  id="detailView" item xs={6   } className={`${classes.control} ${classes.fixed}`}>
-                <h1>detail</h1>
-                <h1>detail</h1>
+            <Grid container spacing={0} className={""}>
+                <Grid item xs={6} className={classes.control}>
+                    <ul>
+                        {console.log(props)}
+                        {props.results.length ?
+                            props.results.map(applicant => 
+                                <ListItem 
+                                    key={applicant + applicant._id}
+                                    applicantName={applicant.applicantName}
+                                    expInMonths={`Experience: ${applicant.cumulativeExperience}`}
+                                    availableWhen={`Available: ${applicant.dateAvailable}`}
+                                    workHistory={`Work History: ${applicant.workHistory}`}
+                                />
+                            ) :
+                            <div> No Search Results</div>
+
+                                
+                        }
+                    </ul>
+                </Grid>
+                <Grid  id="detailView" item xs={6} className={`${classes.control} ${classes.fixed}`}>
+                    <h1>detail</h1>
+                    <h1>detail</h1>
+                </Grid>
+
             </Grid>
-        </Grid>
+        </Container>
     );
 }

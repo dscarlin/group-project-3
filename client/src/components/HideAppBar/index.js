@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { AppBar, Toolbar, Typography, useScrollTrigger, Slide } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import SearchForm from "../SearchForm";
 import style from "./style.module.css";
 import auth0Client from "../../auth";
 
@@ -68,13 +67,13 @@ export default withRouter(function HideAppBar(props) {
                                 <NavLink to="/" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                             }
                         </Typography>
-                        <div className={classes.centerBar}>
+                        {/* <div className={classes.centerBar}>
                             {auth0Client.isAuthenticated() && props.location.pathname != "/signup" ? 
                                 <SearchForm />
                                 :
                                 null
                             }
-                        </div>
+                        </div> */}
                         <Typography variant="h6" className={classes.linkRight}>
                             {console.log(props.location.pathname)}
                             {auth0Client.isAuthenticated() ? 
