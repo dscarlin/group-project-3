@@ -2,18 +2,12 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import Slide from "@material-ui/core/Slide";
+import { AppBar, Toolbar, Typography, useScrollTrigger, Slide } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchForm from "../SearchForm";
-// import Button from "@material-ui/core/Button";
-// import Popper from "../Popper";
 import style from "./style.module.css";
 import { useAuth0 } from "../../react-auth0-wrapper";
-import { Link } from "react-router-dom";
+
 
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -56,6 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 export default withRouter(function HideAppBar(props) {
     const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    console.log("user: ", user);
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -65,7 +60,7 @@ export default withRouter(function HideAppBar(props) {
                         {/* <Popper/> */}
                         <Typography variant="h6" className={classes.title}>
                             {isAuthenticated ? 
-                                <NavLink to="/list-view/" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
+                                <NavLink to="/list-view" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                                 :
                                 <NavLink to="/" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                             }
