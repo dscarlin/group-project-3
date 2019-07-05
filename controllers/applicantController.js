@@ -23,8 +23,9 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     remove: (req, res) => {
+        console.log(req.params)
         db.Applicant
-        .findByIdAndRemove(req.params)
+        .findOneAndRemove(req.params)
         .then()
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));

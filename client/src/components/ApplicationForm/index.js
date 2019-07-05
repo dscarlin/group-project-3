@@ -118,7 +118,6 @@ class ApplicationForm extends Component {
         const { classes } = this.props;
         return (
             <form className={classes.form}>
-
                 <h3>Applicant Details:</h3>
                 <FormControl className={`${classes.formControl}`}>
                     <InputLabel  htmlFor="name">Full Name</InputLabel>

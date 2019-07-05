@@ -9,8 +9,16 @@ module.exports = {
     },
     findOne: (req, res) => {
         db.Employer
-            .findOne(req.params)
+            .findOne(req.query)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    remove: (req, res) => {
+        console.log(req.params)
+        db.Employer
+            .remove(req.params)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     }
+
 };

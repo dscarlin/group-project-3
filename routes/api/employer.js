@@ -6,11 +6,11 @@ const employerController = require("../../controllers/employerController");
 router
     .route("/")
     .post(checkJwt, employerController.create)
+    .get(checkJwt, employerController.findOne)
 
 router
-    .route("/:email")
-    .get(checkJwt, employerController.findOne);
-    // .delete(checkJwt, employerController.remove)
+    .route("/:_id")
+    .delete(checkJwt, employerController.remove);
 // router
 //     .route("/:id/saved")
 //     .get(employerController.findSaved)

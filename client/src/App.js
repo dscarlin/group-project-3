@@ -35,7 +35,8 @@ class App extends Component {
                         <Route  exact path="/Apply" component={ Apply}/>
                         <Route path="/login" render={props => 
                             <LoginLoading appState={this.appState} {...props} />} />
-                        <SecuredRoute path="/signup" component={ EmployerSignupForm } />
+                        <SecuredRoute path="/signup" component={ props =>  
+                            <EmployerSignupForm appState={this.appState} {...props} />} />
                         <SecuredRoute path="/dashboard" component={(props) =>  
                             <Dashboard {...props} appState={this.appState} />} />
                         <SecuredRoute path="/list-view" component={(props) =>  

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { Button, Select, FormHelperText, FormControl, MenuItem, InputLabel, Input  } from "@material-ui/core";
 import auth0Client from "../../auth";
@@ -46,7 +47,6 @@ class EmployerSignupForm extends Component {
         email: "",
         phone: ""
     };
-    
     handleChange = event => {
         let { name, value } = event.target;
         if (name === "phone"){
@@ -57,22 +57,21 @@ class EmployerSignupForm extends Component {
                 phoneNumber.splice(4,0,')');
                 phoneNumber.splice(5,0,' ');
                 phoneNumber.splice(9,0,'-');
-            }
+            };
             phoneNumber = phoneNumber.join('').slice(0,14);
-            this.setState({phone: phoneNumber})
+            this.setState({phone: phoneNumber});
         }
         else
             this.setState({ [name]: value });
     };
     handleSubmit = e => {
         e.preventDefault();
-        const user = this.state
+        const user = this.state;
         console.log(user);
         axios.post(`/api/employer`, user, {
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         })
-        .then(res => {
-            console.log(res);
+        .then(userInfo => {
             this.setState({  
                 businessName: "",
                 streetAddress: "",
@@ -82,14 +81,15 @@ class EmployerSignupForm extends Component {
                 email: "",
                 phone: "",
             });
-
+            this.props.appState({userInfo});
+            this.props.history.push("/dashboard");
         });
-
     };
     render() {
         const { classes, noShadow } = this.props;
         return (
             <form className={classes.form + (noShadow ? '' : ` ${classes.shadow}`)}>
+            {console.log(this.props)}
 
                 <h1>Account Information:</h1>
                 <FormControl className={`${classes.formControl}`}>
@@ -141,4 +141,4 @@ class EmployerSignupForm extends Component {
         );
     };
 }
-export default withStyles(styles)(EmployerSignupForm);
+export default withRouter(withStyles(styles)(EmployerSignupForm));

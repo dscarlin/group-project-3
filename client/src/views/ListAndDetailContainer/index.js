@@ -40,11 +40,8 @@ export default function ListAndDetailContainer(props) {
                         {props.results.length ?
                             props.results.map(applicant => 
                                 <ListItem 
-                                    key={applicant + applicant._id}
-                                    applicantName={applicant.applicantName}
-                                    expInMonths={`Experience: ${applicant.cumulativeExperience}`}
-                                    availableWhen={`Available: ${applicant.dateAvailable}`}
-                                    workHistory={`Work History: ${applicant.workHistory}`}
+                                    appplicant={applicant}
+                                    key={applicant._id}
                                 />
                             ) :
                             <div> No Search Results</div>
