@@ -13,10 +13,12 @@ import "./App.css";
 
 class App extends Component {
     state = {
-            modalOpen: false
+            modalOpen: false,
+            userInfo: null
         }
-    toggleModal = (arg) => {
-        this.setState({ modalopen: !this.state.open})
+
+    appState = (arg) => {
+        this.setState(arg)
     }
     render() {
         return (
@@ -26,7 +28,7 @@ class App extends Component {
                     <HideAppBar />
                     <Switch>
                         <Route exact path="/" component={ Landing } />
-                        <Route exact path='/login' component={ LoginLoading }/>
+                        <Route exact path='/login' render={props => <LoginLoading appState={this.appState} {...props} />} />
                     {/* <Route
                         exact path="/login"
                         render={ props => 
@@ -43,7 +45,7 @@ class App extends Component {
                         <Route exact path="/list-view/saved" component={ ListAndDetailContainer }/>
                     </Switch>
                 </Router>
-                <SimpleModal open={this.state.modalOpen} togglOpen={this.toggleModal}/>
+                <SimpleModal open={this.state.modalOpen} appState={this.appState} togglOpen={this.toggleModal}/>
             </React.Fragment>
         );
     }

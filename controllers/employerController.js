@@ -9,7 +9,7 @@ module.exports = {
     },
     findOne: (req, res) => {
         db.Employer
-            .find(req.params)
+            .findOne(req.params)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     }
