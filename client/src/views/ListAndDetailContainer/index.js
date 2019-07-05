@@ -36,18 +36,15 @@ export default function ListAndDetailContainer(props) {
             <Grid container spacing={0} className={""}>
                 <Grid item xs={6} className={classes.control}>
                     <ul>
-                        {console.log(props)}
-                        {props.results.length ?
-                            props.results.map(applicant => 
-                                <ListItem 
-                                    appplicant={applicant}
-                                    key={applicant._id}
-                                />
-                            ) :
-                            <div> No Search Results</div>
-
-                                
-                        }
+                        {applicants.map(applicant => 
+                            <ListItem 
+                                key={applicant + applicant._id}
+                                applicantName={applicant.applicantName}
+                                expInMonths={`Experience: ${applicant.cumulativeExperience}`}
+                                availableWhen={`Available: ${applicant.dateAvailable}`}
+                                workHistory={`Work History: ${applicant.workHistory}`}
+                            />
+                        )}
                     </ul>
                 </Grid>
                 <Grid  id="detailView" item xs={6} className={`${classes.control} ${classes.fixed}`}>
