@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Container } from "@material-ui/core";
 import SearchForm from "../../components/SearchForm";
 import applicants from "../../dummyApps.json";
-import {withRouter} from "react-router-dom";
 
 
 
@@ -17,15 +16,14 @@ const useStyles = makeStyles(() => ({
     
 }));
 
-export default withRouter(function Dashboard(props) {
+export default function Dashboard(props) {
     const classes = useStyles();
-    const goToListView = () => props.history.push("./list-view")
     return(
         <Container>
             <Grid className={`${classes.root}`}>
-                <SearchForm goToListView={goToListView} appState={props.appState}/>
+                <SearchForm redirect={true} appState={props.appState}/>
             </Grid>
            
         </Container>
     );
-});
+};

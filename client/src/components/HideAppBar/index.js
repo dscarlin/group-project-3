@@ -60,7 +60,7 @@ export default withRouter(function HideAppBar(props) {
                 <AppBar>
                     <Toolbar>
                         {/* <Popper/> */}
-                        <Typography variant="h6" className={classes.title}>
+                        <Typography variant="h6" className={`${classes.title} ${classes.root}`}>
                             {auth0Client.isAuthenticated() ? 
                                 <NavLink to="/list-view" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
                                 :

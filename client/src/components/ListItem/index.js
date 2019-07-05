@@ -42,7 +42,7 @@ export default function ListItem(props) {
         return console.log("*Twilio Message Ping*");
     };
     return (
-        <li className={classes.root}>
+        <li className={classes.root} onClick={() => props.handleClick(props.index)}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
@@ -55,7 +55,7 @@ export default function ListItem(props) {
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs onClick={showApplicantDetail}>
+                            <Grid item xs >
                                 <Typography gutterBottom variant="subtitle1">
                                     {props.applicantName}
                                 </Typography>
@@ -68,7 +68,7 @@ export default function ListItem(props) {
                             </Grid>
                         </Grid>
                         <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs onClick={showApplicantDetail}>
+                            <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1">
                                     {props.workHistory}
                                 </Typography>

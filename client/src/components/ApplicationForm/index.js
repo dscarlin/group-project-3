@@ -41,7 +41,18 @@ const positionOptions = [
     "BOH Manager",
     "Line Cook",
     "Dishwasher",
-    "Prep Cook"
+    "Prep Cook",
+];
+const workedPositionOptions = [
+    "Server",
+    "Bar Tender",
+    "Busser",
+    "FOH Manager",
+    "BOH Manager",
+    "Line Cook",
+    "Dishwasher",
+    "Prep Cook",
+    "Other"
 ];
 
 const availabilityOptions = [
@@ -100,6 +111,7 @@ class ApplicationForm extends Component {
             this.setState({ [name]: value });
     };
     handleSubmit = e => {
+        //maybe display a modal before submission to give the applicant a chance to review
         e.preventDefault();
         this.setState({
             industryExperience: this.state.industryExperience || 0,
@@ -108,6 +120,7 @@ class ApplicationForm extends Component {
             whMonths3: this.state.whMonths3 || 0,
         })
         axios.post("/api/applicant",this.state).then(res => console.log(res))
+        // maybe display the results to the applicant for feedback
         this.setState({name: "", email: "", phone: "", selectedPositions: [], availability: [], 
             restaurantName1: "", positionsWorked1: [], whMonths1:"", whDetails1: "", 
             restaurantName2: "", positionsWorked2: [], whMonths2:"", whDetails2: "", 
@@ -191,7 +204,7 @@ class ApplicationForm extends Component {
                         renderValue={selected => selected.join(", ")}
                         MenuProps={MenuProps}
                     >
-                        {positionOptions.map(name => (
+                        {workedPositionOptions.map(name => (
                             <MenuItem key={name} value={name}>
                                 <Checkbox checked={this.state.positionsWorked1.indexOf(name) > -1} />
                                 <ListItemText primary={name} />

@@ -1,10 +1,12 @@
 import React from "react";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Input, InputLabel, MenuItem, FormControl, 
     FormControlLabel, ListItemText, Select, 
     Checkbox, Button } from "@material-ui/core";
 import auth0Client from "../../auth";
+
 
 
 const useStyles = makeStyles(() => ({
@@ -57,7 +59,7 @@ const availabilityOptions = [
     "Late Night"
 ];
   
-export default function SearchForm(props) {
+export default withRouter(function SearchForm(props) {
     const classes = useStyles();
     // const [SelectedPositions, setSelectedPositions,] = React.useState([]);
     // const [selectedAvailability, setSelectedAvailability] = React.useState([]);
@@ -87,23 +89,21 @@ export default function SearchForm(props) {
         let availability = state.selectedAvailability.join();
         let url = `/api/applicant?selectedPositions=${positions}`+
             `&availability=${availability}&checkbox=${checkbox}`;
-        axios
-            .get(url, {headers: 
-            { "Authorization": `Bearer ${auth0Client.getIdToken()}` }})
-            .then(res => {
-                console.log("search: ",res);
-                props.appState({searchResult: res});
-                setState({
-                    selectedPositions: [],
-                    selectedAvailability: [],
-                    checkbox: false,
-                });
-                props.goToListView();
+        async function submitForm() {
+            await setState({
+                selectedPositions: [],
+                selectedAvailability: [],
+                checkbox: false,
             });
-        // setSelectedPositions([]);
-        // setSelectedAvailability([]);
-        
-        
+            const response =  await axios.get(url, {headers: 
+                { "Authorization": `Bearer ${auth0Client.getIdToken()}` }});
+            let searchResult = response.data;
+            console.log("search: ",searchResult);
+            await props.appState({ searchResult });
+            if(props.redirect)
+                props.history.push("/list-view");
+        }
+        submitForm();        
     };
     return (
         <form className={classes.root} >
@@ -158,4 +158,4 @@ export default function SearchForm(props) {
         </form>
 
     );
-}
+});

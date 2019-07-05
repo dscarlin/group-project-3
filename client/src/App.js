@@ -42,7 +42,7 @@ class App extends Component {
                         <SecuredRoute path="/list-view" component={(props) =>  
                             <ListAndDetailContainer {...props} appState={this.appState} results={this.state.searchResult} />} />
                         <SecuredRoute path="/list-view/saved" component={(props) =>  
-                            <ListAndDetailContainer {...props} appState={this.appState} results={this.state.searchResult} />} /> */}
+                            <ListAndDetailContainer {...props} appState={this.appState} results={this.state.searchResult} />} /> 
                         {/* need to make a no-match component  to go in this route */}
                         <Route component={ Landing }/> 
                     </Switch>
