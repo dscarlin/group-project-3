@@ -7,6 +7,8 @@ import Apply from "./views/Apply";
 import ListAndDetailContainer from "./views/ListAndDetailContainer";
 import SimpleModal from "./components/Modal";
 import LoginLoading from './components/LoginLoading';
+import SecuredRoute from './components/SecuredRoute';
+import EmployerSignupForm from './components/EmployerSignupForm';
 
 import "./App.css";
 
@@ -28,7 +30,8 @@ class App extends Component {
                     <HideAppBar />
                     <Switch>
                         <Route exact path="/" component={ Landing } />
-                        <Route exact path='/login' render={props => <LoginLoading appState={this.appState} {...props} />} />
+                        <Route path="/login" render={props => <LoginLoading appState={this.appState} {...props} />} />
+                        <SecuredRoute path="/signup" component={ EmployerSignupForm } />
                     {/* <Route
                         exact path="/login"
                         render={ props => 

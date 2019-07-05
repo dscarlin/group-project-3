@@ -25,18 +25,12 @@ const useStyles = makeStyles(theme => ({
   
 
 export default function SimpleModal(props) {
-    // getModalStyle is not a pure function, we roll the style only on the first render
-    const [modalStyle] = React.useState(getModalStyle);
-
     const toggle = function() {
         props.appState({ modalOpen: !props.open });
     };
     const classes = useStyles();
-
     return (
         <div>
-            <Typography gutterBottom>Click to get the full Modal experience!</Typography>
-            <Button onClick={toggle}>Open Modal</Button>
             <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"

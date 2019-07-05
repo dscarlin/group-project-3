@@ -113,7 +113,7 @@ class ApplicationForm extends Component {
         this.setState({name: "", email: "", phone: "", selectedPositions: [], availability: [], 
             restaurantName1: "", positionsWorked1: [], whMonths1:"", whDetails1: "", 
             restaurantName2: "", positionsWorked2: [], whMonths2:"", whDetails2: "", 
-            restaurantName1: "", positionsWorked3: [], whMonths3:"", whDetails3: "", 
+            restaurantName3: "", positionsWorked3: [], whMonths3:"", whDetails3: "", 
             coverLetter: ""})
     };
     render() {

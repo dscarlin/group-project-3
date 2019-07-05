@@ -69,13 +69,14 @@ export default withRouter(function HideAppBar(props) {
                             }
                         </Typography>
                         <div className={classes.centerBar}>
-                            {auth0Client.isAuthenticated() ? 
+                            {auth0Client.isAuthenticated() && props.location.pathname != "/signup" ? 
                                 <SearchForm />
                                 :
                                 null
                             }
                         </div>
                         <Typography variant="h6" className={classes.linkRight}>
+                            {console.log(props.location.pathname)}
                             {auth0Client.isAuthenticated() ? 
                                 <button  className={`${style.inheritLink}`} onClick={() => signOut()} color="inherit">Log Out</button>
                                 :         

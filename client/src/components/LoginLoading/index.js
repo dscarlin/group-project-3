@@ -12,10 +12,17 @@ class LoginLoading extends Component {
         const userInfo = await axios.get(`/api/employer/${email}`, {
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
+        console.log(this.props.appState({userInfo}) &&
+        this.props.history.replace("/list-view")
+            ? true : false);
         console.log(userInfo);
-        userInfo && this.props.appState({userInfo}) &&
-        this.props.history.replace("/list-view") ||
-        this.props.appState({ modalOpen: true });
+        console.log(userInfo? true : false);
+        if (userInfo){
+            this.props.appState({userInfo});
+            this.props.history.replace("/list-view");
+        }
+        else
+            this.props.history.replace("/signup");
     }
 
 

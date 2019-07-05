@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Button, Select, FormHelperText, FormControl, MenuItem, InputLabel, Input  } from "@material-ui/core";
+import auth0Client from "../../auth";
+import axios from "axios";
 
 
 
@@ -10,8 +12,13 @@ const styles = () => ({
         // width: "fit-conteant",
         maxWidth: "90vw",
         minWidth: "30vw",
-        // boxShadow: "5px 5px 20px 5px grey",
+        
         padding: "2em"
+    },
+    shadow: {
+        boxShadow: "5px 5px 20px 5px grey",
+        marginTop: "10vh",
+        width: "40vw"
     },
     formControl: {
         width: "100%"
@@ -21,31 +28,12 @@ const styles = () => ({
         margin: "2em auto"        
     }
 });
-// const ITEM_HEIGHT = 48;
-// const ITEM_PADDING_TOP = 8;
-// const MenuProps = {
-//     PaperProps: {
-//         style: {
-//             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-//             width: "auto",
-//         },
-//     }
-// };
-  
-// businessName: { type: String  },
-//   streetAddress: { type: String  },
-//   city: { type: String  },
-//   state: {type: String },
-//   zipcode: {type: String},
-//   email: { type: String },
-//   phoneNumber: { type: String },
-//   savedApplicants: [
 
-const states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 
-'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 
-'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 
-'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 
-'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+const states = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 
+'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'MA',   
+'MD','ME', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 
+'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 
+'TN', 'TX', 'UT', 'VT', 'VA', 'VI', 'WA', 'WI', 'WV', 'WY' ];
 
 
 class EmployerSignupForm extends Component {
@@ -78,22 +66,30 @@ class EmployerSignupForm extends Component {
     };
     handleSubmit = e => {
         e.preventDefault();
-        const { businessName, streetAddress, city, state, zipcode, email, phone } = this.state
-        console.log(businessName, streetAddress, city, state, zipcode, email, phone);
-        this.setState({  
-            businessName: "",
-            streetAddress: "",
-            city: "",
-            state: "",
-            zipcode: "",
-            email: "",
-            phone: "",
+        const user = this.state
+        console.log(user);
+        axios.post(`/api/employer`, user, {
+            headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
+        })
+        .then(res => {
+            console.log(res);
+            this.setState({  
+                businessName: "",
+                streetAddress: "",
+                city: "",
+                state: "",
+                zipcode: "",
+                email: "",
+                phone: "",
+            });
+
         });
+
     };
     render() {
-        const { classes } = this.props;
+        const { classes, noShadow } = this.props;
         return (
-            <form className={classes.form}>
+            <form className={classes.form + (noShadow ? '' : ` ${classes.shadow}`)}>
 
                 <h1>Account Information:</h1>
                 <FormControl className={`${classes.formControl}`}>
@@ -130,7 +126,7 @@ class EmployerSignupForm extends Component {
                     }}
                     >
                     {states.map(state => 
-                    <MenuItem value={state}>{state}</MenuItem>
+                    <MenuItem value={state} key={state}>{state}</MenuItem>
                     )}
                     </Select>
                 </FormControl>
