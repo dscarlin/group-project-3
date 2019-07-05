@@ -33,13 +33,6 @@ export default function ListAndDetailContainer() {
     
     const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
     
-    function displayDetail(event) {
-        // event.preventDefault();
-        // event.target.key;
-        setSelectedApplicant(event.target.key);
-
-        console.log(SelectedApplicant);
-    }
 
 {/* selectApplicant={this.state.handleChange} */}
     console.log(applicants);
@@ -47,14 +40,15 @@ export default function ListAndDetailContainer() {
         <Grid container spacing={0} className={classes.root}>
             <Grid item xs={6} className={classes.control}>
                 <ul>
-                    {applicants.map(applicant =>
+                    {applicants.map((applicant, index) =>
                         <ListItem 
                             key={applicant._id}
                             applicantName={applicant.applicantName}
                             expInMonths={`Experience: ${applicant.cumulativeExperience}`}
                             availableWhen={`Available: ${applicant.dateAvailable}`}
                             workHistory={`Work History: ${applicant.workHistory}`}
-                            onClick={displayDetail}
+                            handleClick={setSelectedApplicant}
+                            index={index}
                         />
                     )}
                 </ul>
