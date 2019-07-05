@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const checkJwt = require("../../checkJwt")
 const applicantController = require("../../controllers/applicantController");
 
 //Matches with "/api/applicant"

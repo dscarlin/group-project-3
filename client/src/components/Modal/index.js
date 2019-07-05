@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Modal, Button } from "@material-ui/core";
-import { Auth0Context } from "../../react-auth0-wrapper";
 import EmployerSignupForm from "../EmployerSignupForm";
 
 

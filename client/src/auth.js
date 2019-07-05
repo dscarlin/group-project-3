@@ -4,10 +4,11 @@ class Auth {
     constructor() {
         this.auth0 = new auth0.WebAuth({
             // the following three lines MUST be updated
-            domain: process.env.DOMAIN,
-            audience: `https://${process.env.DOMAIN}/userinfo`,
-            clientID: process.env.CLIENT_ID,
-            redirectUri: "http://localhost:3000/profile",
+            
+            domain: "dev-tick-gf2.auth0.com",
+            audience: "https://dev-tick-gf2.auth0.com/userinfo",
+            clientID: "iZFfzzr94dgSW7aFC19LB6Ex5eTXWdrD",
+            redirectUri: "http://localhost:3000/login",
             responseType: "id_token",
             scope: "openid profile"
         });

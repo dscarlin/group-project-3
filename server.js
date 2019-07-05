@@ -2,10 +2,8 @@
 const express = require("express");
 const PORT = process.env.PORT || 3001;
 const app = express();
+require("dotenv").config();
 
-//auth0 middleware
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
 
 //Mongoose Database -- 
 const mongoose = require("mongoose");
