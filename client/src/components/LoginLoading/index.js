@@ -6,9 +6,9 @@ class LoginLoading extends Component {
     async componentDidMount() {
         await auth0Client.handleAuthentication();
         console.log(auth0Client.getIdToken());
-        console.log(auth0Client);
+        console.log(auth0Client.getProfile());
 
-        // this.props.history.replace("/list-view");
+        this.props.history.replace("/list-view");
     }
 
     render() {

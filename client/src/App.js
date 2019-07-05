@@ -5,8 +5,6 @@ import HideAppBar from "./components/HideAppBar";
 import Landing from "./views/Landing";
 import Apply from "./views/Apply";
 import ListAndDetailContainer from "./views/ListAndDetailContainer";
-import Profile from "./components/Profile";
-import PrivateRoute from "./components/PrivateRoute";
 import SimpleModal from "./components/Modal";
 import LoginLoading from './components/LoginLoading';
 
@@ -28,7 +26,6 @@ class App extends Component {
                     <HideAppBar />
                     <Switch>
                         <Route exact path="/" component={ Landing } />
-                        <Route path="/profile" component={Profile} />
                         <Route exact path='/login' component={ LoginLoading }/>
                     {/* <Route
                         exact path="/login"
