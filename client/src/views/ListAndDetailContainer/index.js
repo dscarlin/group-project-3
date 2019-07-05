@@ -25,13 +25,14 @@ const useStyles = makeStyles(theme => ({
 export default function ListAndDetailContainer() {
     const classes = useStyles();
     
-    const [SelectedApplicant, setSelectedApplicant] = React.useState({});
+    const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
     
     function handleChange(event) {
         setSelectedApplicant(event.target.key);
         console.log(event.target.key)
     }
 
+{/* selectApplicant={this.state.handleChange} */}
     console.log(applicants);
     return(
         <Grid container spacing={0} className={classes.root}>
@@ -44,7 +45,6 @@ export default function ListAndDetailContainer() {
                             expInMonths={`Experience: ${applicant.cumulativeExperience}`}
                             availableWhen={`Available: ${applicant.dateAvailable}`}
                             workHistory={`Work History: ${applicant.workHistory}`}
-                            selectApplicant={this.state.handleChange}
                         />
                     )}
                 </ul>
