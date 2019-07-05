@@ -7,10 +7,17 @@ import Apply from "./views/Apply";
 import ListAndDetailContainer from "./views/ListAndDetailContainer";
 import Profile from "./components/Profile";
 import PrivateRoute from "./components/PrivateRoute";
+import SimpleModal from "./components/Modal";
 import "./App.css";
 
-class App extends Component {
 
+class App extends Component {
+    state = {
+            modalOpen: false
+        }
+    toggleModal = (arg) => {
+        this.setState({ modalopen: !this.state.open})
+    }
     render() {
         return (
             <React.Fragment>
@@ -40,8 +47,9 @@ class App extends Component {
                     <Route exact path="/list-view" component={ ListAndDetailContainer }/>
                     <Route exact path="/list-view/saved" component={ ListAndDetailContainer }/>
                 </Router>
+                <SimpleModal open={this.state.modalOpen} togglOpen={this.toggleModal}/>
             </React.Fragment>
         );
-    };
-};
+    }
+}
 export default App;
