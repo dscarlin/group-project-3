@@ -1,4 +1,5 @@
 import React from "react";
+import lifecycle from "react-pure-lifecycle";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Card, CardContent, Container, CardHeader, Divider, Grid, Paper, Typography} from "@material-ui/core";
 import Email from "@material-ui/icons/Email";
@@ -49,10 +50,21 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function ListAndDetailContainer(props) {
+const methods = {
+    componentDidMount(props) {
+        console.log("I mounted! Here are my props: ", props);
+    }
+};
+
+function ListAndDetailContainer(props) {
     const classes = useStyles();
     
     const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
+
+    function select(i) {
+        console.log("test function  ",i);
+        setSelectedApplicant(i);
+    }
     
     const addExperience = (exp1, exp2, exp3) => {
         return exp1 +exp2 + exp3;
@@ -70,7 +82,7 @@ export default function ListAndDetailContainer(props) {
         var initials = firstInitial + lastInitial;
         return initials;
     };
-    console.log(SelectedApplicant)
+    console.log(SelectedApplicant);
     const applicants = props.appState.searchResult;
     console.log(applicants);
     return(
@@ -83,11 +95,12 @@ export default function ListAndDetailContainer(props) {
                     <ul>
                         {applicants.map((applicant, index) =>
                             <ListItem 
+                                applicants={applicants}
                                 key={applicant._id}
                                 applicant={applicant}
                                 appState={props.appState}
                                 setAppState={props.setAppState}
-                                handleClick={setSelectedApplicant}
+                                handleClick={select}
                                 index={index}
                             />
                         )}
@@ -136,3 +149,4 @@ export default function ListAndDetailContainer(props) {
         </Container>
     );
 }
+export default lifecycle(methods)(ListAndDetailContainer);

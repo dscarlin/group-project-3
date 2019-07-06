@@ -45,14 +45,25 @@ export default function ListItem(props) {
         if(result.data.ok)
             return props.setAppState({ userInfo });
     };
-    const removeApplicant = (e) => {
+    const removeApplicant = async (e) => {
+        e.stopPropagation();
         e.preventDefault();
-        return console.log("Delete this Item from List View");
+        let applicantId = props.appState.searchResult[props.index]._id;
+        let userInfo = props.appState.userInfo;
+        let index = userInfo.notInterested.indexOf(applicantId);
+        if(index < 0)
+            userInfo.notInterested.push(applicantId);
+        else
+            userInfo.notInterested.splice(index, 1);
+        const result = await axios.put("/api/employer",userInfo,{
+            headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
+        });
+        console.log(userInfo);
+        if(result.data.ok)
+            return props.setAppState({ userInfo });
+        
     };
-    const showApplicantDetail = (e) => {
-        e.preventDefault();
-        return console.log("On List Item click, display the detail page for this applicant");
-    };
+
     const messageApplicant= (e) => {
         e.preventDefault();
         return console.log("*Twilio Message Ping*");
