@@ -51,20 +51,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const methods = {
-    componentDidMount(props) {
-        console.log("I mounted! Here are my props: ", props);
-    }
+    // componentDidMount(props) {
+    //     props.setAppState({ SelectedApplicant: 0});
+    // }
 };
 
 function ListAndDetailContainer(props) {
     const classes = useStyles();
     
-    const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
+    // const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
 
-    function select(i) {
-        console.log("test function  ",i);
-        setSelectedApplicant(i);
-    }
+   
     
     const addExperience = (exp1, exp2, exp3) => {
         return exp1 +exp2 + exp3;
@@ -84,6 +81,7 @@ function ListAndDetailContainer(props) {
     };
     console.log(SelectedApplicant);
     const applicants = props.appState.searchResult;
+    const SelectedApplicant = props.appState.SelectedApplicant;
     console.log(applicants);
     return(
         <Container>
@@ -99,51 +97,53 @@ function ListAndDetailContainer(props) {
                                 applicant={applicant}
                                 appState={props.appState}
                                 setAppState={props.setAppState}
-                                handleClick={select}
                                 index={index}
                             />
                         )}
                     </ul>
                 </Grid>
-                <Paper className={classes.paper}>
-                    <Grid id="detail-view" item xs={6   } className={`${classes.control} ${classes.fixed}`}>
-                        <Avatar className={classes.avatar}>{getInitials(applicants[SelectedApplicant].name)}</Avatar>
-                        <Typography style={{display: "inline-block", color: "#555"}} variant="h3">{applicants[SelectedApplicant].name}</Typography>
-                        <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
-                        <Divider className={classes.widthControl}/>
-                        <Grid container>
-                            <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
-                            <Grid container alignItems="center" justify="flex-start" spacing={0}>
-                                <Grid item xs={5}>
-                                    <Card className={classes.card}>
-                                        <CardContent>
-                                            <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p>
-                                            {/* <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p> */}
-                                            <p><strong style={{color: "#3F51B5"}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                                <Grid item xs={5}>
-                                    <Card className={classes.card}>
-                                        <CardContent>
-                                            <span><Avatar className={classes.avatar}><Email style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].email}</span>
-                                            <span><Avatar className={classes.avatar}><Phone style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].phone}</span>
-                                        </CardContent>
-                                    </Card>
+                {applicants.length?
+                    <Paper className={classes.paper}>
+                        <Grid id="detail-view" item xs={6   } className={`${classes.control} ${classes.fixed}`}>
+                            <Avatar className={classes.avatar}>{getInitials(applicants[SelectedApplicant].name)}</Avatar>
+                            <Typography style={{display: "inline-block", color: "#555"}} variant="h3">{applicants[SelectedApplicant].name}</Typography>
+                            <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
+                            <Divider className={classes.widthControl}/>
+                            <Grid container>
+                                <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
+                                <Grid container alignItems="center" justify="flex-start" spacing={0}>
+                                    <Grid item xs={5}>
+                                        <Card className={classes.card}>
+                                            <CardContent>
+                                                <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p>
+                                                {/* <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p> */}
+                                                <p><strong style={{color: "#3F51B5"}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    <Grid item xs={5}>
+                                        <Card className={classes.card}>
+                                            <CardContent>
+                                                <span><Avatar className={classes.avatar}><Email style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].email}</span>
+                                                <span><Avatar className={classes.avatar}><Phone style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].phone}</span>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
                                 </Grid>
                             </Grid>
+                            <Grid container alignItems="center">
+                                <Card className={classes.card}>
+                                    <CardHeader title="Cover Letter" className={classes.cardHeader}/>
+                                    <Divider />
+                                    <CardContent>
+                                        <p>{applicants[SelectedApplicant].coverLetter}</p>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
                         </Grid>
-                        <Grid container alignItems="center">
-                            <Card className={classes.card}>
-                                <CardHeader title="Cover Letter" className={classes.cardHeader}/>
-                                <Divider />
-                                <CardContent>
-                                    <p>{applicants[SelectedApplicant].coverLetter}</p>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Paper>
+                    </Paper>
+                    : 
+                    null}
             </Grid>
         </Container>
     );

@@ -81,7 +81,7 @@ export default function ListItem(props) {
         return workHistory;
     }
     return (
-        <li className={classes.root} onClick={() => props.handleClick(props.index)}>
+        <li className={classes.root} onClick={() => props.setAppState({ SelectedApplicant: props.index})}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
