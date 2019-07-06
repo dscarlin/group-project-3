@@ -50,11 +50,16 @@ export default function ListItem(props) {
         e.preventDefault();
         let applicantId = props.appState.searchResult[props.index]._id;
         let userInfo = props.appState.userInfo;
+        let searchResult = props.appState.searchResult;
         let index = userInfo.notInterested.indexOf(applicantId);
-        if(index < 0)
+        if(index < 0){
             userInfo.notInterested.push(applicantId);
-        else
-            userInfo.notInterested.splice(index, 1);
+            searchResult.splice(props.index,1);
+        }
+        // else{
+        //     userInfo.notInterested.splice(index, 1);
+        //     // searchResult.unshift(props) //add back to search result
+        // }
         const result = await axios.put("/api/employer",userInfo,{
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });

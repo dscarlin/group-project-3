@@ -88,14 +88,13 @@ function ListAndDetailContainer(props) {
     return(
         <Container>
             <Grid className={`${classes.root}`}>
-                <SearchForm setAppState={props.appState}/>
+                <SearchForm appstate={props.appState} setAppState={props.setAppState}/>
             </Grid>
             <Grid container spacing={0} className={classes.root}>
                 <Grid item xs={6} className={classes.control}>
                     <ul>
                         {applicants.map((applicant, index) =>
                             <ListItem 
-                                applicants={applicants}
                                 key={applicant._id}
                                 applicant={applicant}
                                 appState={props.appState}
