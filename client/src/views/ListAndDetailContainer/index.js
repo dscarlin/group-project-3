@@ -4,10 +4,10 @@ import { Avatar, Card, CardContent, Container, CardHeader, Divider, Grid, Paper,
 import Email from "@material-ui/icons/Email";
 import Phone from "@material-ui/icons/Phone";
 import ListItem from "../../components/ListItem";
-import List from "../../components/List";
+// import List from "../../components/List";
 import SearchForm from "../../components/SearchForm";
-import applicants from "../../dummyApps.json";
-import Details from "../../components/Details";
+// import applicants from "../../dummyApps.json";
+// import Details from "../../components/Details";
 
 
 const useStyles = makeStyles(theme => ({
@@ -57,9 +57,9 @@ export default function ListAndDetailContainer(props) {
     
     const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
     
-    const addExperience = (exp1, exp2, exp3) => {
-        return exp1 +exp2 + exp3;
-    };
+    // const addExperience = (exp1, exp2, exp3) => {
+    //     return exp1 +exp2 + exp3;
+    // };
     const workHistory = (jobOne, jobTwo, jobThree) => {
         let workHistory = [jobOne, jobTwo, jobThree];
         return workHistory;
@@ -78,10 +78,7 @@ export default function ListAndDetailContainer(props) {
     console.log(applicants);
     return(
         <Container>
-<<<<<<< HEAD
             {console.log(`applicant: ${applicants[SelectedApplicant]}`)}
-=======
->>>>>>> 749e3e1bf47f29187fa3fe3a34127fd34ad237a3
             <Grid className={`${classes.root}`}>
                 <SearchForm setAppState={props.appState}/>
             </Grid>

@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Container } from "@material-ui/core";
 import SearchForm from "../../components/SearchForm";
-import applicants from "../../dummyApps.json";
+// import applicants from "../../dummyApps.json";
 
 
 
