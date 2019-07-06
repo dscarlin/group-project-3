@@ -7,6 +7,7 @@ router
     .route("/")
     .post(checkJwt, employerController.create)
     .get(checkJwt, employerController.findOne)
+    .put(checkJwt, employerController.update)
 
 router
     .route("/:_id")

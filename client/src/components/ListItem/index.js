@@ -1,5 +1,8 @@
 import React from "react";
 import axios from "axios";
+import auth0Client from "../../auth";
+
+//csss
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -26,9 +29,21 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListItem(props) {
     const classes = useStyles();
-    const favoriteApplicant = async () => {
-        const result = await axios.put("")
-        return console.log(result);
+    const favoriteApplicant = async (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        let applicantId = props.appState.searchResult[props.index]._id;
+        let userInfo = props.appState.userInfo;
+        let index = userInfo.interested.indexOf(applicantId);
+        if(index < 0)
+            userInfo.interested.push(applicantId);
+        else
+            userInfo.interested.splice(index, 1);
+        const result = await axios.put("/api/employer",userInfo,{
+            headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
+        });
+        if(result.data.ok)
+            return props.setAppState({ userInfo });
     };
     const removeApplicant = (e) => {
         e.preventDefault();
@@ -55,7 +70,11 @@ export default function ListItem(props) {
                 <Grid container spacing={2}>
                     <Grid item>
                         <ButtonBase> 
-                            <Star style={{color:"gray"}} onClick={favoriteApplicant}></Star>
+                            <Star style={props.appState.userInfo.interested
+                                .indexOf(props.appState.searchResult[props.index]._id) < 0 ? 
+                                {color:"gray"} : {color: "yellow"}} 
+                            onClick={favoriteApplicant}
+                            />
                         </ButtonBase>
                         <ButtonBase> 
                             <Delete style={{color:"gray"}} onClick={removeApplicant}></Delete>

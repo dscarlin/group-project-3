@@ -10,13 +10,21 @@ const employerSchema = new Schema({
   zipcode: {type: String},
   email: { type: String },
   phone: { type: String },
-  applicants: [
-      {
-          // Store ObjectIds in the array
-          type: Schema.Types.ObjectId,
-          // The ObjectIds will refer to the ids in the Note model
-          ref: "Applicant"
-      }
+  interested: [
+    {
+        // Store ObjectIds in the array
+        type: Schema.Types.ObjectId,
+        // The ObjectIds will refer to the ids in the Note model
+        ref: "Applicant",
+    }
+  ],
+  notInterested: [
+    {
+        // Store ObjectIds in the array
+        type: Schema.Types.ObjectId,
+        // The ObjectIds will refer to the ids in the Note model
+        ref: "Applicant",
+    }
   ]
 });
 
