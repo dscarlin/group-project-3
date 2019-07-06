@@ -1,10 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Container, Typography, Paper } from "@material-ui/core";
+import { Avatar, Card, CardContent, Container, CardHeader, Divider, Grid, Paper, Typography} from "@material-ui/core";
+import Email from "@material-ui/icons/Email";
+import Phone from "@material-ui/icons/Phone";
 import ListItem from "../../components/ListItem";
 import SearchForm from "../../components/SearchForm";
 import applicants from "../../dummyApps.json";
-import Divider from "@material-ui/core/Divider"
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,7 +13,22 @@ const useStyles = makeStyles(theme => ({
         position: "relative",
         marginTop: theme.spacing(8),
     },
-    
+    avatar: {
+        padding: 6,
+        display: 'inline-block',
+        color: 'white',
+        backgroundColor: '#3F51B5'
+    },
+    card: {
+        marginTop: 10,
+        width: '90%',
+        minHeight: 175,
+        color: '#555'
+    },
+    cardHeader: {
+        color: 'white',
+        backgroundColor: '#3F51B5'
+    },
     control: {
         // border: "solid black 1px",
         paddingTop: "2em"
@@ -23,13 +39,13 @@ const useStyles = makeStyles(theme => ({
         width: "50%", 
         height: "100vh"     
     },
-    widthControl: {
-        width: "40vw"
-    },
     paper: {
         // padding: theme.spacing(2),
         margin: "1em 0",
         maxWidth: "90%",
+    },
+    widthControl: {
+        width: "45vw"
     }
 }));
 
@@ -45,8 +61,17 @@ export default function ListAndDetailContainer(props) {
         let workHistory = [jobOne, jobTwo, jobThree]
         return workHistory;
     }
+    const getInitials = (name) => {
+        var splitName = name.split(" ");
+        var firstName = splitName[0];
+        var lastName = splitName[1];
+        var firstInitial = firstName.split("")[0];
+        var lastInitial = lastName.split("")[0];
+        var initials = firstInitial + lastInitial;
+        return initials;
+    }
 
-    const applicants = props.results;
+    // const applicants = props.results;
     console.log(applicants);
     return(
         <Container>
@@ -69,17 +94,48 @@ export default function ListAndDetailContainer(props) {
                 </Grid>
                 <Paper className={classes.paper}>
                     <Grid id="detail-view" item xs={6   } className={`${classes.control} ${classes.fixed}`}>
-                        <Typography variant="h3">{`App # ${applicants[SelectedApplicant]._id} ${applicants[SelectedApplicant].name}`}</Typography>
-                        <Typography subtitle1="h2">{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</Typography>
+                        <Avatar className={classes.avatar}>{getInitials(applicants[SelectedApplicant].name)}</Avatar>
+                        <Typography style={{display: 'inline-block', color: '#555'}} variant="h3">{applicants[SelectedApplicant].name}</Typography>
+                        <Typography style={{color: '#999'}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
                         <Divider className={classes.widthControl}/>
-                        <p><strong>Short Bio: </strong> {applicants[SelectedApplicant].coverLetter}</p>
-                        <ul>
-                            <li>{`Available: ${applicants[SelectedApplicant].availability}`}</li>
-                            <li>{`Email: ${applicants[SelectedApplicant].email}`}</li>
-                            <li>{`Phone: ${applicants[SelectedApplicant].phone}`}</li>
-                            <li>{`Experience: ${addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)}`}</li>
-                            <li>{`Work History: ${workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}`}</li>
-                        </ul>
+                        <Grid container>
+                            <p style={{color: '#555'}}><strong style={{color: '#3F51B5'}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
+                            <Grid container alignItems="center" justify="flex-start" spacing={0}>
+                                <Grid item xs={5}>
+                                    <Card className={classes.card}>
+                                        <CardContent>
+                                            <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p>
+                                            <p><strong style={{color: '#3F51B5'}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                                <Grid item xs={5}>
+                                    <Card className={classes.card}>
+                                        <CardContent>
+                                            <span><Avatar className={classes.avatar}><Email style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].email}</span>
+                                            <span><Avatar className={classes.avatar}><Phone style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].phone}</span>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid container alignItems="center">
+                            <Card className={classes.card}>
+                                <CardHeader title="Cover Letter" className={classes.cardHeader}/>
+                                <Divider />
+                                <CardContent>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam convallis dui eget dui mollis efficitur. 
+                                    Mauris hendrerit volutpat lacus. Praesent lobortis at sem vitae sodales. Pellentesque viverra nunc sapien, scelerisque 
+                                    consectetur nulla sollicitudin sit amet. Quisque in aliquet metus, eu rutrum dui. 
+                                    Integer in placerat sapien. Curabitur ullamcorper vehicula tempus. Nam eu nisi sapien. Donec pretium ullamcorper mollis. 
+                                    Nam eu leo sem. Sed quis mauris gravida lectus consectetur dapibus. In neque massa, imperdiet viverra volutpat nec, 
+                                    volutpat pellentesque tortor. Integer consequat, metus eget consequat eleifend, sem nunc laoreet enim, 
+                                    sit amet ullamcorper diam eros eget ligula. Vivamus quis fringilla sapien. Maecenas volutpat venenatis est, auctor facilisis magna.
+                                </p>
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     </Grid>
                 </Paper>
             </Grid>
