@@ -97,9 +97,12 @@ export default withRouter(function SearchForm(props) {
             });
             const response =  await axios.get(url, {headers: 
                 { "Authorization": `Bearer ${auth0Client.getIdToken()}` }});
-            let searchResult = response.data;
+            //filter out notInterested in candidates
+            let searchResult = response.data.filter(applicant =>
+                props.appState.userInfo.notInterested.indexOf(applicant._id) < 0);
             console.log("search: ",searchResult);
-            await props.appState({ searchResult });
+
+            await props.setAppState({ searchResult });
             if(props.redirect)
                 props.history.push("/list-view");
         }

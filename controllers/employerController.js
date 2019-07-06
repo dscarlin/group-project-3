@@ -19,6 +19,12 @@ module.exports = {
             .remove(req.params)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+    update: (req, res) => {
+        const { _id } = req.body;
+        db.Employer
+            .update({ _id }, req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
-
 };

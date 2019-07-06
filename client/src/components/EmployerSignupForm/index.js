@@ -81,7 +81,7 @@ class EmployerSignupForm extends Component {
                 email: "",
                 phone: "",
             });
-            this.props.appState({userInfo});
+            this.props.setAppState({userInfo});
             this.props.history.push("/dashboard");
         });
     };

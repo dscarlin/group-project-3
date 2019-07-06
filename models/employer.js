@@ -10,14 +10,22 @@ const employerSchema = new Schema({
   zipcode: {type: String},
   email: { type: String },
   phone: { type: String },
-  savedApplicants: [
+  interested: [
     {
         // Store ObjectIds in the array
         type: Schema.Types.ObjectId,
         // The ObjectIds will refer to the ids in the Note model
-        ref: "Applicant"
+        ref: "Applicant",
     }
-]
+  ],
+  notInterested: [
+    {
+        // Store ObjectIds in the array
+        type: Schema.Types.ObjectId,
+        // The ObjectIds will refer to the ids in the Note model
+        ref: "Applicant",
+    }
+  ]
 });
 
 const Employer = mongoose.model("Employer", employerSchema);

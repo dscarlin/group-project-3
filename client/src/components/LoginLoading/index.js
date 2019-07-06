@@ -7,12 +7,13 @@ class LoginLoading extends Component {
     async componentDidMount() {
         await auth0Client.handleAuthentication();
         let email = auth0Client.getProfile().email;
-        const userInfo = await axios.get(`/api/employer?email=${email}`, {
+        const response = await axios.get(`/api/employer?email=${email}`, {
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
+        const userInfo = response.data;          
         console.log(userInfo);
         console.log(auth0Client.getIdToken());
-        if (userInfo.data){
+        if (userInfo){
             // ///////////////////////////////////////////////////// //
             //  axios call to toggle to remove user for dev purposes//
             // //////////////////////////////////////////////////// //
@@ -20,7 +21,7 @@ class LoginLoading extends Component {
             //     headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
             // });
             // console.log(deletedUser);
-            this.props.appState({userInfo});
+            this.props.setAppState({userInfo});
             this.props.history.replace("/dashboard");
         }
         else

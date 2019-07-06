@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
+const relationship = require('mongoose-relationship');
 const Schema = mongoose.Schema;
-
 const appSchema = new Schema({
   selectedPositions: [
     {
@@ -38,7 +38,8 @@ const appSchema = new Schema({
   whMonths3: { type: Number },
   whDetails3: { type: String },
   coverLetter: { type: String },
-  applicationDate: { type: Date, default: Date.now }
+  applicationDate: { type: Date, default: Date.now },
+  
 });
 
 const Applicant = mongoose.model("Applicant", appSchema);
