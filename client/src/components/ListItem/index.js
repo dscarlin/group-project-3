@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -25,9 +26,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListItem(props) {
     const classes = useStyles();
-    const favoriteApplicant = (e) => {
-        e.preventDefault();
-        return console.log("Save this Item to Employer's Favorites");
+    const favoriteApplicant = async () => {
+        const result = await axios.put("")
+        return console.log(result);
     };
     const removeApplicant = (e) => {
         e.preventDefault();

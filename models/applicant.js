@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
+const relationship = require('mongoose-relationship');
 const Schema = mongoose.Schema;
-
 const appSchema = new Schema({
   selectedPositions: [
     {
@@ -38,8 +38,19 @@ const appSchema = new Schema({
   whMonths3: { type: Number },
   whDetails3: { type: String },
   coverLetter: { type: String },
-  applicationDate: { type: Date, default: Date.now }
+  applicationDate: { type: Date, default: Date.now },
+  employers: [
+    {
+        // Store ObjectIds in the array
+        type: Schema.Types.ObjectId,
+        // The ObjectIds will refer to the ids in the Note model
+        ref: "Employer",
+        childPath: "applicants"
+    }
+  ]
+
 });
+appSchema.plugin(relationship, { relationshipPathName:['employers'] });
 
 const Applicant = mongoose.model("Applicant", appSchema);
 

@@ -1,5 +1,33 @@
 db = require("../models")
+// db.Employer.find().then(res => console.log(res))
+// db.Employer.remove({_id: '5d1f9d18308c8554a419a243'}).then(res => console.log(res))
 
+    // db.Applicant.findOneAndUpdate({},{ $set: {employers: []}},{new:true}).then(res => console.log(res))
+    // db.Employer.findOneAndUpdate({},{ $set: {applicants: []}},{new:true}).then(res => console.log(res))
+    // db.Applicant.findOne().then(res => 
+    //     db.Employer.findOneAndUpdate({},{ $addToSet: { savedApplicants: res._id  } }).then(res =>
+    //         db.Employer.findOne({_id: res._id}).populate("savedApplicants").then(res => console.log(res)))
+    //     );
+            
+    db.Applicant.findOne().populate("employers").then(applicant =>{
+        db.Employer.findOne().populate("applicants").then(employer =>{
+            applicant.employers.push(employer);
+            applicant.save();
+    //             //  employer.applicants.push(applicant);
+    //             // employer.save();
+            console.log(applicant)
+            console.log(employer)
+        })})
+    // db.Employer.findOneAndUpdate({},{ $set: {applicants: []}},{new:true}).then(res => console.log(res))
+    // db.Employer.findOne().then(res => 
+    //     db.Applicant.findOneAndUpdate({},{ $addToSet: { employers: res._id  } }).then(res =>
+    //         db.Applicant.findOne({_id: res._id}).populate("employers").then(res => console.log(res)))
+    //     );
+            
+  
+    
+
+    
 module.exports = {
     create: (req, res) => {
         db.Applicant
