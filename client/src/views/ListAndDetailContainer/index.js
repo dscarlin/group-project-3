@@ -4,8 +4,11 @@ import { Avatar, Card, CardContent, Container, CardHeader, Divider, Grid, Paper,
 import Email from "@material-ui/icons/Email";
 import Phone from "@material-ui/icons/Phone";
 import ListItem from "../../components/ListItem";
+import List from "../../components/List";
 import SearchForm from "../../components/SearchForm";
 import applicants from "../../dummyApps.json";
+import Details from "../../components/Details";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -75,11 +78,30 @@ export default function ListAndDetailContainer(props) {
     console.log(applicants);
     return(
         <Container>
-            {console.log(props.results)}
+            {console.log(`applicant: ${applicants[SelectedApplicant]}`)}
             <Grid className={`${classes.root}`}>
                 <SearchForm appState={props.appState}/>
             </Grid>
             <Grid container spacing={0} className={classes.root}>
+                {/* <List 
+                    key={applicant._id}
+                    applicant={applicant}
+                    handleClick={setSelectedApplicant}
+                    index={index}
+                />
+                <Details
+                    applicant={applicant}
+                    index={index}
+                    name={applicants[SelectedApplicant].name}
+                    getInitials={getInitials(applicants[SelectedApplicant].name)}
+                    applicationDate={applicants[SelectedApplicant].applicationDate}
+                    availableShifts={applicants[SelectedApplicant].availability}
+                    addExperience={addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)}
+                    workHistory={workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}
+                    email={applicants[SelectedApplicant].email}
+                    phone={applicants[SelectedApplicant].phone}
+                    coverLetter={applicants[SelectedApplicant].coverLetter}
+                /> */}
                 <Grid item xs={6} className={classes.control}>
                     <ul>
                         {applicants.map((applicant, index) =>
