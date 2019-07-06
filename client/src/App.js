@@ -34,15 +34,15 @@ class App extends Component {
                         <Route exact path="/" component={ Landing } />
                         <Route  exact path="/Apply" component={ Apply}/>
                         <Route path="/login" render={props => 
-                            <LoginLoading appState={this.appState} {...props} />} />
+                            <LoginLoading setAppState={this.appState} {...props} />} />
                         <SecuredRoute path="/signup" component={ props =>  
-                            <EmployerSignupForm appState={this.appState} {...props} />} />
+                            <EmployerSignupForm setAppState={this.appState}  {...props} />} />
                         <SecuredRoute path="/dashboard" component={(props) =>  
-                            <Dashboard {...props} appState={this.appState} />} />
+                            <Dashboard {...props} setAppState={this.appState} appState={this.state} />} />
                         <SecuredRoute path="/list-view" component={(props) =>  
-                            <ListAndDetailContainer {...props} appState={this.appState} results={this.state.searchResult} />} />
+                            <ListAndDetailContainer {...props} setAppState={this.appState} appState={this.state} />} />
                         <SecuredRoute path="/list-view/saved" component={(props) =>  
-                            <ListAndDetailContainer {...props} appState={this.appState} results={this.state.searchResult} />} /> 
+                            <ListAndDetailContainer {...props} setAppState={this.appState} appState={this.state} />} /> 
                         {/* need to make a no-match component  to go in this route */}
                         <Route component={ Landing }/> 
                     </Switch>

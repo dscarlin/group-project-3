@@ -21,7 +21,10 @@ export default function Dashboard(props) {
     return(
         <Container>
             <Grid className={`${classes.root}`}>
-                <SearchForm redirect={true} appState={props.appState}/>
+                <SearchForm redirect={true} 
+                    setAppState={props.setAppState}
+                    appState={props.appState}
+                />
             </Grid>
            
         </Container>
