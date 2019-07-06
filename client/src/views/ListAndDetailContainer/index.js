@@ -18,19 +18,19 @@ const useStyles = makeStyles(theme => ({
     },
     avatar: {
         padding: 6,
-        display: 'inline-block',
-        color: 'white',
-        backgroundColor: '#3F51B5'
+        display: "inline-block",
+        color: "white",
+        backgroundColor: "#3F51B5"
     },
     card: {
         marginTop: 10,
-        width: '90%',
+        width: "90%",
         minHeight: 175,
-        color: '#555'
+        color: "#555"
     },
     cardHeader: {
-        color: 'white',
-        backgroundColor: '#3F51B5'
+        color: "white",
+        backgroundColor: "#3F51B5"
     },
     control: {
         // border: "solid black 1px",
@@ -59,11 +59,11 @@ export default function ListAndDetailContainer(props) {
     
     const addExperience = (exp1, exp2, exp3) => {
         return exp1 +exp2 + exp3;
-    }
+    };
     const workHistory = (jobOne, jobTwo, jobThree) => {
-        let workHistory = [jobOne, jobTwo, jobThree]
+        let workHistory = [jobOne, jobTwo, jobThree];
         return workHistory;
-    }
+    };
     const getInitials = (name) => {
         var splitName = name.split(" ");
         var firstName = splitName[0];
@@ -72,15 +72,18 @@ export default function ListAndDetailContainer(props) {
         var lastInitial = lastName.split("")[0];
         var initials = firstInitial + lastInitial;
         return initials;
-    }
-
-    // const applicants = props.results;
+    };
+    console.log(SelectedApplicant)
+    const applicants = props.appState.searchResult;
     console.log(applicants);
     return(
         <Container>
+<<<<<<< HEAD
             {console.log(`applicant: ${applicants[SelectedApplicant]}`)}
+=======
+>>>>>>> 749e3e1bf47f29187fa3fe3a34127fd34ad237a3
             <Grid className={`${classes.root}`}>
-                <SearchForm appState={props.appState}/>
+                <SearchForm setAppState={props.appState}/>
             </Grid>
             <Grid container spacing={0} className={classes.root}>
                 {/* <List 
@@ -108,6 +111,8 @@ export default function ListAndDetailContainer(props) {
                             <ListItem 
                                 key={applicant._id}
                                 applicant={applicant}
+                                appState={props.appState}
+                                setAppState={props.setAppState}
                                 handleClick={setSelectedApplicant}
                                 index={index}
                             />
@@ -117,17 +122,18 @@ export default function ListAndDetailContainer(props) {
                 <Paper className={classes.paper}>
                     <Grid id="detail-view" item xs={6   } className={`${classes.control} ${classes.fixed}`}>
                         <Avatar className={classes.avatar}>{getInitials(applicants[SelectedApplicant].name)}</Avatar>
-                        <Typography style={{display: 'inline-block', color: '#555'}} variant="h3">{applicants[SelectedApplicant].name}</Typography>
-                        <Typography style={{color: '#999'}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
+                        <Typography style={{display: "inline-block", color: "#555"}} variant="h3">{applicants[SelectedApplicant].name}</Typography>
+                        <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
                         <Divider className={classes.widthControl}/>
                         <Grid container>
-                            <p style={{color: '#555'}}><strong style={{color: '#3F51B5'}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
+                            <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
                             <Grid container alignItems="center" justify="flex-start" spacing={0}>
                                 <Grid item xs={5}>
                                     <Card className={classes.card}>
                                         <CardContent>
-                                            <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p>
-                                            <p><strong style={{color: '#3F51B5'}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
+                                            <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p>
+                                            {/* <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p> */}
+                                            <p><strong style={{color: "#3F51B5"}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
                                         </CardContent>
                                     </Card>
                                 </Grid>
@@ -146,15 +152,7 @@ export default function ListAndDetailContainer(props) {
                                 <CardHeader title="Cover Letter" className={classes.cardHeader}/>
                                 <Divider />
                                 <CardContent>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam convallis dui eget dui mollis efficitur. 
-                                    Mauris hendrerit volutpat lacus. Praesent lobortis at sem vitae sodales. Pellentesque viverra nunc sapien, scelerisque 
-                                    consectetur nulla sollicitudin sit amet. Quisque in aliquet metus, eu rutrum dui. 
-                                    Integer in placerat sapien. Curabitur ullamcorper vehicula tempus. Nam eu nisi sapien. Donec pretium ullamcorper mollis. 
-                                    Nam eu leo sem. Sed quis mauris gravida lectus consectetur dapibus. In neque massa, imperdiet viverra volutpat nec, 
-                                    volutpat pellentesque tortor. Integer consequat, metus eget consequat eleifend, sem nunc laoreet enim, 
-                                    sit amet ullamcorper diam eros eget ligula. Vivamus quis fringilla sapien. Maecenas volutpat venenatis est, auctor facilisis magna.
-                                </p>
+                                    <p>{applicants[SelectedApplicant].coverLetter}</p>
                                 </CardContent>
                             </Card>
                         </Grid>
