@@ -4,8 +4,8 @@ import { Grid, Typography } from "@material-ui/core";
 import ListItem from "../../components/ListItem";
 import applicants from "../../dummyApps.json";
 
-
 const useStyles = makeStyles(theme => ({
+
     root: {
         flexGrow: 1,
         position: "relative",
@@ -19,8 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
     details: {
         position: "fixed",
-        right: 0,
-        width: "48%", 
+        right: 0, 
         height: "100vh",
         marginRight: 15     
     },
@@ -30,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function SavedCandidates() {
+export default function ListScroll() {
     const classes = useStyles();
     console.log(applicants);
     return(

@@ -5,6 +5,7 @@ import HideAppBar from "./components/HideAppBar";
 import Login from "./views/Login";
 import Landing from "./views/Landing";
 import Apply from "./views/Apply";
+import Saved from "./views/Saved";
 import ListAndDetailContainer from "./views/ListAndDetailContainer";
 import "./App.css";
 
@@ -45,7 +46,7 @@ class App extends Component {
                     {/* Need solution for rendering list item based on whether user wants saved or search */}
                     {/* Initial idea is to first render saved on Login, and searched on click of search button */}
                     <Route exact path="/list-view/searched" component={ ListAndDetailContainer }/>
-                    <Route exact path="/list-view/saved" component={ ListAndDetailContainer }/>
+                    <Route exact path="/list-view/saved" component={ Saved }/>
                 </Router>
             </React.Fragment>
         );
