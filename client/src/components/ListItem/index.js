@@ -45,14 +45,30 @@ export default function ListItem(props) {
         if(result.data.ok)
             return props.setAppState({ userInfo });
     };
-    const removeApplicant = (e) => {
+    const removeApplicant = async (e) => {
+        e.stopPropagation();
         e.preventDefault();
-        return console.log("Delete this Item from List View");
+        let applicantId = props.appState.searchResult[props.index]._id;
+        let userInfo = props.appState.userInfo;
+        let searchResult = props.appState.searchResult;
+        let index = userInfo.notInterested.indexOf(applicantId);
+        if(index < 0){
+            userInfo.notInterested.push(applicantId);
+            searchResult.splice(props.index,1);
+        }
+        // else{
+        //     userInfo.notInterested.splice(index, 1);
+        //     // searchResult.unshift(props) //add back to search result
+        // }
+        const result = await axios.put("/api/employer",userInfo,{
+            headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
+        });
+        console.log(userInfo);
+        if(result.data.ok)
+            return props.setAppState({ userInfo });
+        
     };
-    const showApplicantDetail = (e) => {
-        e.preventDefault();
-        return console.log("On List Item click, display the detail page for this applicant");
-    };
+
     const messageApplicant= (e) => {
         e.preventDefault();
         return console.log("*Twilio Message Ping*");
@@ -65,7 +81,7 @@ export default function ListItem(props) {
         return workHistory;
     }
     return (
-        <li className={classes.root} onClick={() => props.handleClick(props.index)}>
+        <li className={classes.root} onClick={() => props.setAppState({ SelectedApplicant: props.index})}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>

@@ -18,7 +18,9 @@ class App extends Component {
     state = {
             modalOpen: false,
             userInfo: null,
-            searchResult: []
+            searchResult: [],
+            SelectedApplicant: 0,
+
     };
 
     appState = (arg) => {
