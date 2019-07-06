@@ -1,36 +1,33 @@
-const db = require("../models");
+db = require("../models")
 
-// Defining methods for the applicantController
 module.exports = {
-  findAll: function(req, res) {
-    db.Applicant
-      .find(req.query)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  findById: function(req, res) {
-    db.Applicant
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  create: function(req, res) {
-    db.Applicant
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  update: function(req, res) {
-    db.Applicant
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  remove: function(req, res) {
-    db.Applicant
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  }
+    create: (req, res) => {
+        db.Applicant
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    findAll: (req, res) => {
+        req.query.selectedPositions = 
+        //matches any applicants that have one or more
+        //of the specified position search criteria
+        { "$in" : req.query.selectedPositions.split(",") };
+        req.query.availability = 
+        //matches any applicants that have all of the specified
+        //availabilities
+        {  [req.query.checkbox] : req.query.availability.split(",") };
+        delete req.query.checkbox;
+        db.Applicant
+            .find(req.query)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    remove: (req, res) => {
+        console.log(req.params)
+        db.Applicant
+        .findOneAndRemove(req.params)
+        .then()
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    } 
 };

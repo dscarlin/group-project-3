@@ -1,55 +1,55 @@
 import React, {Component} from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import HideAppBar from "./components/HideAppBar";
-import Login from "./views/Login";
 import Landing from "./views/Landing";
 import Apply from "./views/Apply";
-import Saved from "./views/Saved";
+import Dashboard from "./views/Dashboard";
 import ListAndDetailContainer from "./views/ListAndDetailContainer";
+import SimpleModal from "./components/Modal";
+import LoginLoading from './components/LoginLoading';
+import SecuredRoute from './components/SecuredRoute';
+import EmployerSignupForm from './components/EmployerSignupForm';
+
 import "./App.css";
+
 
 class App extends Component {
     state = {
-        loggedIn: false
-    }
-    login = () => {
-        this.setState({loggedIn: true})
+            modalOpen: false,
+            userInfo: null,
+            searchResult: []
     };
-    logOut = () => {
 
-        this.setState({loggedIn: false})
+    appState = (arg) => {
+        this.setState(arg)
     };
     render() {
         return (
             <React.Fragment>
                 <CssBaseline />
                 <Router>
-                    <HideAppBar 
-                        loggedIn={this.state.loggedIn}
-                        logOut={this.logOut}
-                    />
-                    <Route 
-                        exact path="/" 
-                        component={ Landing } 
-                    />   
-                    <Route
-                        exact path="/login"
-                        render={ props => 
-                            <Login
-                            login={this.login}
-                            {...props} 
-                            />
-                        }
-                    />   
-                    <Route exact path="/Apply" component={ Apply}/>
-                    {/* Need solution for rendering list item based on whether user wants saved or search */}
-                    {/* Initial idea is to first render saved on Login, and searched on click of search button */}
-                    <Route exact path="/list-view/searched" component={ ListAndDetailContainer }/>
-                    <Route exact path="/list-view/saved" component={ Saved }/>
+                    <HideAppBar />
+                    <Switch>
+                        <Route exact path="/" component={ Landing } />
+                        <Route  exact path="/Apply" component={ Apply}/>
+                        <Route path="/login" render={props => 
+                            <LoginLoading appState={this.appState} {...props} />} />
+                        <SecuredRoute path="/signup" component={ props =>  
+                            <EmployerSignupForm appState={this.appState} {...props} />} />
+                        <SecuredRoute path="/dashboard" component={(props) =>  
+                            <Dashboard {...props} appState={this.appState} />} />
+                        <SecuredRoute path="/list-view" component={(props) =>  
+                            <ListAndDetailContainer {...props} appState={this.appState} results={this.state.searchResult} />} />
+                        <SecuredRoute path="/list-view/saved" component={(props) =>  
+                            <ListAndDetailContainer {...props} appState={this.appState} results={this.state.searchResult} />} /> 
+                        {/* need to make a no-match component  to go in this route */}
+                        <Route component={ Landing }/> 
+                    </Switch>
                 </Router>
+                <SimpleModal open={this.state.modalOpen} appState={this.appState} togglOpen={this.toggleModal}/>
             </React.Fragment>
         );
-    };
-};
+    }
+}
 export default App;

@@ -2,10 +2,42 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const appSchema = new Schema({
-  name: { type: String, required: true },
-  expInMonths: { type: Number, required: true },
-  workHistory: {type: Array, default: undefined},
-  availableWhen: { type: Date required: true },
+  selectedPositions: [
+    {
+      type: String
+    }
+  ],
+  availability: [
+    {
+      type: String
+    }
+  ],
+  name: { type: String },
+  email: { type: String },
+  phone: { type: String },
+  
+  positionsWorked1: [
+    {
+      type: String
+    }
+  ],
+  whMonths1: { type: Number },
+  whDetails1: { type: String },
+  positionsWorked2: [
+    {
+      type: String
+    }
+  ],
+  whMonths2: { type: Number },
+  whDetails2: { type: String },
+  positionsWorked3: [
+    {
+      type: String
+    }
+  ],
+  whMonths3: { type: Number },
+  whDetails3: { type: String },
+  coverLetter: { type: String },
   applicationDate: { type: Date, default: Date.now }
 });
 

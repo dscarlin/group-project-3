@@ -1,6 +1,11 @@
 import React from "react";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Input, InputLabel, MenuItem, FormControl, ListItemText, Select, Checkbox, Button } from "@material-ui/core";
+import { Input, InputLabel, MenuItem, FormControl, 
+    FormControlLabel, ListItemText, Select, 
+    Checkbox, Button } from "@material-ui/core";
+import auth0Client from "../../auth";
 
 
 
@@ -22,7 +27,6 @@ const useStyles = makeStyles(() => ({
     },
     button: {
         verticalAlign: "bottom"
-
     }
 }));
   
@@ -53,25 +57,53 @@ const availabilityOptions = [
     "Lunch",
     "Dinner",
     "Late Night"
-]
+];
   
-export default function SearchForm() {
+export default withRouter(function SearchForm(props) {
     const classes = useStyles();
-    const [SelectedPositions, setSelectedPositions,] = React.useState([]);
-    const [selectedAvailability, setSelectedAvailability] = React.useState([]);
-  
-    function handleChange(event) {
-        if(event.target.name === "pos")
-            setSelectedPositions(event.target.value);
-        else
-            setSelectedAvailability(event.target.value);
-    }
+    // const [SelectedPositions, setSelectedPositions,] = React.useState([]);
+    // const [selectedAvailability, setSelectedAvailability] = React.useState([]);
+    const [state, setState] = React.useState({
+        selectedPositions: [],
+        selectedAvailability: [],
+        checkbox: false,
+    });
+    const handleChange = event => {
+        console.log(event.target);
+        let { name, value } = event.target;
+        if(name === "checkbox")
+            value = event.target.checked;
+        setState({ ...state, [name]: value });
+    };
+    // function handleChange(event) {
+    //     if(event.target.name === "pos")
+    //         setSelectedPositions(event.target.value);
+    //     else
+    //         setSelectedAvailability(event.target.value);
+    // }
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(SelectedPositions, selectedAvailability);
-        setSelectedPositions([]);
-        setSelectedAvailability([]);
-        //SelectedPositions is the array of 
+        console.log(state);
+        let positions = state.selectedPositions.join();
+        let checkbox = state.checkbox ? "$all" : "$in";
+        let availability = state.selectedAvailability.join();
+        let url = `/api/applicant?selectedPositions=${positions}`+
+            `&availability=${availability}&checkbox=${checkbox}`;
+        async function submitForm() {
+            await setState({
+                selectedPositions: [],
+                selectedAvailability: [],
+                checkbox: false,
+            });
+            const response =  await axios.get(url, {headers: 
+                { "Authorization": `Bearer ${auth0Client.getIdToken()}` }});
+            let searchResult = response.data;
+            console.log("search: ",searchResult);
+            await props.appState({ searchResult });
+            if(props.redirect)
+                props.history.push("/list-view");
+        }
+        submitForm();        
     };
     return (
         <form className={classes.root} >
@@ -79,9 +111,9 @@ export default function SearchForm() {
                 <InputLabel className={`${classes.white}`} htmlFor="select-multiple-checkbox">Position to fill</InputLabel>
                 <Select
                     multiple
-                    name="pos"
+                    name="selectedPositions"
                     className={classes.white}
-                    value={SelectedPositions}
+                    value={state.selectedPositions}
                     onChange={handleChange}
                     input={<Input className={classes.white} id="select-multiple-checkbox" />}
                     renderValue={selected => selected.join(", ")}
@@ -89,7 +121,7 @@ export default function SearchForm() {
                 >
                     {positionOptions.map(name => (
                         <MenuItem key={name} value={name}>
-                            <Checkbox checked={SelectedPositions.indexOf(name) > -1} />
+                            <Checkbox checked={state.selectedPositions.indexOf(name) > -1} />
                             <ListItemText primary={name} />
                         </MenuItem>
                     ))}
@@ -99,9 +131,9 @@ export default function SearchForm() {
                 <InputLabel className={`${classes.white}`} htmlFor="select-multiple-checkbox">Availability Needed</InputLabel>
                 <Select
                     multiple
-                    name="avail"
+                    name="selectedAvailability"
                     className={classes.white}
-                    value={selectedAvailability}
+                    value={state.selectedAvailability}
                     onChange={handleChange}
                     input={<Input className={classes.white} id="select-multiple-checkbox" />}
                     renderValue={selected => selected.join(", ")}
@@ -109,14 +141,21 @@ export default function SearchForm() {
                 >
                     {availabilityOptions.map(name => (
                         <MenuItem key={name} value={name}>
-                            <Checkbox checked={selectedAvailability.indexOf(name) > -1} />
+                            <Checkbox checked={state.selectedAvailability.indexOf(name) > -1} />
                             <ListItemText primary={name} />
                         </MenuItem>
                     ))}
                 </Select>
             </FormControl>
+            <FormControlLabel
+                className={classes.button}
+                control={
+                    <Checkbox   checked={state.checkbox} onChange={handleChange} name="checkbox" value={state.checkbox} />
+                }
+                label="Match All Availability"
+            />            
             <Button onClick={handleSubmit} className={`${classes.white} ${classes.button}`} >Search</Button>             
         </form>
 
     );
-}
+});

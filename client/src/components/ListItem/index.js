@@ -41,8 +41,15 @@ export default function ListItem(props) {
         e.preventDefault();
         return console.log("*Twilio Message Ping*");
     };
+    const addExperience = (a, b, c) => {
+        return a + b + c;
+    }
+    const workHistory = (jobOne, jobTwo, jobThree) => {
+        let workHistory = [jobOne, jobTwo, jobThree]
+        return workHistory;
+    }
     return (
-        <li className={classes.root}>
+        <li className={classes.root} onClick={() => props.handleClick(props.index)}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
@@ -55,22 +62,22 @@ export default function ListItem(props) {
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs onClick={showApplicantDetail}>
+                            <Grid item xs >
                                 <Typography gutterBottom variant="subtitle1">
-                                    {props.applicantName}
+                                    {props.applicant.name}
                                 </Typography>
                                 <Typography variant="body2" gutterBottom>
-                                    {props.expInMonths}
+                                    {addExperience(props.applicant.whMonths1,props.applicant.whMonths2, props.applicant.whMonths3)}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {props.availableWhen}
+                                    {props.applicant.availability}
                                 </Typography>
                             </Grid>
                         </Grid>
                         <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs onClick={showApplicantDetail}>
+                            <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1">
-                                    {props.workHistory}
+                                    {workHistory(props.applicant.positionsWorked1, props.applicant.positionsWorked2, props.applicant.positionsWorked3)}
                                 </Typography>
                             </Grid>
                         </Grid>
