@@ -1,106 +1,60 @@
+
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-// import Button from '@material-ui/core/Button';
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 import { makeStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-
-const StyledMenu = withStyles({
-    paper: {
-        border: "1px solid #d3d4d5",
-    },
-})(props => (
-    <Menu
-        elevation={0}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
-        }}
-        transformOrigin={{
-            vertical: "top",
-            horizontal: "center",
-        }}
-        {...props}
-    />
-));
-
-const StyledMenuItem = withStyles(theme => ({
-    root: {
-        "&:focus": {
-            backgroundColor: theme.palette.primary.main,
-            "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-                color: theme.palette.common.white,
-            },
-        },
-    },
-}))(MenuItem);
+import {Popper, Typography, Button, Fade, Paper } from "@material-ui/core";
+import Delete from "@material-ui/icons/Delete";
+import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles(theme => ({
-    menuButton: {
-        marginRight: theme.spacing(2),
+    typography: {
+        padding: theme.spacing(2),
+    },
+    paper: {
+        "& Button": {
+            margin: "1em",
+
+            "& Button.removeButton:hover": {
+                backgroundColor: "red"
+            }
+        },
+        textAlign: "center"
     }
+   
 }));
 
-export default function Popper() {
+export default function SimplePopper(props) {
     const classes = useStyles();
-
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     function handleClick(event) {
-        setAnchorEl(event.currentTarget);
+        event.stopPropagation();
+        setAnchorEl(anchorEl ? null : event.currentTarget);
     }
 
-    function handleClose() {
-        setAnchorEl(null);
-    }
+    const open = Boolean(anchorEl);
+    const id = open ? "simple-popper" : undefined;
 
     return (
-        <React.Fragment>
-            <IconButton
-                edge="start" 
-                className={classes.menuButton} 
-                aria-controls="customized-menu"
-                aria-haspopup="true"
-                variant="contained"
-                color="inherit" 
-                aria-label="Menu"
-                onClick={handleClick}>
-                <MenuIcon />
-            </IconButton>
-            <StyledMenu
-                id="customized-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                <StyledMenuItem>
-                    <ListItemIcon>
-                        <SendIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Sent mail" />
-                </StyledMenuItem>
-                <StyledMenuItem>
-                    <ListItemIcon>
-                        <DraftsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Drafts" />
-                </StyledMenuItem>
-                <StyledMenuItem>
-                    <ListItemIcon>
-                        <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Inbox" />
-                </StyledMenuItem>
-            </StyledMenu>
-        </React.Fragment>
+        <div>
+            <Delete aria-describedby={id} variant="contained" onClick={handleClick}/>
+            {/* <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+        Toggle Popper
+      </Button> */}
+            <Popper id={id} open={open} anchorEl={anchorEl} transition>
+                {({ TransitionProps }) => (
+                    <Fade {...TransitionProps} timeout={350}>
+                        <Paper className={classes.paper}>
+                            <Typography className={classes.typography}>
+                                <strong>Permanently Remove Applicant?</strong>
+                                <br/><small>Appplicant will be removed from all future searches</small>
+                                <br/><small>* This operation cannot be undone </small>
+                            </Typography>
+                            <Button  onClick={props.removeApplicant}>Delete</Button>
+                            <Button className="removeButton" onClick={handleClick}>Cancel</Button>
+                        </Paper>
+                    </Fade>
+                )}
+            </Popper>
+        </div>
     );
 }

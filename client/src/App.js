@@ -20,7 +20,7 @@ class App extends Component {
             userInfo: null,
             searchResult: [],
             SelectedApplicant: 0,
-
+            popperAnchorEl: null
     };
 
     appState = (arg) => {
