@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
         padding: 6,
         display: "inline-block",
         color: "white",
-        backgroundColor: "#3F51B5"
+        backgroundColor: "#3F51B5",
+        textAlign: "center"
     },
     card: {
         marginTop: 10,
@@ -86,7 +87,7 @@ function ListAndDetailContainer(props) {
     return(
         <Container>
             <Grid className={`${classes.root}`}>
-                <SearchForm appstate={props.appState} setAppState={props.setAppState}/>
+                <SearchForm appState={props.appState} setAppState={props.setAppState}/>
             </Grid>
             <Grid container spacing={0} className={classes.root}>
                 <Grid item xs={6} className={classes.control}>

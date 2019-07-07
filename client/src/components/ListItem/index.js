@@ -12,7 +12,10 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 // Icons
 import Star from "@material-ui/icons/StarRounded";
 import Message from "@material-ui/icons/Message";
-import Delete from "@material-ui/icons/Delete";
+
+//Popper
+import Popper from "../Popper";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -68,18 +71,18 @@ export default function ListItem(props) {
             return props.setAppState({ userInfo });
         
     };
-
+    
     const messageApplicant= (e) => {
         e.preventDefault();
         return console.log("*Twilio Message Ping*");
     };
     const addExperience = (a, b, c) => {
         return a + b + c;
-    }
+    };
     const workHistory = (jobOne, jobTwo, jobThree) => {
-        let workHistory = [jobOne, jobTwo, jobThree]
+        let workHistory = [jobOne, jobTwo, jobThree];
         return workHistory;
-    }
+    };
     return (
         <li className={classes.root} onClick={() => props.setAppState({ SelectedApplicant: props.index})}>
             <Paper className={classes.paper}>
@@ -93,7 +96,8 @@ export default function ListItem(props) {
                             />
                         </ButtonBase>
                         <ButtonBase> 
-                            <Delete style={{color:"gray"}} onClick={removeApplicant}></Delete>
+                            
+                            <Popper removeApplicant={removeApplicant}/>
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
