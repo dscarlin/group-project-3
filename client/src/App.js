@@ -30,11 +30,12 @@ class App extends Component {
     };
     messageApplicant = async applicant => {
         var employer = this.state.userInfo;
+        employer.messaged.push(applicant._id)
         const message = `Hey ${applicant.name}, ${employer.businessName} would like you` +
             `to contact them to schedule an interview. Their phone number is ${employer.phone} and their` +
             `address is: ${employer.streetAddress} ${employer.city}, ${employer.state} ${employer.zipcode}.`
         const payload = { message, phoneNumber: applicant.phone }
-        const result = await axios.post(`/api/applicant/${employer.email}`,payload,{
+        const result = await axios.post(`/api/applicant/${employer._id}`,payload,{
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
         console.log(result);
