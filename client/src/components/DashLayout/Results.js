@@ -14,7 +14,7 @@ export default (props) => {
 
     return (
 
-        <Grid item sm>
+        <Grid item sm={6}>
             <Card className={`${classes.card} ${classes.container}`} align="center">
                 <CardHeader title="Search Results" className={classes.cardHeader} />
                 <CardContent className={classes.resultList}>

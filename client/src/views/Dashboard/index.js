@@ -73,11 +73,12 @@ export default function Dashboard(props) {
                 />
             </Grid>
             <br />
-            <Grid container spacing={2}>
+            <Grid container justify="space-evenly" spacing={0}>
                 <Results 
                     useStyles={useStyles}
                     appState={props.appState}
                     setAppState={props.setAppState}
+                    messageApplicant={props.messageApplicant}
                 />
                 <DetailContainer 
                     useStyles={useStyles}

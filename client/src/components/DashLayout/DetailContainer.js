@@ -28,7 +28,7 @@ export default (props) => {
     const SelectedApplicant = props.appState.SelectedApplicant;
 
     return (
-        <Grid item sm>
+        <Grid item sm={6}>
             {applicants.length ?
                 <Card className={`${classes.card} ${classes.container}`} align="center">
                     <CardHeader title="Candidate Details" className={classes.cardHeader} />

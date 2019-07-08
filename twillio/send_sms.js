@@ -5,14 +5,15 @@ require("dotenv").config()
 
 function sendMessage(applicantNumber, message) {
 
-  const accountSid = 'ACba635bef34bd665e3a5524406f0e3e7a';
+  // const accountSid = 'ACba635bef34bd665e3a5524406f0e3e7a';
+  const accountSid = process.env.accountSid || 'ACba635bef34bd665e3a5524406f0e3e7a';
   const authToken = process.env.authToken;
   const client = require('twilio')(accountSid, authToken);
 
   client.messages
     .create({
       body: message,
-      from: '+19195253220',
+      from: process.env.NUMBER || '+19195253220',
       to: applicantNumber
     })
     .then(message => console.log(message.sid));
