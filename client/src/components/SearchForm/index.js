@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
         color: "inherit"
     },
     button: {
-        verticalAlign: "bottom"
+        verticalAlign: "bottom",
     }
 }));
   
@@ -104,7 +104,7 @@ export default withRouter(function SearchForm(props) {
 
             await props.setAppState({ searchResult });
             if(props.redirect)
-                props.history.push("/list-view");
+                props.history.push("/dashboard");
         }
         submitForm();        
     };
@@ -157,7 +157,7 @@ export default withRouter(function SearchForm(props) {
                 }
                 label="Match All Availability"
             />            
-            <Button onClick={handleSubmit} className={`${classes.white} ${classes.button}`} >Search</Button>             
+            <Button onClick={handleSubmit} className={`${classes.white} ${classes.button}`} color="primary" >Search</Button>             
         </form>
 
     );

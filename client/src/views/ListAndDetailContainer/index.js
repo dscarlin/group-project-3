@@ -1,12 +1,14 @@
 import React from "react";
 import lifecycle from "react-pure-lifecycle";
 import { makeStyles } from "@material-ui/core/styles";
-import { Avatar, Card, CardContent, Container, CardHeader, Divider, Grid, Paper, Typography} from "@material-ui/core";
+import { Avatar, Card, CardContent, Container, CardHeader, Divider, Grid, Paper, Typography, List} from "@material-ui/core";
 import Email from "@material-ui/icons/Email";
 import Phone from "@material-ui/icons/Phone";
 import ListItem from "../../components/ListItem";
 import SearchForm from "../../components/SearchForm";
 import applicants from "../../dummyApps.json";
+import Details from "../../components/Details";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -43,6 +45,8 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         // padding: theme.spacing(2),
+        padding: 20,
+        overflowY: "auto",
         margin: "1em 0",
         maxWidth: "90%",
     },
@@ -86,12 +90,32 @@ function ListAndDetailContainer(props) {
     console.log(applicants);
     return(
         <Container>
+            {console.log(`applicant: ${applicants[SelectedApplicant]}`)}
             <Grid className={`${classes.root}`}>
                 <SearchForm appState={props.appState} setAppState={props.setAppState}/>
             </Grid>
             <Grid container spacing={0} className={classes.root}>
-                <Grid item xs={6} className={classes.control}>
-                    <ul>
+                {/* <List 
+                    key={applicant._id}
+                    applicant={applicant}
+                    handleClick={setSelectedApplicant}
+                    index={index}
+                />
+                <Details
+                    applicant={applicant}
+                    index={index}
+                    name={applicants[SelectedApplicant].name}
+                    getInitials={getInitials(applicants[SelectedApplicant].name)}
+                    applicationDate={applicants[SelectedApplicant].applicationDate}
+                    availableShifts={applicants[SelectedApplicant].availability}
+                    addExperience={addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)}
+                    workHistory={workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}
+                    email={applicants[SelectedApplicant].email}
+                    phone={applicants[SelectedApplicant].phone}
+                    coverLetter={applicants[SelectedApplicant].coverLetter}
+                /> */}
+                <Grid item sm className={classes.control}>
+                    <List component="ul">
                         {applicants.map((applicant, index) =>
                             <ListItem 
                                 messageApplicant={props.messageApplicant}
@@ -102,7 +126,7 @@ function ListAndDetailContainer(props) {
                                 index={index}
                             />
                         )}
-                    </ul>
+                    </List>
                 </Grid>
                 {applicants.length?
                     <Paper className={classes.paper}>

@@ -32,12 +32,8 @@ const useStyles = makeStyles(theme => ({
     },
     welcomeMessage: {
         position: "relative", 
-        padding: theme.spacing(3),
-        [theme.breakpoints.up("md")]: {
-            padding: theme.spacing(8),
-            paddingRight: 0,
-        },
-        textShadow: 1
+        padding: 64,
+        marginTop: 50
     },
     overview: {
         position: "relative",
@@ -60,9 +56,9 @@ export default function Landing(props) {
                         <Grid item md={12}>
                             <div className={classes.welcomeMessage}>
                                 <Typography variant="h1" color="inherit" align="center" >
-                                    Welcome to On The Fly Staffing
+                                    On The Fly Staffing
                                 </Typography>
-                                <Typography variant="h3" color="inherit" align="center" >
+                                <Typography variant="h5" color="inherit" align="center" >
                                     Helping the hospitality industry apply and hire with ease.
                                 </Typography>
                             </div>
@@ -81,12 +77,10 @@ export default function Landing(props) {
                     </Button>
                     <Button variant="contained" className={`${classes.button} `} >
                         <NavLink to="/list-view" exact={true} className={`${style.inherit}`}>
-                            Find Applicants
+                            Find Candidates
                         </NavLink>
                     </Button>
                 </div>
-                
-                
             </main>
         </React.Fragment>
     );

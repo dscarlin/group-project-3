@@ -26,7 +26,6 @@ const sendMessage = require("../twillio/send_sms");
     //     );
             
   
-    
 
     
 module.exports = {
@@ -72,11 +71,12 @@ module.exports = {
     },
     sendSMS: (req, res) => {
         //send sms through twilio
-        const { phoneNumber, message } = req.body
-        // sendMessage(phoneNumber, message);
+        let { phoneNumber, message } = req.body
+        // phoneNumber = `+1${phoneNumber.split('').filter(char => char.match(/[0-9]/g)).join('')}`;
+        sendMessage(phoneNumber, message);
         const user = { email: req.user.email }
         //update employer info that applicant has been messaged
-        const messaged = { "$push" : { messaged: req.params._id } };
+        const messaged = { "$push" : { messaged: req.params._id }, "$addToSet" : {interested : req.params._id} };
         db.Employer
             .findOneAndUpdate(user, messaged)
             .then(dbModel => res.json(dbModel))
