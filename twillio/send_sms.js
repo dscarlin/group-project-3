@@ -17,5 +17,4 @@ function sendMessage(applicantNumber, message) {
     })
     .then(message => console.log(message.sid));
 }
-
-export default sendMessage;
+module.exports = sendMessage; 
