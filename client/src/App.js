@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import axios from "axios";
+import auth0Client from "./auth";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import HideAppBar from "./components/HideAppBar";
@@ -18,12 +20,26 @@ class App extends Component {
     state = {
             modalOpen: false,
             userInfo: null,
-            searchResult: []
+            searchResult: [],
+            SelectedApplicant: 0,
+            popperAnchorEl: null
     };
 
     appState = (arg) => {
         this.setState(arg)
     };
+    messageApplicant = async applicant => {
+        var employer = this.state.userInfo;
+        const message = `Hey ${applicant.name}, ${employer.businessName} would like you` +
+            `to contact them to schedule an interview. Their phone number is ${employer.phone} and their` +
+            `address is: ${employer.streetAddress} ${employer.city}, ${employer.state} ${employer.zipcode}.`
+        const payload = { message, phoneNumber: applicant.phone }
+        const result = await axios.post(`/api/applicant/${employer.email}`,payload,{
+            headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
+        });
+        console.log(result);
+    };  
+
     render() {
         return (
             <React.Fragment>
@@ -40,7 +56,7 @@ class App extends Component {
                         <SecuredRoute path="/dashboard" component={(props) =>  
                             <Dashboard {...props} setAppState={this.appState} appState={this.state} />} />
                         <SecuredRoute path="/list-view" component={(props) =>  
-                            <ListAndDetailContainer {...props} setAppState={this.appState} appState={this.state} />} />
+                            <ListAndDetailContainer {...props} setAppState={this.appState} messageApplicant={this.messageApplicant} appState={this.state} />} />
                         <SecuredRoute path="/list-view/saved" component={(props) =>  
                             <ListAndDetailContainer {...props} setAppState={this.appState} appState={this.state} />} /> 
                         {/* need to make a no-match component  to go in this route */}

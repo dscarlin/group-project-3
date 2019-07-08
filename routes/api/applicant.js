@@ -2,6 +2,7 @@ const router = require("express").Router();
 const checkJwt = require("../../checkJwt")
 const applicantController = require("../../controllers/applicantController");
 
+
 //Matches with "/api/applicant"
 router
     .route("/")
@@ -11,7 +12,7 @@ router
 
 router
     .route("/:_id")
-    .delete(checkJwt, applicantController.remove);
-
+    .delete(checkJwt, applicantController.remove)
+    .post(checkJwt, applicantController.sendSMS);
 
 module.exports = router;

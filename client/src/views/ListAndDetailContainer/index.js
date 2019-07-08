@@ -1,4 +1,5 @@
 import React from "react";
+import lifecycle from "react-pure-lifecycle";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar, Card, CardContent, Container, CardHeader, Divider, Grid, Paper, Typography} from "@material-ui/core";
 import Email from "@material-ui/icons/Email";
@@ -20,7 +21,8 @@ const useStyles = makeStyles(theme => ({
         padding: 6,
         display: "inline-block",
         color: "white",
-        backgroundColor: "#3F51B5"
+        backgroundColor: "#3F51B5",
+        textAlign: "center"
     },
     card: {
         marginTop: 10,
@@ -52,10 +54,18 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function ListAndDetailContainer(props) {
+const methods = {
+    // componentDidMount(props) {
+    //     props.setAppState({ SelectedApplicant: 0});
+    // }
+};
+
+function ListAndDetailContainer(props) {
     const classes = useStyles();
     
-    const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
+    // const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
+
+   
     
     const addExperience = (exp1, exp2, exp3) => {
         return exp1 +exp2 + exp3;
@@ -73,8 +83,9 @@ export default function ListAndDetailContainer(props) {
         var initials = firstInitial + lastInitial;
         return initials;
     };
-    console.log(SelectedApplicant)
+    console.log(SelectedApplicant);
     const applicants = props.appState.searchResult;
+    const SelectedApplicant = props.appState.SelectedApplicant;
     console.log(applicants);
     return(
         <Container>
@@ -83,7 +94,7 @@ export default function ListAndDetailContainer(props) {
 =======
 >>>>>>> 749e3e1bf47f29187fa3fe3a34127fd34ad237a3
             <Grid className={`${classes.root}`}>
-                <SearchForm setAppState={props.appState}/>
+                <SearchForm appState={props.appState} setAppState={props.setAppState}/>
             </Grid>
             <Grid container spacing={0} className={classes.root}>
                 {/* <List 
@@ -109,56 +120,60 @@ export default function ListAndDetailContainer(props) {
                     <ul>
                         {applicants.map((applicant, index) =>
                             <ListItem 
+                                messageApplicant={props.messageApplicant}
                                 key={applicant._id}
                                 applicant={applicant}
                                 appState={props.appState}
                                 setAppState={props.setAppState}
-                                handleClick={setSelectedApplicant}
                                 index={index}
                             />
                         )}
                     </ul>
                 </Grid>
-                <Paper className={classes.paper}>
-                    <Grid id="detail-view" item xs={6   } className={`${classes.control} ${classes.fixed}`}>
-                        <Avatar className={classes.avatar}>{getInitials(applicants[SelectedApplicant].name)}</Avatar>
-                        <Typography style={{display: "inline-block", color: "#555"}} variant="h3">{applicants[SelectedApplicant].name}</Typography>
-                        <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
-                        <Divider className={classes.widthControl}/>
-                        <Grid container>
-                            <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
-                            <Grid container alignItems="center" justify="flex-start" spacing={0}>
-                                <Grid item xs={5}>
-                                    <Card className={classes.card}>
-                                        <CardContent>
-                                            <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p>
-                                            {/* <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p> */}
-                                            <p><strong style={{color: "#3F51B5"}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                                <Grid item xs={5}>
-                                    <Card className={classes.card}>
-                                        <CardContent>
-                                            <span><Avatar className={classes.avatar}><Email style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].email}</span>
-                                            <span><Avatar className={classes.avatar}><Phone style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].phone}</span>
-                                        </CardContent>
-                                    </Card>
+                {applicants.length?
+                    <Paper className={classes.paper}>
+                        <Grid id="detail-view" item xs={6   } className={`${classes.control} ${classes.fixed}`}>
+                            <Avatar className={classes.avatar}>{getInitials(applicants[SelectedApplicant].name)}</Avatar>
+                            <Typography style={{display: "inline-block", color: "#555"}} variant="h3">{applicants[SelectedApplicant].name}</Typography>
+                            <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
+                            <Divider className={classes.widthControl}/>
+                            <Grid container>
+                                <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
+                                <Grid container alignItems="center" justify="flex-start" spacing={0}>
+                                    <Grid item xs={5}>
+                                        <Card className={classes.card}>
+                                            <CardContent>
+                                                <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p>
+                                                {/* <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p> */}
+                                                <p><strong style={{color: "#3F51B5"}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    <Grid item xs={5}>
+                                        <Card className={classes.card}>
+                                            <CardContent>
+                                                <span><Avatar className={classes.avatar}><Email style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].email}</span>
+                                                <span><Avatar className={classes.avatar}><Phone style={{backgroundColor: "#3F51B5"}}/></Avatar>{applicants[SelectedApplicant].phone}</span>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
                                 </Grid>
                             </Grid>
+                            <Grid container alignItems="center">
+                                <Card className={classes.card}>
+                                    <CardHeader title="Cover Letter" className={classes.cardHeader}/>
+                                    <Divider />
+                                    <CardContent>
+                                        <p>{applicants[SelectedApplicant].coverLetter}</p>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
                         </Grid>
-                        <Grid container alignItems="center">
-                            <Card className={classes.card}>
-                                <CardHeader title="Cover Letter" className={classes.cardHeader}/>
-                                <Divider />
-                                <CardContent>
-                                    <p>{applicants[SelectedApplicant].coverLetter}</p>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    </Grid>
-                </Paper>
+                    </Paper>
+                    : 
+                    null}
             </Grid>
         </Container>
     );
 }
+export default lifecycle(methods)(ListAndDetailContainer);
