@@ -56,7 +56,11 @@ class App extends Component {
                         <SecuredRoute path="/signup" component={ props =>  
                             <EmployerSignupForm setAppState={this.appState}  {...props} />} />
                         <SecuredRoute path="/dashboard" component={(props) =>  
+<<<<<<< HEAD
                             <Dashboard {...props} setAppState={this.appState} messageApplicant={this.messageApplicant} appState={this.state} />} />
+=======
+                            <Dashboard {...props} setAppState={this.appState} appState={this.state} messageApplicant={this.messageApplicant} /> } />
+>>>>>>> 8972924a1bc2918ffe4237fb52394d9351930eaf
                         <SecuredRoute path="/list-view" component={(props) =>  
                             <ListAndDetailContainer {...props} setAppState={this.appState} messageApplicant={this.messageApplicant} appState={this.state} />} />
                         <SecuredRoute path="/list-view/saved" component={(props) =>  

@@ -8,9 +8,10 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     findOne: (req, res) => {
+        console.log("call employer db")
         db.Employer
             .findOne(req.query)
-            .then(dbModel => res.json(dbModel))
+            .then(dbModel => {console.log(dbModel); res.json(dbModel)})
             .catch(err => res.status(422).json(err));
     },
     remove: (req, res) => {

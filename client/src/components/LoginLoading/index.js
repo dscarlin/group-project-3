@@ -7,12 +7,12 @@ class LoginLoading extends Component {
     async componentDidMount() {
         await auth0Client.handleAuthentication();
         let email = auth0Client.getProfile().email;
+        console.log(auth0Client.getIdToken());
         const response = await axios.get(`/api/employer?email=${email}`, {
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
         const userInfo = response.data;          
         console.log(userInfo);
-        console.log(auth0Client.getIdToken());
         if (userInfo){
             // ///////////////////////////////////////////////////// //
             //  axios call to toggle to remove user for dev purposes//
