@@ -65,19 +65,20 @@ const useStyles = makeStyles(theme => ({
 export default function Dashboard(props) {
     const classes = useStyles();
     return(
-        <Container>
-            <Grid className={`${classes.root}`}>
+        <Container maxWidth="false">
+            <Grid  className={`${classes.root}`}>
                 <SearchForm redirect={true} 
                     setAppState={props.setAppState}
                     appState={props.appState}
                 />
             </Grid>
             <br />
-            <Grid container spacing={2}>
+            <Grid container justify="space-evenly" spacing={1}>
                 <Results 
                     useStyles={useStyles}
                     appState={props.appState}
                     setAppState={props.setAppState}
+                    messageApplicant={props.messageApplicant}
                 />
                 <DetailContainer 
                     useStyles={useStyles}
