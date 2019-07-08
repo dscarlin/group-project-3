@@ -71,7 +71,7 @@ class EmployerSignupForm extends Component {
         axios.post(`/api/employer`, user, {
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         })
-        .then(userInfo => {
+        .then(res => {
             this.setState({  
                 businessName: "",
                 streetAddress: "",
@@ -80,7 +80,9 @@ class EmployerSignupForm extends Component {
                 zipcode: "",
                 email: "",
                 phone: "",
+                
             });
+            const userInfo = res.data
             this.props.setAppState({userInfo});
             this.props.history.push("/dashboard");
         });

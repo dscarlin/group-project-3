@@ -9,6 +9,12 @@ function sendMessage(applicantNumber, message) {
   const accountSid = process.env.accountSid || 'ACba635bef34bd665e3a5524406f0e3e7a';
   const authToken = process.env.authToken;
   const client = require('twilio')(accountSid, authToken);
+  console.log("function");
+  console.log("num ",process.env.NUMBER )
+  console.log("acct ",process.env.accountSid )
+  console.log("auth ",process.env.authToken )
+  console.log("appNum ", applicantNumber)
+  console.log("mess: ",message)
 
   client.messages
     .create({
