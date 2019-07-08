@@ -53,10 +53,7 @@ export default (props) => {
                             <CardHeader title="Cover Letter" className={classes.cardHeader}/>
                             <Divider />
                             <CardContent className={classes.coverLetter}>
-                                {/* <p>{applicants[SelectedApplicant].coverLetter}</p> */}
-                                {applicants.map(a => 
-                                    <p>Lorem    slkjhfkjsdflkjsdlkfjsldkjflksdjflkjsldfjklsdkjflsdkjflsdkjflksjdflkjsdlfkjsdlkjfl</p>
-                                )}
+                                <p>{applicants[SelectedApplicant].coverLetter}</p>
                             </CardContent>
                         </Card>
                     </CardContent>
