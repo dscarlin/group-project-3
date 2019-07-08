@@ -22,8 +22,7 @@ const useStyles = makeStyles(theme => ({
         textAlign: "center"
     },
     card: {
-        marginTop: 10,
-        marginBottom: 10,
+        margin: "10px auto",
         width: "90%",
         color: "#555",
     },
@@ -50,14 +49,15 @@ const useStyles = makeStyles(theme => ({
         width: "45vw"
     },
     container: {
-        height: 800
+        height: "100vh"
     },
     coverLetter: {
-        height: 300,
+        height: "35vh",
         overflow: "auto"
     },
     resultList: {
-        overflow: "auto"
+        overflow: "auto",
+        height: "85vh"
     }
 
 }));
@@ -73,9 +73,16 @@ export default function Dashboard(props) {
                 />
             </Grid>
             <br />
-            <Grid container spacing={1}>
-                <Results useStyles={useStyles} />
-                <DetailContainer useStyles={useStyles} />
+            <Grid container spacing={2}>
+                <Results 
+                    useStyles={useStyles}
+                    appState={props.appState}
+                    setAppState={props.setAppState}
+                />
+                <DetailContainer 
+                    useStyles={useStyles}
+                    appState={props.appState}
+                />
             </Grid>
            
         </Container>

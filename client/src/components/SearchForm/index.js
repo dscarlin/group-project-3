@@ -104,7 +104,7 @@ export default withRouter(function SearchForm(props) {
 
             await props.setAppState({ searchResult });
             if(props.redirect)
-                props.history.push("/list-view");
+                props.history.push("/dashboard");
         }
         submitForm();        
     };
