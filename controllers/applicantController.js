@@ -1,4 +1,5 @@
 db = require("../models")
+const sendMessage = require("../twillio/send_sms");
 // db.Employer.find().then(res => console.log(res))
 // db.Employer.remove().then(res => console.log(res))
 
@@ -60,5 +61,9 @@ module.exports = {
         .then()
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
-    } 
+    },
+    sendSMS: (req, res) => {
+        const { phoneNumber, message } = req.body
+        sendMessage(phoneNumber, message);
+    },
 };

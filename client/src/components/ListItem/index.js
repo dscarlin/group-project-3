@@ -71,11 +71,6 @@ export default function ListItem(props) {
             return props.setAppState({ userInfo });
         
     };
-    
-    const messageApplicant= (e) => {
-        e.preventDefault();
-        return console.log("*Twilio Message Ping*");
-    };
     const addExperience = (a, b, c) => {
         return a + b + c;
     };
@@ -123,7 +118,7 @@ export default function ListItem(props) {
                         </Grid>
                         <Grid item>
                             <ButtonBase>
-                                <Message style={{color:"gray"}} onClick={messageApplicant}></Message>
+                                <Message style={{color:"gray"}} onClick={() => props.messageApplicant(props.applicant)}></Message>
                             </ButtonBase>
                         </Grid>
                     </Grid>

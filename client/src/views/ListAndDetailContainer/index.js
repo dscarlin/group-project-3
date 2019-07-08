@@ -94,6 +94,7 @@ function ListAndDetailContainer(props) {
                     <ul>
                         {applicants.map((applicant, index) =>
                             <ListItem 
+                                messageApplicant={props.messageApplicant}
                                 key={applicant._id}
                                 applicant={applicant}
                                 appState={props.appState}
