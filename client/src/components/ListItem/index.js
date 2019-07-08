@@ -78,6 +78,7 @@ export default function ListItem(props) {
         let workHistory = [jobOne, jobTwo, jobThree];
         return workHistory;
     };
+    const applicant = props.appState.searchResult[props.index]
     return (
         <li className={classes.root} onClick={() => props.setAppState({ SelectedApplicant: props.index})}>
             <Paper className={classes.paper}>
@@ -86,7 +87,7 @@ export default function ListItem(props) {
                         <ButtonBase> 
                             <Star style={props.appState.userInfo.interested
                                 .indexOf(props.appState.searchResult[props.index]._id) < 0 ? 
-                                {color:"gray"} : {color: "yellow"}} 
+                                {color:"gray"} : {color: "#f5dc06"}} 
                             onClick={favoriteApplicant}
                             />
                         </ButtonBase>
@@ -118,7 +119,17 @@ export default function ListItem(props) {
                         </Grid>
                         <Grid item>
                             <ButtonBase>
-                                <Message style={{color:"gray"}} onClick={() => props.messageApplicant(props.applicant)}></Message>
+                                {props.appState.userInfo.messaged.indexOf(applicant._id) >= 0 ? 
+                                    <div>
+                                        <Message style={{color:"green"}} ></Message>
+                                        <span><strong>Messaged</strong></span>
+                                    </div>
+                                    :
+                                    <div>
+                                        <Message style={{color:"gray"}} onClick={() => props.messageApplicant(props.applicant)}></Message>
+                                        <span>SMS Invite to Schedule Interview</span>
+                                    </div>
+                                }
                             </ButtonBase>
                         </Grid>
                     </Grid>
