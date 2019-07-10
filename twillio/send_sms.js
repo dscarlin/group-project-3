@@ -19,6 +19,7 @@ function sendMessage(applicantNumber, message) {
     .create({
       body: message,
       from: process.env.NUMBER || '+19199481344',
+      mediaUrl: 'https://i.imgur.com/lawuGFk.png',
       to: applicantNumber
     })
     .then(message => console.log(message.sid));
