@@ -1,5 +1,8 @@
 import auth0 from "auth0-js";
 
+const redirectUri = process.env.NODE_ENV === "development" ? 
+    "http://localhost:3000/login" : "https://on-the-fly-staff.herokuapp.com/login"
+
 class Auth {
     constructor() {
         this.auth0 = new auth0.WebAuth({
@@ -8,7 +11,7 @@ class Auth {
             domain: "dev-tick-gf2.auth0.com",
             audience: "https://dev-tick-gf2.auth0.com/userinfo",
             clientID: "iZFfzzr94dgSW7aFC19LB6Ex5eTXWdrD",
-            redirectUri: "https://on-the-fly-staff.herokuapp.com/login",
+            redirectUri: redirectUri,
             responseType: "id_token",
             scope: "openid profile email"
         });
