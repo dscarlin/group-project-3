@@ -1,10 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Container} from "@material-ui/core";
+import { Grid, Container, IconButton} from "@material-ui/core";
+import { InfoOutlined } from "@material-ui/icons";
 import SearchForm from "../../components/SearchForm";
 import Results from "../../components/DashLayout/Results";
 import applicants from "../../dummyApps.json";
 import DetailContainer from "../../components/DashLayout/DetailContainer";
+import SearchSavedToggle from "../../components/SearchSavedToggle";
 
 
 const useStyles = makeStyles(theme => ({
@@ -58,27 +60,41 @@ const useStyles = makeStyles(theme => ({
     resultList: {
         overflow: "auto",
         height: "85vh"
-    }
+    },
+    searchToggle: {
+        width: "40vw",
+        backgroundColor: theme.palette.primary.main,
+        justifyContent: "center",
+        alignContent: "center"
+    },
+    info: {
+        margin: theme.spacing(1),
+    }  
 
 }));
 
 export default function Dashboard(props) {
     const classes = useStyles();
     return(
-        <Container maxWidth="false">
-            <Grid  className={`${classes.root}`}>
+        <Container>
+            <Grid className={`${classes.root}`}>
+                <IconButton aria-label="info" className={classes.info}>
+                    <InfoOutlined color="primary" fontSize="large" />            
+                </IconButton>
                 <SearchForm redirect={true} 
                     setAppState={props.setAppState}
                     appState={props.appState}
                 />
             </Grid>
-            <br />
-            <Grid container justify="space-evenly" spacing={0}>
+            <SearchSavedToggle 
+                useStyles={useStyles}
+                appState={props.appState}
+            />
+            <Grid container spacing={2}>
                 <Results 
                     useStyles={useStyles}
                     appState={props.appState}
                     setAppState={props.setAppState}
-                    messageApplicant={props.messageApplicant}
                 />
                 <DetailContainer 
                     useStyles={useStyles}
