@@ -8,7 +8,7 @@ class Auth {
             domain: "dev-tick-gf2.auth0.com",
             audience: "https://dev-tick-gf2.auth0.com/userinfo",
             clientID: "iZFfzzr94dgSW7aFC19LB6Ex5eTXWdrD",
-            redirectUri: process.env.REDIRECT_URI || "http://localhost:3000/login",
+            redirectUri: "https://on-the-fly-staff.herokuapp.com/login",
             responseType: "id_token",
             scope: "openid profile email"
         });
