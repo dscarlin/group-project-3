@@ -33,10 +33,10 @@ class App extends Component {
         employer.messaged.push(applicant._id)
         if(employer.interested.indexOf(applicant._id) < 0)
             employer.interested.push(applicant._id)
-        const message = `Hey ${applicant.name}, ${employer.businessName} would like you ` +
-            `to contact them to schedule an interview. Their phone number is ${employer.phone} and their` +
-            `address is: ${employer.streetAddress} ${employer.city}, ${employer.state} ${employer.zipcode}.`
-        const payload = { message, phoneNumber: applicant.phone }
+        const message = `Congrats ${applicant.name}, ${employer.businessName} found you on On The Fly and would like ` +
+            `to set up an interview! Contact them at ${employer.phone}. Their ` +
+            `address is:  ${employer.streetAddress}  ${employer.city}, ${employer.state} ${employer.zipcode}.`
+        const payload = { message, phoneNumber: applicant.phone}
         const result = await axios.post(`/api/applicant/${applicant._id}`,payload,{
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
