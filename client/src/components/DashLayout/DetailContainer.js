@@ -1,18 +1,34 @@
 import React from "react";
-import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader } from "@material-ui/core";
-import { Email, Phone } from "@material-ui/icons";
-import applicants from "../../dummyApps.json";
+import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader, ListItem } from "@material-ui/core";
+import { Email, Phone, ExpandLess, ExpandMore } from "@material-ui/icons";
 
 
 
 export default (props) => {
 
-    const addExperience = (exp1, exp2, exp3) => {
-        return exp1 +exp2 + exp3;
-    };
-    const workHistory = (jobOne, jobTwo, jobThree) => {
-        let workHistory = [jobOne, jobTwo, jobThree];
-        return workHistory;
+    const [open, setOpen] = React.useState(true);
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+
+    function handleClick() {
+        setOpen(!open);
+    }
+    function handleListItemClick(event, index) {
+        setSelectedIndex(index);
+    }
+
+    const workHistory = (applicant) => {
+        
+        let restaurants = [applicant.restaurantName1, applicant.restaurantName2, applicant.restaurantName3];
+        let positions = [applicant.positionsWorked1.join(", "), applicant.positionsWorked2.join(", "), applicant.positionsWorked3.join(", ")];
+        let months = [applicant.whMonths1, applicant.whMonths2, applicant.whMonths3];
+        
+        const listItems = restaurants.map((restaurant, index) => 
+            <li key={`${restaurant}-Item`} selected={selectedIndex===index} onClick={handleClick} onClick={event => handleListItemClick(event, index)} style={{listStyle: "none", textAlign: "left"}}><strong>{restaurant}</strong>{`: ${positions[index]} for ${months[index]} months`}{open ? <ExpandLess /> : <ExpandMore />}</li>
+        );
+        return (
+            <ul>{listItems}</ul>
+        );
+
     };
     const getInitials = (name) => {
         var splitName = name.split(" ");
@@ -37,12 +53,13 @@ export default (props) => {
                         <Typography style={{display: "inline-block", color: "#555"}} variant="h3" align="center">{applicants[SelectedApplicant].name}</Typography>
                         <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
                         <Divider className={classes.widthControl}/>
-                        <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
+                        <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability.join(", ")}</p>
                         <Card className={classes.card} align="center">
                             <CardContent className={classes.CardContent}>
                                 <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p>
                                 {/* <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p> */}
-                                <p><strong style={{color: "#3F51B5"}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
+                                <p><strong style={{color: "#3F51B5", textAlign: "left"}}><u>Work History</u></strong></p> 
+                                {workHistory(applicants[SelectedApplicant])}
                             </CardContent>
                         </Card>           
                                 

@@ -8,7 +8,6 @@ class Apply extends Component {
         return(
             <React.Fragment>
                 <h1>&nbsp;</h1>
-                <h1>Application Page</h1>
                 <ApplicationForm/>
             </React.Fragment>
         );
