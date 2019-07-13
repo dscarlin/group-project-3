@@ -27,6 +27,27 @@ class App extends Component {
             popperAnchorEl: null,
             displayToggle: 0
     };
+    async componentDidMount() {
+        // auth0Client.getTokenId();
+        // await auth0Client.handleAuthentication();
+        // let email = auth0Client.getProfile().email;
+        // console.log(auth0Client.getIdToken());
+        // const response = await axios.get(`/api/employer?email=${email}`, {
+        //     headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
+        // });
+        // const userInfo = response.data;          
+        // console.log(userInfo);
+        // if (userInfo)
+        //     // ///////////////////////////////////////////////////// //
+        //     //  axios call to toggle to remove user for dev purposes//
+        //     // //////////////////////////////////////////////////// //
+        //     // const deletedUser = await axios.delete(`/api/employer/${userInfo.data._id}`,{
+        //     //     headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
+        //     // });
+        //     // console.log(deletedUser);
+        //     this.props.setAppState({userInfo});
+        
+    }
 
     appState = (arg) => {
         this.setState(arg)
@@ -68,7 +89,7 @@ class App extends Component {
                         <Route component={ Landing }/> 
                     </Switch>
                 </Router>
-                <SimpleModal open={this.state.modalOpen} appState={this.appState} togglOpen={this.toggleModal}/>
+                <SimpleModal component={EmployerSignupForm} passedProps={{noShadow: true}} open={this.state.modalOpen} appState={this.appState} togglOpen={this.toggleModal}/>
             </React.Fragment>
         );
     }
