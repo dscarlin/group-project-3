@@ -18,6 +18,7 @@ function sendMessage(applicantNumber, message) {
 
   client.messages
     .create({
+      mediaUrl: ['on-the-fly-staff.herokuapp.com/assets/onthefly2-S.png'],
       body: message,
       from: process.env.NUMBER || '+19195253220',
       to: applicantNumber
