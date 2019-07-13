@@ -92,7 +92,7 @@ export default function ListItem(props) {
         var initials = firstInitial + lastInitial;
         return initials;
     };
-    const applicant = props.appState.searchResult[props.index]
+    const applicant = props.appState.searchResult[props.index];
     return (
         <li className={classes.root} onClick={() => props.setAppState({ SelectedApplicant: props.index})}>
             <Paper className={classes.paper}>
@@ -121,8 +121,8 @@ export default function ListItem(props) {
                             <ButtonBase> 
                                 <Star 
                                     style={props.appState.userInfo.interested
-                                    .indexOf(props.appState.searchResult[props.index]._id) < 0 ? 
-                                    {color:"gray"} : {color: "#f5dc06"}} 
+                                        .indexOf(props.appState.searchResult[props.index]._id) < 0 ? 
+                                        {color:"gray"} : {color: "#f5dc06"}} 
                                     onClick={favoriteApplicant}
                                 />
                             </ButtonBase>

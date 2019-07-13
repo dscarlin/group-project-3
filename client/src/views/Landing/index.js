@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         position: "relative", 
         padding: 64,
         marginTop: "20vh",
-        textShadow: "-1px -1px black"
+        textShadow: "1px 1px black"
     },
     overview: {
         position: "relative",

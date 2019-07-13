@@ -21,8 +21,11 @@ class App extends Component {
             modalOpen: false,
             userInfo: null,
             searchResult: [],
+            savedResult: ["saved"],
+            messagedResult: ["messaged"],
             SelectedApplicant: 0,
-            popperAnchorEl: null
+            popperAnchorEl: null,
+            displayToggle: 0
     };
 
     appState = (arg) => {

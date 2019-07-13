@@ -1,20 +1,21 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Container, IconButton} from "@material-ui/core";
+import { Grid, Container, IconButton, Slide} from "@material-ui/core";
 import { InfoOutlined } from "@material-ui/icons";
 import SearchForm from "../../components/SearchForm";
 import Results from "../../components/DashLayout/Results";
 import applicants from "../../dummyApps.json";
 import DetailContainer from "../../components/DashLayout/DetailContainer";
 import SearchSavedToggle from "../../components/SearchSavedToggle";
+import Info from "../../components/Info";
 
 
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         position: "relative",
-        marginTop: theme.spacing(8),
-        padding: 10
+        marginTop: theme.spacing(1),
+        padding: 10,
     },
     avatar: {
         padding: 6,
@@ -63,33 +64,59 @@ const useStyles = makeStyles(theme => ({
     },
     searchToggle: {
         width: "40vw",
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: "white",
         justifyContent: "center",
-        alignContent: "center"
+        alignContent: "center",
+        margin: "auto"
     },
     info: {
-        margin: theme.spacing(1),
-    }  
+        position: "absolue",
+        marginTop: theme.spacing(8)
+    }
 
 }));
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default function Dashboard(props) {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
+    function handleClickOpen() {
+        setOpen(true);
+    }
+
+    function handleClose() {
+        setOpen(false);
+    }
+
     return(
         <Container>
             <Grid className={`${classes.root}`}>
-                <IconButton aria-label="info" className={classes.info}>
+                <IconButton aria-label="info" className={classes.info} onClick={handleClickOpen}>
                     <InfoOutlined color="primary" fontSize="large" />            
                 </IconButton>
+                <Info 
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                />
+                <SearchSavedToggle
+                    className={classes.searchToggle}
+                    useStyles={useStyles}
+                    appState={props.appState}
+                    setAppState={props.setAppState}
+                    align="center"
+                />
                 <SearchForm redirect={true} 
                     setAppState={props.setAppState}
                     appState={props.appState}
                 />
             </Grid>
-            <SearchSavedToggle 
-                useStyles={useStyles}
-                appState={props.appState}
-            />
+      
             <Grid container spacing={2}>
                 <Results 
                     useStyles={useStyles}
