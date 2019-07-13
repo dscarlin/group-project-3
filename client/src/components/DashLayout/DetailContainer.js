@@ -1,15 +1,15 @@
 import React from "react";
 import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader } from "@material-ui/core";
 import { Email, Phone } from "@material-ui/icons";
-import applicants from "../../dummyApps.json";
+
 
 
 
 export default (props) => {
 
-    const addExperience = (exp1, exp2, exp3) => {
-        return exp1 +exp2 + exp3;
-    };
+    // const addExperience = (exp1, exp2, exp3) => {
+    //     return exp1 +exp2 + exp3;
+    // };
     const workHistory = (jobOne, jobTwo, jobThree) => {
         let workHistory = [jobOne, jobTwo, jobThree];
         return workHistory;

@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { Grid, Card, CardHeader, CardContent, List } from "@material-ui/core";
 import ListItem from "../../components/ListItem";
-import applicants from "../../dummyApps.json";
 // import DummyItem from "./DummyItem";
 
 

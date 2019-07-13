@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {Popper, Typography, Button, Fade, Paper } from "@material-ui/core";
-import Delete from "@material-ui/icons/Delete";
-import { red } from "@material-ui/core/colors";
+// import Delete from "@material-ui/icons/Delete";
+// import { red } from "@material-ui/core/colors";
 
 
 const useStyles = makeStyles(theme => ({
