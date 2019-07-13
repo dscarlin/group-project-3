@@ -23,7 +23,7 @@ export default function SimpleModal(props) {
         props.appState({ modalOpen: !props.open });
     };
     const classes = useStyles();
-    const {Component, passedProps} = props
+    const {component: Component, passedProps} = props
     return (
         <div>
             <Modal
