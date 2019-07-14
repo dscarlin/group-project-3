@@ -16,7 +16,8 @@ const appSchema = new Schema({
   name: { type: String, required: [true, "Name required"]},
   email: { type: String, unique: true, trim: true, match: [/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/, "Email Invalid."] },
   phone: { type: String, required: [true, "Phone number required."] },
-  
+  industryExperience: { type: Number, min: [0, "Years of industry experience must be posititve."] },
+  restaurantName1: { type: String },
   positionsWorked1: [
     {
       type: String,
@@ -25,6 +26,7 @@ const appSchema = new Schema({
   ],
   whMonths1: { type: Number, min: [0, "Work History 1 months of experience must be posititve."] },
   whDetails1: { type: String },
+  restaurantName2: { type: String },
   positionsWorked2: [
     {
       type: String,
@@ -33,6 +35,7 @@ const appSchema = new Schema({
   ],
   whMonths2: { type: Number, min: [0, "Work History 2 months of experience must be posititve."] },
   whDetails2: { type: String },
+  restaurantName3: { type: String },
   positionsWorked3: [
     {
       type: String,
