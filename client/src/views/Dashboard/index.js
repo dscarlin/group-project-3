@@ -36,9 +36,6 @@ const useStyles = makeStyles(theme => ({
         // border: "solid black 1px",
         paddingTop: "2em"
     },
-    detailView: {
-        overflow: "scroll"
-    },
     fixed: {
         position: "fixed",
         right: "0",
@@ -60,7 +57,7 @@ const useStyles = makeStyles(theme => ({
         height: "35vh",
         overflow: "auto"
     },
-    resultList: {
+    containerContent: {
         overflow: "auto",
         height: "85vh"
     },
@@ -74,6 +71,9 @@ const useStyles = makeStyles(theme => ({
     info: {
         position: "absolue",
         marginTop: theme.spacing(8)
+    },
+    messageBtn: {
+        margin: theme.spacing(0)
     }
 
 }));
@@ -119,7 +119,7 @@ export default function Dashboard(props) {
                 />
             </Grid>
       
-            <Grid container spacing={2}>
+            <Grid container spacing={0}>
                 <Results 
                     useStyles={useStyles}
                     appState={props.appState}

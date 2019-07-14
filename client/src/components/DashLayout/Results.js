@@ -41,7 +41,7 @@ export default (props) => {
         <Grid item sm={6}>
             <Card className={`${classes.card} ${classes.container}`} align="center">
                 <CardHeader title={cardTitle} className={classes.cardHeader} />
-                <CardContent className={classes.resultList}>
+                <CardContent  className={classes.containerContent}>
                     <List component="ul" >
                         <Fragment>
                             {applicants.map((applicant, index) =>
