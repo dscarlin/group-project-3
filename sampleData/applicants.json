@@ -1,128 +1,136 @@
 [
     {
-        "selectedPositions": ["Busser","Server","FOH Manager"],
-        "availability": ["Breakfast","Lunch","Dinner"],
-        "name": "Paul Nelson",
-        "email": "email@email.com",
-        "phone": "(919) 368-2008",
-        "industryExperience": 2,
-        "restaurantName1": "Death and Taxes",
-        "positionsWorked1": ["Busser","Server"],
-        "whMonths1": 12,
-        "whDetails1": "Provided fine dining service.",
-        "restaurantName2": "PittsboroRoadhouse",
-        "positionsWorked2": ["Busser"],
-        "whMonths2": 10,
-        "whDetails2": "Casually eclectic American restaurant.",
-        "restaurantName3": "Meadowbrook Inn",
-        "positionsWorked3": ["Busser","DishWasher"],
-        "whMonths3": 10,
-        "whDetails3": "Located in Blowing Rock, NC",
-        "coverLetter": "I am a hard worker and am willing to do what it takes!"
-    },
-    {
-        "selectedPositions": ["Busser","Server","FOH Manager"],
-        "availability": ["Breakfast","Lunch","Dinner"],
-        "name": "Joshua Lewis",
-        "email": "semail@email.com",
+        "selectedPositions": [
+            "Server",
+            "Bar Tender"
+        ],
+        "availability": [
+            "Late Night",
+            "Dinner"
+        ],
+        "positionsWorked1": [
+            "Server"
+        ],
+        "positionsWorked2": [
+            "Bar Tender"
+        ],
+        "positionsWorked3": [
+            "Server"
+        ],
+        "name": "John Brown",
+        "email": "johnbrown43285@gmail.com",
         "phone": "(252) 646-2642",
-        "industryExperience": 2,
-        "restaurantName1": "La Tela Pizzeria",
-        "positionsWorked1": ["Busser","Server"],
-        "whMonths1": 12,
-        "whDetails1": "Gourmet Pizzeria on Kiawah Island",
-        "restaurantName2": "PittsboroRoadhouse",
-        "positionsWorked2": ["Busser"],
-        "whMonths2": 10,
-        "whDetails2": "Casually eclectic American restaurant.",
-        "restaurantName3": "Meadowbrook Inn",
-        "positionsWorked3": ["Busser","DishWasher"],
-        "whMonths3": 10,
-        "whDetails3": "Located in Blowing Rock, NC",
-        "coverLetter": "I am a hard worker and am willing to do what it takes!"
+        "restaurantName1": "Bida Manda",
+        "whMonths1": 13,
+        "whDetails1": "Serve customers, with a focus on following up to ensure a great customer experience and repeat business. Handle cash and credit transactions with total accuracy. Prioritized time management to maximize customer satisfaction and revenue generation.",
+        "restaurantName2": "Person Street Bar",
+        "whMonths2": 15,
+        "whDetails2": "Craft, create, and serve signature cocktails while managing bar stock and supplies, and provide personal excellent customer service.",
+        "restaurantName3": "Stanbury",
+        "whMonths3": 9,
+        "whDetails3": "Served guests with a focus on time and revenue management, while providing excellent customer experiences. Trained new staff on restaurant processes and policies. Developed strong multitasking skills in a fast-paced environment while managing a constant flow of guests during lunch and dinner shifts.",
+        "coverLetter": "Experienced server with demonstrated leadership experience. Proven revenue generator, specializing in repeat customer cultivation and maintenance. adept problem solver, with experience resolving customer and staff issues in house. Strong administrator, with extensive experience managing staff schedules, hiring, training, and daily accounting."
     },
     {
-        "selectedPositions": ["Busser","Server","FOH Manager"],
-        "availability": ["Breakfast","Lunch","Dinner"],
-        "name": "David Carlin",
-        "email": "femail@email.com",
-        "phone": "(919) 368-2008",
-        "industryExperience": 2,
-        "restaurantName1": "La Tela Pizzeria",
-        "positionsWorked1": ["Busser","Server"],
-        "whMonths1": 12,
-        "whDetails1": "Gourmet Pizzeria on Kiawah Island",
-        "restaurantName2": "PittsboroRoadhouse",
-        "positionsWorked2": ["Busser"],
-        "whMonths2": 10,
-        "whDetails2": "Casually eclectic American restaurant.",
-        "restaurantName3": "Meadowbrook Inn",
-        "positionsWorked3": ["Busser","DishWasher"],
-        "whMonths3": 10,
-        "whDetails3": "Located in Blowing Rock, NC",
-        "coverLetter": "I am a hard worker and am willing to do what it takes!"
+        "selectedPositions": [
+            "Server"
+        ],
+        "availability": [
+            "Late Night",
+            "Dinner",
+            "Lunch",
+            "Breakfast"
+        ],
+        "positionsWorked1": [
+            "Server"
+        ],
+        "positionsWorked2": [
+            "Server"
+        ],
+        "positionsWorked3": [
+            "Busser"
+        ],
+        "name": "Bella Door",
+        "email": "belladoor4328@gmail.com",
+        "phone": "(252) 646-2642",
+        "restaurantName1": "Death and Taxes",
+        "whMonths1": 13,
+        "whDetails1": "Served guests with a focus on time and revenue management, while providing excellent customer experiences. Worked full time shifts while attending school. Knowledge and application of customer habits and patterns. ",
+        "restaurantName2": "Garland",
+        "whMonths2": 15,
+        "whDetails2": "Provided exceptional customer service to ensure repeat business. Demonstrated deep product knowledge when discussing menu options and making recommendations to customers. Prioritized time management to maximize customer satisfaction and revenue generation.",
+        "restaurantName3": "Coquette",
+        "whMonths3": 7,
+        "whDetails3": "Set, clear, and clean tables. Serve food and assist servers as needed to provide quick and high-quality customer service. Trained in using POS systems.",
+        "coverLetter": "Experienced server with demonstrated leadership experience. Proven revenue generator, specializing in repeat customer cultivation and maintenance. adept problem solver, with experience resolving customer and staff issues in house. Strong administrator, with extensive experience managing staff schedules, hiring, training, and daily accounting."
     },
     {
-        "selectedPositions": ["Busser","Server","FOH Manager"],
-        "availability": ["Breakfast","Lunch","Dinner"],
-        "name": "Lewis Georgeson",
-        "email": "emaillewis@email.com",
-        "phone": "(919) 368-2008",
-        "industryExperience": 2,
-        "restaurantName1": "La Tela Pizzeria",
-        "positionsWorked1": ["Busser","Server"],
-        "whMonths1": 12,
-        "whDetails1": "Gourmet Pizzeria on Kiawah Island",
-        "restaurantName2": "PittsboroRoadhouse",
-        "positionsWorked2": ["Busser"],
-        "whMonths2": 10,
-        "whDetails2": "Casually eclectic American restaurant.",
-        "restaurantName3": "Meadowbrook Inn",
-        "positionsWorked3": ["Busser","DishWasher"],
-        "whMonths3": 10,
-        "whDetails3": "Located in Blowing Rock, NC",
-        "coverLetter": "I am a hard worker and am willing to do what it takes!"
+        "selectedPositions": [
+            "FOH Manager",
+            "BOH Manager"
+        ],
+        "availability": [
+            "Breakfast",
+            "Lunch",
+            "Dinner"
+        ],
+        "positionsWorked1": [
+            "Server",
+            "Bar Tender"
+        ],
+        "positionsWorked2": [
+            "Bar Tender",
+            "FOH Manager"
+        ],
+        "positionsWorked3": [
+            "Server"
+        ],
+        "name": "Paul Doe",
+        "email": "pauldoe3218432@gmail.com",
+        "phone": "(222) 222-2222",
+        "industryExperience": 10,
+        "restaurantName1": "Poole's",
+        "whMonths1": 28,
+        "whDetails1": "Developed strong multitasking skills in a fast-paced environment while managing a constant flow of guests during lunch and dinner shifts. Trained new staff on restaurant processes and policies. Handled daily revenue of $8000 – $16000.",
+        "restaurantName2": "Brewery Bhavana",
+        "whMonths2": 19,
+        "whDetails2": "Use POS system to help management improve margins, ensure accurate sales reporting, manage more effectively, and develop staff revenue goals. Create and manage staff schedules. Train front-of-house staff on serving protocols, safe food handling, and time management.",
+        "restaurantName3": "Vin Rouge",
+        "whMonths3": 31,
+        "whDetails3": "Serve customers as needed, providing stellar service and encouraging repeat business. Lead server proving an example and leadership while providing amazing customer service. ",
+        "coverLetter": "Experienced server with demonstrated leadership experience. Proven revenue generator, specializing in repeat customer cultivation and maintenance. adept problem solver, with experience resolving customer and staff issues in house. Strong administrator, with extensive experience managing staff schedules, hiring, training, and daily accounting."
     },
     {
-        "selectedPositions": ["Busser","Server","FOH Manager"],
-        "availability": ["Breakfast","Lunch","Dinner"],
-        "name": "Christopher Johnson",
-        "email": "emailchris@email.com",
-        "phone": "(919) 368-2008",
-        "industryExperience": 2,
-        "restaurantName1": "La Tela Pizzeria",
-        "positionsWorked1": ["Busser","Server"],
-        "whMonths1": 12,
-        "whDetails1": "Gourmet Pizzeria on Kiawah Island",
-        "restaurantName2": "PittsboroRoadhouse",
-        "positionsWorked2": ["Busser"],
-        "whMonths2": 10,
-        "whDetails2": "Casually eclectic American restaurant.",
-        "restaurantName3": "Meadowbrook Inn",
-        "positionsWorked3": ["Busser","DishWasher"],
-        "whMonths3": 10,
-        "whDetails3": "Located in Blowing Rock, NC",
-        "coverLetter": "I am a hard worker and am willing to do what it takes!"
-    },
-    {
-        "selectedPositions": ["Busser","Server","FOH Manager"],
-        "availability": ["Breakfast","Lunch","Dinner"],
-        "name": "Bill Richards",
-        "email": "vemail@email.com",
-        "phone": "(919) 368-2008",
-        "industryExperience": 2,
-        "restaurantName1": "La Tela Pizzeria",
-        "positionsWorked1": ["Busser","Server"],
-        "whMonths1": 12,
-        "whDetails1": "Gourmet Pizzeria on Kiawah Island",
-        "restaurantName2": "PittsboroRoadhouse",
-        "positionsWorked2": ["Busser"],
-        "whMonths2": 10,
-        "whDetails2": "Casually eclectic American restaurant.",
-        "restaurantName3": "Meadowbrook Inn",
-        "positionsWorked3": ["Busser","DishWasher"],
-        "whMonths3": 10,
-        "whDetails3": "Located in Blowing Rock, NC",
-        "coverLetter": "I am a hard worker and am willing to do what it takes!"
+        "selectedPositions": [
+            "Line Cook",
+            "Prep Cook"
+        ],
+        "availability": [
+            "Lunch",
+            "Breakfast"
+        ],
+        "positionsWorked1": [
+            "Prep Cook"
+        ],
+        "positionsWorked2": [
+            "Line Cook"
+        ],
+        "positionsWorked3": [
+            "Dishwasher"
+        ],
+        "name": "DeeDee Johnson",
+        "email": "deedeejohnson4382@gmail.com",
+        "phone": "(222) 333-4444",
+        "industryExperience": 4,
+        "restaurantName1": "Sitti",
+        "whMonths1": 23,
+        "whDetails1": "Preparing food for service. Chopping vegetables, butchering meat, and preparing sauces.  Set up and stocking stations with all necessary supplies.  Excellent understanding of various cooking methods, ingredients, equipment and procedures.",
+        "restaurantName2": "Mecca",
+        "whMonths2": 13,
+        "whDetails2": "Set up and stocking stations with all necessary supplies. Ensure that food comes out simultaneously, in high quality and in a timely fashion. Cook menu items in cooperation with the rest of the kitchen staff. ",
+        "restaurantName3": "Royale",
+        "whMonths3": 14,
+        "whDetails3": "Clean work areas, equipment, utensils, dishes, and silverware all too sanitary standards. Assist cooks and kitchen staff with various tasks as needed, and provide cooks with needed items. Inform supervisors when supplies are getting low or equipment is not working properly.",
+        "coverLetter": "I respectfully request that you consider my enclosed resume. I would like to express my sincere interest in the Line Cook position you have available. As an accomplished and dedicated professional with experience preparing and assembling meals for reputable dining establishments, I am confident that I possess the knowledge and skill set you are seeking."
     }
 ]

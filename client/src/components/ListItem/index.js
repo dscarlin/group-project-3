@@ -86,9 +86,13 @@ export default function ListItem(props) {
     const getInitials = (name) => {
         var splitName = name.split(" ");
         var firstName = splitName[0];
-        var lastName = splitName[1];
+        var lastName = "";
+        if(splitName.length > 1)
+            lastName = splitName[1];
         var firstInitial = firstName.split("")[0];
-        var lastInitial = lastName.split("")[0];
+        var lastInitial = "";
+        if(lastName)
+            lastInitial = lastName.split("")[0];
         var initials = firstInitial + lastInitial;
         return initials;
     };
