@@ -136,13 +136,14 @@ class ApplicationForm extends Component {
     };
     handleSubmit = e => {
         if(!this.state.extraValidationPass)
-            return window.scrollTop();
+            return window.scrollTo(0,0);
+
         e.preventDefault();
         this.togglePopper(e);
     };
     handleError = errors => {
         console.log(errors);
-        window.scrollTo(0,0)
+        window.scrollTo(0,0);
         console.log(window);
         
     }
