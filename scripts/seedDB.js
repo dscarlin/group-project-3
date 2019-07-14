@@ -11,7 +11,7 @@ mongoose.connect(
 applicantSeed = require("../sampleData/applicants.json");
 
 db.Applicant
-  .remove({})
+  .deleteMany({})
   .then(() => db.Applicant.collection.insertMany(applicantSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");

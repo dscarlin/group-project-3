@@ -4,10 +4,7 @@ import auth0Client from "../../auth";
 
 //csss
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import { Grid, Paper, Typography, ButtonBase, Avatar } from "@material-ui/core";
 
 // Icons
 import Star from "@material-ui/icons/StarRounded";
@@ -26,6 +23,18 @@ const useStyles = makeStyles(theme => ({
         // padding: theme.spacing(2),
         margin: "2em 0",
         maxWidth: "90%",
+        textAlign: "left", 
+    },
+    avatar: {
+        padding: 6,
+        margin: "1.5em", 
+        display: "inline-block",
+        color: "white",
+        backgroundColor: theme.palette.primary.main,
+        textAlign: "center"
+    },
+    color: {
+        color: "primary"
     }
 }));
 
@@ -74,16 +83,55 @@ export default function ListItem(props) {
     const addExperience = (a, b, c) => {
         return a + b + c;
     };
-    const workHistory = (jobOne, jobTwo, jobThree) => {
-        let workHistory = [jobOne, jobTwo, jobThree];
-        return workHistory;
+    const getInitials = (name) => {
+        var splitName = name.split(" ");
+        var firstName = splitName[0];
+        var lastName = splitName[1];
+        var firstInitial = firstName.split("")[0];
+        var lastInitial = lastName.split("")[0];
+        var initials = firstInitial + lastInitial;
+        return initials;
     };
-    const applicant = props.appState.searchResult[props.index]
+    const applicant = props.appState.searchResult[props.index];
     return (
         <li className={classes.root} onClick={() => props.setAppState({ SelectedApplicant: props.index})}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
+                        <Avatar className={classes.avatar}>{getInitials(applicant.name)}</Avatar>
+                    </Grid>
+                    <Grid item xs={12} sm container>
+                        <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs>
+                                <Typography gutterBottom variant="h6" color="primary">
+                                    <strong>{props.applicant.name}</strong>
+                                </Typography>
+                                <Typography variant="body1">
+                                    <strong>Positions:</strong> {props.applicant.selectedPositions.join(", ")}
+                                </Typography>
+                                <Typography variant="body1">
+                                    <strong>Availability:</strong> {props.applicant.availability.join(", ")}
+                                </Typography>
+                                <Typography variant="body1">
+                                    <strong>Experience:</strong> {addExperience(props.applicant.whMonths1,props.applicant.whMonths2, props.applicant.whMonths3)} Months
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item>
+                            <ButtonBase> 
+                                <Star 
+                                    style={props.appState.userInfo.interested
+                                        .indexOf(props.appState.searchResult[props.index]._id) < 0 ? 
+                                        {color:"gray"} : {color: "#f5dc06"}} 
+                                    onClick={favoriteApplicant}
+                                />
+                            </ButtonBase>
+                            <ButtonBase> 
+                                <Popper removeApplicant={removeApplicant}/>
+                            </ButtonBase>
+                        </Grid>
+                    </Grid>
+                    {/* <Grid item>
                         <ButtonBase> 
                             <Star style={props.appState.userInfo.interested
                                 .indexOf(props.appState.searchResult[props.index]._id) < 0 ? 
@@ -116,8 +164,8 @@ export default function ListItem(props) {
                                     {workHistory(props.applicant.positionsWorked1, props.applicant.positionsWorked2, props.applicant.positionsWorked3)}
                                 </Typography>
                             </Grid>
-                        </Grid>
-                        <Grid item>
+                        </Grid> */}
+                    {/* <Grid item>
                             <ButtonBase>
                                 {props.appState.userInfo.messaged.indexOf(applicant._id) >= 0 ? 
                                     <div>
@@ -131,8 +179,8 @@ export default function ListItem(props) {
                                     </div>
                                 }
                             </ButtonBase>
-                        </Grid>
-                    </Grid>
+                        </Grid> */}
+                    {/* </Grid> */}
                 </Grid>
             </Paper>
         </li>

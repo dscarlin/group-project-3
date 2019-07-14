@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        minHeight: 400
+        minHeight: "75vh"
     },
     overlay: {
         position: "absolute",
@@ -33,7 +33,8 @@ const useStyles = makeStyles(theme => ({
     welcomeMessage: {
         position: "relative", 
         padding: 64,
-        marginTop: 50
+        marginTop: "20vh",
+        textShadow: "1px 1px black"
     },
     overview: {
         position: "relative",
@@ -56,7 +57,7 @@ export default function Landing(props) {
                         <Grid item md={12}>
                             <div className={classes.welcomeMessage}>
                                 <Typography variant="h1" color="inherit" align="center" >
-                                    On The Fly Staffing
+                                    <strong>On The Fly Staffing</strong>
                                 </Typography>
                                 <Typography variant="h5" color="inherit" align="center" >
                                     Helping the hospitality industry apply and hire with ease.

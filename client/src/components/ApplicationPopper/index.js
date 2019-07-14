@@ -46,7 +46,7 @@ export default function applicationPopper(props) {
 
     return (
         <div>
-             <Button onClick={handleClick} className={`${classes.white} ${classes.button}`} >Apply</Button>
+            <Button onClick={handleClick} className={`${classes.white} ${classes.button}`} >Apply</Button>
             {/* <Delete aria-describedby={id} variant="contained" onClick={handleClick}/> */}
             {/* <Button aria-describedby={id} variant="contained" onClick={handleClick}>
         Toggle Popper
