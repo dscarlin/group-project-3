@@ -45,7 +45,7 @@ const appSchema = new Schema({
   whMonths3: { type: Number, min: [0, "Work History 3 months of experience must be posititve."] },
   whDetails3: { type: String },
   coverLetter: { type: String },
-  lifecycle: { type: Date, expires: '15s', default: Date }
+  // lifecycle: { type: Date, expires: '15s', default: Date }
   
 }, 
 {timestamps: true}

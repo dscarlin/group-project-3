@@ -6,6 +6,7 @@ import { AppBar, Toolbar, Typography, useScrollTrigger, Slide } from "@material-
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
 import auth0Client from "../../auth";
+import logo from "../../assets/onthefly2-S.png"
 
 function HideOnScroll(props) {
     const { children, window } = props;
@@ -38,12 +39,13 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(2),
     },
     title: {
-        width: "fit-content"
+        width: "fit-content",
     },
     centerBar: {
         flexGrow: 1,
         alignContent: "center"
-    }
+    },
+
 }));
 
 export default withRouter(function HideAppBar(props) {
@@ -59,14 +61,16 @@ export default withRouter(function HideAppBar(props) {
             <HideOnScroll {...props}>
                 <AppBar>
                     <Toolbar>
+                        
                         {/* <Popper/> */}
                         <Typography variant="h6" className={`${classes.title} ${classes.root}`}>
-                            {auth0Client.isAuthenticated() ? 
-                                <NavLink to="/dashboard" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
+                            {auth0Client.isAuthenticated() ?
+                                <NavLink to="/dashboard" exact={true} className={`${style.inheritLink}`}><img src={logo} alt="Logo" width="200px" ></img></NavLink>
                                 :
-                                <NavLink to="/" exact={true} className={`${style.inheritLink}`}>On The Fly Staffing</NavLink>
+                                <NavLink to="/" exact={true} className={`${style.inheritLink}`}><img src={logo} alt="Logo" width="200px" ></img></NavLink>
                             }
                         </Typography>
+                        
                         {/* <div className={classes.centerBar}>
                             {auth0Client.isAuthenticated() && props.location.pathname != "/signup" ? 
                                 <SearchForm />

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { TextField, Button, Checkbox, Select, ListItemText, 
     FormControl, FormHelperText, MenuItem, InputLabel, Input  } from "@material-ui/core";
-import { ValidatorForm, SelectValidator, TextValidator} from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import axios from "axios";
 import ApplicationPopper from "../ApplicationPopper";
 
@@ -137,15 +137,12 @@ class ApplicationForm extends Component {
     handleSubmit = e => {
         if(!this.state.extraValidationPass)
             return window.scrollTo(0,0);
-
         e.preventDefault();
         this.togglePopper(e);
     };
     handleError = errors => {
-        console.log(errors);
         window.scrollTo(0,0);
-        console.log(window);
-        
+        console.log(errors)
     }
     runExtraValidators = () => {
         let pass = true

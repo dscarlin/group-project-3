@@ -1,54 +1,90 @@
-import React from "react";
-import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader } from "@material-ui/core";
+import React, { Fragment } from "react";
+import moment from "moment";
+import { Grid, Typography, Avatar, Divider, Card, CardContent, Button, CardHeader } from "@material-ui/core";
 import { Email, Phone } from "@material-ui/icons";
-import applicants from "../../dummyApps.json";
+import ExpansionPanel from "../ExpansionPanel";
+import Message from "@material-ui/icons/Message";
 
 
 
 export default (props) => {
 
-    const addExperience = (exp1, exp2, exp3) => {
-        return exp1 +exp2 + exp3;
-    };
-    const workHistory = (jobOne, jobTwo, jobThree) => {
-        let workHistory = [jobOne, jobTwo, jobThree];
-        return workHistory;
+    const workHistory = (applicant) => {
+        let restaurants = [applicant.restaurantName1, applicant.restaurantName2, applicant.restaurantName3];
+        let positions = [applicant.positionsWorked1.join(", "), applicant.positionsWorked2.join(", "), applicant.positionsWorked3.join(", ")];
+        let months = [applicant.whMonths1, applicant.whMonths2, applicant.whMonths3];
+        let details = [applicant.whDetails1, applicant.whDetails2, applicant.whDetails3];
+        const listItems = restaurants.map((restaurant, index) => 
+            <ExpansionPanel  
+                key={`${restaurant}-Item`} 
+                index={index} 
+                restaurant={restaurant} 
+                details={details} 
+                months={months} 
+                positions={positions} 
+                style={{listStyle: "none", textAlign: "left"}}
+            ></ExpansionPanel>
+        );
+        return (
+            <ul>{listItems}</ul>
+        );
     };
     const getInitials = (name) => {
         var splitName = name.split(" ");
         var firstName = splitName[0];
-        var lastName = splitName[1];
+        var lastName = "";
+        if(splitName.length > 1)
+            lastName = splitName[1];
         var firstInitial = firstName.split("")[0];
-        var lastInitial = lastName.split("")[0];
+        var lastInitial = "";
+        if(lastName)
+            lastInitial = lastName.split("")[0];
         var initials = firstInitial + lastInitial;
         return initials;
     };
     const classes = props.useStyles();
     const applicants = props.appState.searchResult;
     const SelectedApplicant = props.appState.SelectedApplicant;
+    console.log(props);
 
     return (
         <Grid item sm={6}>
             {applicants.length ?
-                <Card className={`${classes.card} ${classes.container}`} align="center">
+                <Card className={`${classes.card} ${classes.container} ${classes.detailView}`} align="center">
                     <CardHeader title="Candidate Details" className={classes.cardHeader} />
                     <CardContent>    
                         <Avatar className={classes.avatar}>{getInitials(applicants[SelectedApplicant].name)}</Avatar>
                         <Typography style={{display: "inline-block", color: "#555"}} variant="h3" align="center">{applicants[SelectedApplicant].name}</Typography>
-                        <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
-                        <Divider className={classes.widthControl}/>
-                        <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
+                        <p>
+                            <span><Email style={{color: "#3F51B5"}}/>{applicants[SelectedApplicant].email}</span>
+                            <span><Phone style={{color: "#3F51B5"}}/>{applicants[SelectedApplicant].phone}</span>
+                        </p>
+                        <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${moment(applicants[SelectedApplicant].applicationDate).format("MMMM Do YYYY, h:mm a")}`}</em></Typography>
+                        <Grid item>
+                            {props.appState.userInfo.messaged.indexOf(applicants[SelectedApplicant]._id) >= 0 ? 
+                               
+                                <div>
+                                    <Message style={{color:"green"}} ></Message>
+                                    <span><strong>Messaged</strong></span>
+                                </div>
+                                :
+                                <Button  size="small" variant="contained" onClick={() => props.messageApplicant(applicants[SelectedApplicant])}>
+                                    <div>
+                                        <Message style={{color:"gray"}} ></Message>
+                                        <span>Send SMS Interview Invitation</span>
+                                    </div>
+                                </Button>
+                            }
+                        </Grid>
+                        <Divider className={classes.dividerFullWidth}/>
                         <Card className={classes.card} align="center">
                             <CardContent className={classes.CardContent}>
+                                <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability.join(", ")}</p>
                                 <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p>
-                                {/* <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p> */}
-                                <p><strong style={{color: "#3F51B5"}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
+                                <p><strong style={{color: "#3F51B5", textAlign: "left", fontSize: "1.5em"}}><u>Work History</u></strong></p> 
+                                {workHistory(applicants[SelectedApplicant])}
                             </CardContent>
                         </Card>           
-                                
-                        <span><Email style={{color: "#3F51B5"}}/>{applicants[SelectedApplicant].email}</span>
-                        <span><Phone style={{color: "#3F51B5"}}/>{applicants[SelectedApplicant].phone}</span>
-                      
                         <Card className={classes.card} align="center">
                             <CardHeader title="Cover Letter" className={classes.cardHeader}/>
                             <Divider />
@@ -60,5 +96,5 @@ export default (props) => {
                 </Card>
                 : null}
         </Grid>
-    )
-}
+    );
+};

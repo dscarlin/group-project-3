@@ -6,8 +6,7 @@ import Email from "@material-ui/icons/Email";
 import Phone from "@material-ui/icons/Phone";
 import ListItem from "../../components/ListItem";
 import SearchForm from "../../components/SearchForm";
-import applicants from "../../dummyApps.json";
-import Details from "../../components/Details";
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,6 +24,7 @@ const useStyles = makeStyles(theme => ({
     },
     card: {
         marginTop: 10,
+        marginBottom: 10,
         width: "90%",
         minHeight: 175,
         color: "#555"
@@ -37,6 +37,9 @@ const useStyles = makeStyles(theme => ({
         // border: "solid black 1px",
         paddingTop: "2em"
     },
+    dividerFullWidth: {
+        margin: `5px 0 0 ${theme.spacing(2)}px`,
+    },
     fixed: {
         position: "fixed",
         right: "0",
@@ -45,13 +48,13 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         // padding: theme.spacing(2),
-        padding: 20,
-        overflowY: "auto",
+        // padding: 20,
+        overflow: "auto",
         margin: "1em 0",
         maxWidth: "90%",
     },
     widthControl: {
-        width: "45vw"
+        width: "65vw"
     }
 }));
 
@@ -66,27 +69,34 @@ function ListAndDetailContainer(props) {
     
     // const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
 
-   
-    
-    const addExperience = (exp1, exp2, exp3) => {
-        return exp1 +exp2 + exp3;
-    };
     const workHistory = (jobOne, jobTwo, jobThree) => {
         let workHistory = [jobOne, jobTwo, jobThree];
         return workHistory;
     };
     const getInitials = (name) => {
         var splitName = name.split(" ");
-        var firstName = splitName[0];
-        var lastName = splitName[1];
-        var firstInitial = firstName.split("")[0];
-        var lastInitial = lastName.split("")[0];
-        var initials = firstInitial + lastInitial;
-        return initials;
+        if(!splitName.length < 2) {
+            var firstName = splitName[0];
+            var lastName = splitName[1];
+            var firstInitial = firstName.split("")[0];
+            var lastInitial = lastName.split("")[0];
+            var initials = firstInitial + lastInitial;
+            return initials;
+        } else {
+            firstName = splitName[0];
+            splitName.push("Lastname");
+            lastName = splitName[1];
+            firstInitial = firstName.split("")[0];
+            lastInitial = lastName.split("")[0];
+            initials = firstInitial + lastInitial;
+            return initials;
+        }
+        
     };
-    console.log(SelectedApplicant);
+    
     const applicants = props.appState.searchResult;
     const SelectedApplicant = props.appState.SelectedApplicant;
+    console.log(SelectedApplicant);
     console.log(applicants);
     return(
         <Container>
@@ -134,7 +144,7 @@ function ListAndDetailContainer(props) {
                             <Avatar className={classes.avatar}>{getInitials(applicants[SelectedApplicant].name)}</Avatar>
                             <Typography style={{display: "inline-block", color: "#555"}} variant="h3">{applicants[SelectedApplicant].name}</Typography>
                             <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${applicants[SelectedApplicant].applicationDate}`}</em></Typography>
-                            <Divider className={classes.widthControl}/>
+                            <Divider className={classes.dividerFullWidth}/>
                             <Grid container>
                                 <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability}</p>
                                 <Grid container alignItems="center" justify="flex-start" spacing={0}>
@@ -142,8 +152,7 @@ function ListAndDetailContainer(props) {
                                         <Card className={classes.card}>
                                             <CardContent>
                                                 <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p>
-                                                {/* <p><strong style={{color: '#3F51B5'}}>Experience: </strong>{addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)} months</p> */}
-                                                <p><strong style={{color: "#3F51B5"}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
+                                                <p><strong style={{color: "#3F51B5", fontSize: ""}}>Work History: </strong>{workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}</p>
                                             </CardContent>
                                         </Card>
                                     </Grid>
