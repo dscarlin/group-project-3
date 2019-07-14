@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {Popper, Typography, Button, Fade, Paper } from "@material-ui/core";
 import Delete from "@material-ui/icons/Delete";
@@ -19,39 +19,22 @@ const useStyles = makeStyles(theme => ({
         },
         textAlign: "center"
     },
-    button: {
-        display: "block",
-        margin: "2em auto"        
-    }
+    
    
 }));
 
 export default function applicationPopper(props) {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    function handleClick(event) {
-        // event.stopPropagation();
-        setAnchorEl(anchorEl ? null : event.currentTarget);
-
-    }
-    function handleSubmit(e){
+    const open = Boolean(props.applState.anchorEl);
+    const id = open ? "simple-popper" : undefined;
+    const handleClick = e => props.togglePopper(e);
+    const handleSubmit = e => {
         props.submit(e);
-        handleClick();
         props.setViewState({applied: true})
     }
-
-    const open = Boolean(anchorEl);
-    const id = open ? "simple-popper" : undefined;
-
     return (
-        <div>
-             <Button onClick={handleClick} className={`${classes.white} ${classes.button}`} >Apply</Button>
-            {/* <Delete aria-describedby={id} variant="contained" onClick={handleClick}/> */}
-            {/* <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-        Toggle Popper
-      </Button> */}
-            <Popper placement="bottom" id={id} open={open} anchorEl={anchorEl} transition>
+        <Fragment>
+            <Popper  id={id} open={open} anchorEl={props.applState.anchorEl} transition>
                 {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={350}>
                         <Paper className={classes.paper}>
@@ -65,6 +48,6 @@ export default function applicationPopper(props) {
                     </Fade>
                 )}
             </Popper>
-        </div>
+        </Fragment>
     );
 }

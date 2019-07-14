@@ -1,15 +1,16 @@
 import React, { Component, Fragment } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { TextField, Button, Checkbox, Select, ListItemText, 
-    FormControl, MenuItem, InputLabel, Input  } from "@material-ui/core";
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-
+    FormControl, FormHelperText, MenuItem, InputLabel, Input  } from "@material-ui/core";
+import { ValidatorForm, SelectValidator, TextValidator} from 'react-material-ui-form-validator';
 import axios from "axios";
 import ApplicationPopper from "../ApplicationPopper";
 
+
 const styles = () => ({
     form: {
-        margin: "2em auto",
+        background: "#fffffff8",
+        margin: "8em auto 0",
         width: "fit-content",
         maxWidth: "90vw",
         minWidth: "50vw",
@@ -17,9 +18,35 @@ const styles = () => ({
         padding: "2em"
     },
     formControl: {
-        width: "100%"
+        width: "100%",
+        marginBottom: ".4em"
     },
-   
+    button: {
+        display: "block",
+        margin: "2em auto"        
+    },
+    visible: {
+        display: "block",
+        color: "#f44336"
+    },
+    invisible: {
+        display: "none"
+    },
+    red: {
+        color: "#f44336!important",
+    },
+    redBorder: {
+        borderColor: "#f44336",
+        '&:after': {
+            transform: "scale(1)",
+            borderBottomColor: "#f44336"
+        }
+    },
+    auto: {
+        width: "fit-content",
+        margin: "auto"
+    }
+
 });
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -30,8 +57,7 @@ const MenuProps = {
             width: "auto",
         },
     }
-};
-  
+}; 
 const positionOptions = [
     "Server",
     "Bar Tender",
@@ -53,24 +79,18 @@ const workedPositionOptions = [
     "Prep Cook",
     "Other"
 ];
-
 const availabilityOptions = [
     "Breakfast",
     "Lunch",
     "Dinner",
     "Late Night"
-]
-// const industryExperienceOptions = [
-//     "Less than One",
-//     "One to Three",
-//     "Three to Five",
-//     "Five to Seven",
-//     "Seven to Ten",
-//     "More than Ten"
-// ]
+];
 
 class ApplicationForm extends Component {
     state = {
+        positionError: false,
+        anchorEl: null,
+        extraValidationPass: false,
         selectedPositions: [],
         availability: [],
         name: "",
@@ -92,11 +112,13 @@ class ApplicationForm extends Component {
         coverLetter: ""
     };
     setApplState = value => this.setState(value);
-    openModal = () => this.setState({modalOpen: true})
+    togglePopper = event => {
+        this.setState({anchorEl: this.state.anchorEl ? null : this.refs.submitButton});
+    }
     handleChange = event => {
         let { name, value } = event.target;
         if (name === "phone"){
-            let phoneNumber = value
+            let phoneNumber = value;
             phoneNumber = phoneNumber.split('').filter(char => char.match(/[0-9]/g));
             if (phoneNumber.length > 9){
                 phoneNumber.splice(0,0,'(');
@@ -104,63 +126,104 @@ class ApplicationForm extends Component {
                 phoneNumber.splice(5,0,' ');
                 phoneNumber.splice(9,0,'-');
             }
-            phoneNumber = phoneNumber.join('').slice(0,14);
-            this.setState({phone: phoneNumber})
+            value = phoneNumber.join('').slice(0,14);
         }
-        else
-            this.setState({ [name]: value });
+        this.setState({ [name]: value });
     };
     handleSubmit = e => {
+        if(!this.state.extraValidationPass)
+            return window.scrollTop();
         e.preventDefault();
-        this.openModal();
+        this.togglePopper(e);
+    };
+    handleError = errors => {
+        console.log(errors);
+        window.scrollTo(0,0)
+        console.log(window);
+        
+    }
+    runExtraValidators = () => {
+        let pass = true
+        if (!this.state.selectedPositions.length){
+            this.setState({positionError: true})
+        }
+        if(pass)
+            this.setState({extraValidationPass: true})
     }
     finalSubmit = e => {
-        //maybe display a modal before submission to give the applicant a chance to review
         e.preventDefault();
         this.setState({
             industryExperience: this.state.industryExperience || 0,
             whMonths1: this.state.whMonths1 || 0,
             whMonths2: this.state.whMonths2 || 0,
             whMonths3: this.state.whMonths3 || 0,
-        })
-        let payload = this.state
-        delete payload.modalOpen
-        axios.post("/api/applicant",payload).then(res => console.log(res))
+        });
+        let payload = this.state;
+        delete payload.anchorEl;
+        delete payload.positionError;
+        delete payload.extraValidationPass;
+        axios.post("/api/applicant",payload).then(res => console.log(res));
         // maybe display the results to the applicant for feedback
         this.setState({name: "", email: "", phone: "", selectedPositions: [], availability: [], 
             restaurantName1: "", positionsWorked1: [], whMonths1:"", whDetails1: "", 
             restaurantName2: "", positionsWorked2: [], whMonths2:"", whDetails2: "", 
             restaurantName3: "", positionsWorked3: [], whMonths3:"", whDetails3: "", 
-            coverLetter: ""})
+            coverLetter: ""});
     };
     render() {
         const { classes } = this.props;
         return (
             <Fragment>
-                <form className={classes.form}>
+                {/* <form className={classes.form}> */}
+                <ValidatorForm
+                className={classes.form}
+                ref="form"
+                onSubmit={this.handleSubmit} 
+                onError={errors => this.handleError(errors)}
+                instantValidate={false}
+                >
+                    <h1 className={classes.auto}>Apply On-the-Fly</h1>
                     <h3>Applicant Details:</h3>
-                    <FormControl className={`${classes.formControl}`}>
-                        <InputLabel  htmlFor="name">Full Name</InputLabel>
-                        <Input id="name" name="name" onChange={this.handleChange} value={this.state.name}/>
-                    </FormControl>
-                    <FormControl className={`${classes.formControl}`}>
-                        <InputLabel htmlFor="email">Email</InputLabel>
-                        <Input id="email" name="email" onChange={this.handleChange} value={this.state.email}/>
-                    </FormControl>
-                    <FormControl className={`${classes.formControl}`}>
-                        <InputLabel htmlFor="phone">Phone Number</InputLabel>
-                        <Input id="phone" name="phone" onChange={this.handleChange} value={this.state.phone}/>
-                    </FormControl>
-                    <FormControl className={`${classes.formControl}`}>
-                        <InputLabel  htmlFor="select-multiple-checkbox">Position Applying For</InputLabel>
+                    <small>required *</small>
+                    <TextValidator
+                    className={`${classes.formControl}`}
+                    label="Full Name *"
+                    onChange={this.handleChange}
+                    name="name"
+                    value={this.state.name}
+                    validators={['required']}
+                    errorMessages={['this field is required']}
+                    />
+                    <TextValidator
+                    className={`${classes.formControl}`}
+                    label="Email"
+                    onChange={this.handleChange}
+                    name="email"
+                    value={this.state.email}
+                    validators={[ 'isEmail']}
+                    errorMessages={[ 'email is not valid']}
+                    />
+                    <TextValidator
+                    className={`${classes.formControl}`}
+                    label="Phone Number *"
+                    onChange={this.handleChange}
+                    name="phone"
+                    value={this.state.phone}
+                    validators={[ 'minStringLength:13']}
+                    errorMessages={[ 'Phone Number Must Be 10 Digits']}
+                    />
+                    <FormControl className={ `${classes.formControl}`} >
+                        <InputLabel  className={this.state.positionError? `${classes.red}`: ''} htmlFor="select-multiple-checkbox">Position Applying For *</InputLabel>
                         <Select
                             multiple
+                            className={this.state.positionError? `${classes.redBorder}`: ''}
                             value={this.state.selectedPositions}
                             onChange={this.handleChange}
                             name="selectedPositions"
-                            input={<Input className={classes.white} id="select-multiple-checkbox" />}
+                            input={<Input  id="select-multiple-checkbox" />}
                             renderValue={selected => selected.join(", ")}
                             MenuProps={MenuProps}
+                            required
                         >
                             {positionOptions.map(name => (
                                 <MenuItem key={name} value={name}>
@@ -169,6 +232,7 @@ class ApplicationForm extends Component {
                                 </MenuItem>
                             ))}
                         </Select>
+                        <FormHelperText className={this.state.positionError? `${classes.red} ${classes.visible}` : classes.invisible}>this field is required </FormHelperText>
                     </FormControl>
                     <FormControl className={`${classes.formControl}`}>
                         <InputLabel  htmlFor="select-multiple-checkbox">Availability</InputLabel>
@@ -225,7 +289,6 @@ class ApplicationForm extends Component {
                     </FormControl>
                     <TextField className={classes.formControl} id="wh-details-1" multiline label="Details" name="whDetails1" onChange={this.handleChange} value={this.state.whDetails1}/>
                     &nbsp;
-                    <hr/>             
                     <h1>&#10113;</h1>
                     <FormControl className={`${classes.formControl}`}>
                         <InputLabel htmlFor="restaurantName2">Business Name</InputLabel>
@@ -256,7 +319,6 @@ class ApplicationForm extends Component {
                     </FormControl>
                     <TextField className={classes.formControl} id="wh-details-2" multiline label="Details" name="whDetails2" onChange={this.handleChange} value={this.state.whDetails2}/>
                     &nbsp;
-                    <hr/>             
                     <h1>&#10114;</h1>
                     <FormControl className={`${classes.formControl}`}>
                         <InputLabel htmlFor="restaurantName3">Business Name</InputLabel>
@@ -286,15 +348,13 @@ class ApplicationForm extends Component {
                         <Input id="wh-months-3" type="number" name="whMonths3" onChange={this.handleChange} value={this.state.whMonths3}/>
                     </FormControl>
                     <TextField className={classes.formControl} id="wh-details-3" multiline label="Details" name="whDetails3" onChange={this.handleChange} value={this.state.whDetails3}/>
-                    &nbsp;
-                            
+                    &nbsp;      
                     <h3>Message To Employer:</h3>
                     <TextField className={classes.formControl} id="coverLetter" multiline label="CoverLetter" name="coverLetter" onChange={this.handleChange} value={this.state.coverLetter}/>
-
-
-                   
-                    <ApplicationPopper setViewState={this.props.setViewState} setApplState={this.setAppleState} applState={this.state} submit={this.finalSubmit}/>
-                </form>
+                    <Button onClick={this.runExtraValidators} ref="submitButton"  type="submit"   className={classes.button} >Apply</Button>
+                    <ApplicationPopper setViewState={this.props.setViewState} setApplState={this.setAppleState} applState={this.state} togglePopper={this.togglePopper} submit={this.finalSubmit}/>
+                {/* </form> */}
+                </ValidatorForm>
             </Fragment>
         );
     };
