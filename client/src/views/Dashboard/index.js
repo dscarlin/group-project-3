@@ -124,7 +124,6 @@ export default function Dashboard(props) {
                     useStyles={useStyles}
                     appState={props.appState}
                     setAppState={props.setAppState}
-                    messageApplicant={props.messageApplicant}
                 />
                 <DetailContainer 
                     useStyles={useStyles}

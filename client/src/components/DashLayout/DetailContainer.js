@@ -10,12 +10,10 @@ import Message from "@material-ui/icons/Message";
 export default (props) => {
 
     const workHistory = (applicant) => {
-        
         let restaurants = [applicant.restaurantName1, applicant.restaurantName2, applicant.restaurantName3];
         let positions = [applicant.positionsWorked1.join(", "), applicant.positionsWorked2.join(", "), applicant.positionsWorked3.join(", ")];
         let months = [applicant.whMonths1, applicant.whMonths2, applicant.whMonths3];
         let details = [applicant.whDetails1, applicant.whDetails2, applicant.whDetails3];
-        
         const listItems = restaurants.map((restaurant, index) => 
             <ExpansionPanel  
                 key={`${restaurant}-Item`} 
@@ -30,14 +28,17 @@ export default (props) => {
         return (
             <ul>{listItems}</ul>
         );
-
     };
     const getInitials = (name) => {
         var splitName = name.split(" ");
         var firstName = splitName[0];
-        var lastName = splitName[1];
+        var lastName = "";
+        if(splitName.length > 1)
+            lastName = splitName[1];
         var firstInitial = firstName.split("")[0];
-        var lastInitial = lastName.split("")[0];
+        var lastInitial = "";
+        if(lastName)
+            lastInitial = lastName.split("")[0];
         var initials = firstInitial + lastInitial;
         return initials;
     };
