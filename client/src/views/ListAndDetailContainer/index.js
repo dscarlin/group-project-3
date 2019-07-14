@@ -6,8 +6,7 @@ import Email from "@material-ui/icons/Email";
 import Phone from "@material-ui/icons/Phone";
 import ListItem from "../../components/ListItem";
 import SearchForm from "../../components/SearchForm";
-import applicants from "../../dummyApps.json";
-import Details from "../../components/Details";
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -70,6 +69,14 @@ function ListAndDetailContainer(props) {
     
     // const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
 
+<<<<<<< HEAD
+=======
+   
+    
+    // const addExperience = (exp1, exp2, exp3) => {
+    //     return exp1 +exp2 + exp3;
+    // };
+>>>>>>> f77936284578721d2bc2c2efa30377fa2057ddde
     const workHistory = (jobOne, jobTwo, jobThree) => {
         let workHistory = [jobOne, jobTwo, jobThree];
         return workHistory;
@@ -94,9 +101,10 @@ function ListAndDetailContainer(props) {
         }
         
     };
-    console.log(SelectedApplicant);
+    
     const applicants = props.appState.searchResult;
     const SelectedApplicant = props.appState.SelectedApplicant;
+    console.log(SelectedApplicant);
     console.log(applicants);
     return(
         <Container>

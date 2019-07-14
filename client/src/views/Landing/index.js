@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.grey[800],
         color: theme.palette.common.white,
         marginBottom: theme.spacing(4),
-        backgroundImage: "url(http://www.liverpoolcommercialcleaners.co.uk/wp-content/uploads/2016/12/professional-ktchen-cleaning.jpg)",
+        backgroundImage: "url(/assets/background.jpg)",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
