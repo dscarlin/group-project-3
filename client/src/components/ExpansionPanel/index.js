@@ -43,8 +43,8 @@ export default function ControlledExpansionPanels(props) {
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Typography style={{textAlign: "left"}}>
+                        {/* <h4 style={{margin: "0 0 .5em ", color: "#555"}}>Work Details:</h4> */}
                         {props.details[props.index]}
-                        <h4 style={{color: "#555"}}>Work Details</h4>
                     </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>

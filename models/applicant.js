@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const relationship = require('mongoose-relationship');
 const Schema = mongoose.Schema;
 const appSchema = new Schema({
   selectedPositions: [

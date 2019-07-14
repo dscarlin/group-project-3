@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import moment from "moment";
-import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader, ListItem } from "@material-ui/core";
-import { Email, Phone, ExpandLess, ExpandMore } from "@material-ui/icons";
+import { Grid, Typography, Avatar, Divider, Card, CardContent, Button, CardHeader } from "@material-ui/core";
+import { Email, Phone } from "@material-ui/icons";
 import ExpansionPanel from "../ExpansionPanel";
+import Message from "@material-ui/icons/Message";
 
 
 
@@ -43,6 +44,7 @@ export default (props) => {
     const classes = props.useStyles();
     const applicants = props.appState.searchResult;
     const SelectedApplicant = props.appState.SelectedApplicant;
+    console.log(props);
 
     return (
         <Grid item sm={6}>
@@ -57,6 +59,22 @@ export default (props) => {
                             <span><Phone style={{color: "#3F51B5"}}/>{applicants[SelectedApplicant].phone}</span>
                         </p>
                         <Typography style={{color: "#999"}} subtitle1="h2"><em>{`Submitted On: ${moment(applicants[SelectedApplicant].applicationDate).format("MMMM Do YYYY, h:mm a")}`}</em></Typography>
+                        <Grid item>
+                            {props.appState.userInfo.messaged.indexOf(applicants[SelectedApplicant]._id) >= 0 ? 
+                               
+                                <div>
+                                    <Message style={{color:"green"}} ></Message>
+                                    <span><strong>Messaged</strong></span>
+                                </div>
+                                :
+                                <Button  size="small" variant="contained" onClick={() => props.messageApplicant(applicants[SelectedApplicant])}>
+                                    <div>
+                                        <Message style={{color:"gray"}} ></Message>
+                                        <span>Send SMS Interview Invitation</span>
+                                    </div>
+                                </Button>
+                            }
+                        </Grid>
                         <Divider className={classes.dividerFullWidth}/>
                         <Card className={classes.card} align="center">
                             <CardContent className={classes.CardContent}>
@@ -77,5 +95,5 @@ export default (props) => {
                 </Card>
                 : null}
         </Grid>
-    )
-}
+    );
+};
