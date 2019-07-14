@@ -11,7 +11,7 @@ const styles = () => ({
     form: {
         background: "#fffffff8",
         margin: "8em auto 0",
-        width: "fit-content",
+        width: "760px",
         maxWidth: "90vw",
         minWidth: "50vw",
         boxShadow: "5px 5px 20px 5px grey",
