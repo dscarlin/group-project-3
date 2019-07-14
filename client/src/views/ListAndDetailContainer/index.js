@@ -70,11 +70,6 @@ function ListAndDetailContainer(props) {
     
     // const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
 
-   
-    
-    const addExperience = (exp1, exp2, exp3) => {
-        return exp1 +exp2 + exp3;
-    };
     const workHistory = (jobOne, jobTwo, jobThree) => {
         let workHistory = [jobOne, jobTwo, jobThree];
         return workHistory;
