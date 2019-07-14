@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         position: "relative",
-        marginTop: theme.spacing(1),
+        // marginTop: theme.spacing(1),
         padding: 10,
     },
     avatar: {
@@ -63,11 +63,11 @@ const useStyles = makeStyles(theme => ({
         height: "85vh"
     },
     searchToggle: {
-        width: "40vw",
+        width: "fit-content",
         backgroundColor: "white",
         justifyContent: "center",
         alignContent: "center",
-        margin: "auto"
+        margin: "2em auto"
     },
     info: {
         position: "absolue",
@@ -104,16 +104,16 @@ export default function Dashboard(props) {
                     keepMounted
                     onClose={handleClose}
                 />
+                <SearchForm redirect={true} 
+                    setAppState={props.setAppState}
+                    appState={props.appState}
+                />
                 <SearchSavedToggle
                     className={classes.searchToggle}
                     useStyles={useStyles}
                     appState={props.appState}
                     setAppState={props.setAppState}
                     align="center"
-                />
-                <SearchForm redirect={true} 
-                    setAppState={props.setAppState}
-                    appState={props.appState}
                 />
             </Grid>
       
