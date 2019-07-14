@@ -4,7 +4,6 @@ import { Grid, Container, IconButton, Slide} from "@material-ui/core";
 import { InfoOutlined } from "@material-ui/icons";
 import SearchForm from "../../components/SearchForm";
 import Results from "../../components/DashLayout/Results";
-import applicants from "../../dummyApps.json";
 import DetailContainer from "../../components/DashLayout/DetailContainer";
 import SearchSavedToggle from "../../components/SearchSavedToggle";
 import Info from "../../components/Info";
