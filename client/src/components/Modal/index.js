@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Modal } from "@material-ui/core";
-import EmployerSignupForm from "../EmployerSignupForm";
   
 
   
@@ -17,13 +16,14 @@ const useStyles = makeStyles(theme => ({
         outline: "none",
     },
 }));
-  
+
 
 export default function SimpleModal(props) {
     const toggle = function() {
         props.appState({ modalOpen: !props.open });
     };
     const classes = useStyles();
+    const {Component, passedProps} = props
     return (
         <div>
             <Modal
@@ -33,7 +33,11 @@ export default function SimpleModal(props) {
                 onClose={toggle}
             >
                 <div  className={classes.paper}>
-                    <EmployerSignupForm noShadow={true} />
+                    {passedProps? 
+                    <Component  />
+                    :  
+                    <Component passedProps={passedProps} />
+                    }
                 </div>
             </Modal>
         </div>

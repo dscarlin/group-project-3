@@ -87,10 +87,11 @@ class EmployerSignupForm extends Component {
             this.props.history.push("/dashboard");
         });
     };
+    noShadow = this.props.hasOwnProperty("passedProps") ? this.props.passedProps.noShadow : null
     render() {
-        const { classes, noShadow } = this.props;
+        const { classes } = this.props;
         return (
-            <form className={classes.form + (noShadow ? '' : ` ${classes.shadow}`)}>
+            <form className={classes.form + (this.noShadow ? '' : ` ${classes.shadow}`)}>
             {console.log(this.props)}
 
                 <h1>Account Information:</h1>

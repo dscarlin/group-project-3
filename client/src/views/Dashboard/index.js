@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => ({
         // border: "solid black 1px",
         paddingTop: "2em"
     },
+    detailView: {
+        overflow: "scroll"
+    },
     fixed: {
         position: "fixed",
         right: "0",

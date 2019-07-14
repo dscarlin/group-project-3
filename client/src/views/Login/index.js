@@ -23,7 +23,7 @@ class Login extends Component {
         
         return(
             <React.Fragment>
-            {/* {this.state.array.map(() => (<p>item</p>) ) /*here temporarily to show hiding feature of appbar on scrolling*/ } */}
+            {/* {this.state.array.map(() => (<p>item</p>) ) /*here temporarily to show hiding feature of appbar on scrolling*/ }
             <h1>&nbsp;</h1>
             <h1>Login Page</h1>
             <Button variant="contained" className={`${classes.button}`} onClick={this.handleSubmit} >
