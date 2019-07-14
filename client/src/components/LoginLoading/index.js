@@ -14,14 +14,8 @@ class LoginLoading extends Component {
         const userInfo = response.data;          
         console.log(userInfo);
         if (userInfo){
-            // ///////////////////////////////////////////////////// //
-            //  axios call to toggle to remove user for dev purposes//
-            // //////////////////////////////////////////////////// //
-            // const deletedUser = await axios.delete(`/api/employer/${userInfo.data._id}`,{
-            //     headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
-            // });
-            // console.log(deletedUser);
-            this.props.setAppState({userInfo});
+            await this.props.setAppState({userInfo});
+            this.props.getSavedAndMessaged();
             this.props.history.replace("/dashboard");
         }
         else

@@ -28,8 +28,17 @@ class App extends Component {
             displayToggle: 0
     };
     async componentDidMount() {
-    }
-
+    };
+    getSavedAndMessaged = async () => {
+        let id = this.state.userInfo._id
+        let messaged = this.state.userInfo.messaged.join();
+        let saved = this.state.userInfo.interested.join();
+        const result = await axios.get(`/api/employer/${id}?s=${saved}&m=${messaged}`, {
+            headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
+        });
+        console.log(result)
+        this.setState(result.data)
+    };
     appState = (arg) => {
         this.setState(arg)
     };
@@ -58,7 +67,7 @@ class App extends Component {
                         <Route exact path="/" component={ Landing } />
                         <Route  exact path="/Apply" component={ Apply}/>
                         <Route path="/login" render={props => 
-                            <LoginLoading setAppState={this.appState} {...props} />} />
+                            <LoginLoading setAppState={this.appState} getSavedAndMessaged={this.getSavedAndMessaged} {...props} />} />
                         <SecuredRoute path="/signup" component={ props =>  
                             <EmployerSignupForm setAppState={this.appState}  {...props} />} />
                         <SecuredRoute path="/dashboard" component={(props) =>   
