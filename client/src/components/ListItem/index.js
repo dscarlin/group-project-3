@@ -81,7 +81,28 @@ export default function ListItem(props) {
         
     };
     const addExperience = (a, b, c) => {
-        return a + b + c;
+        let t = a + b + c;
+        let r = t % 12;
+        let y = Math.floor(t / 12)
+        if (!t) return 0 + " Months";
+        else if(r){
+            if(t == 13)
+                return y + " Year and " + r + " Month";
+            else if(r == 1)
+                return y + " Years and " + r + " Month";
+            else 
+                return y + " Years and " + r + " Months";
+        }
+        else {
+            if(t == 1)
+                return t + " Month";
+            else if(t < 12)
+                return t + " Months";
+            else if(t == 12)
+                return y + " Year";
+            else 
+                return y + " Years";
+        }
     };
     const getInitials = (name) => {
         var splitName = name.split(" ");
@@ -117,7 +138,7 @@ export default function ListItem(props) {
                                     <strong>Availability:</strong> {props.applicant.availability.join(", ")}
                                 </Typography>
                                 <Typography variant="body1">
-                                    <strong>Experience:</strong> {addExperience(props.applicant.whMonths1,props.applicant.whMonths2, props.applicant.whMonths3)} Months
+                                    <strong>Experience:</strong> {addExperience(props.applicant.whMonths1,props.applicant.whMonths2, props.applicant.whMonths3)}
                                 </Typography>
                             </Grid>
                         </Grid>
