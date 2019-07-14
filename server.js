@@ -10,7 +10,7 @@ const logger = require("morgan");
 //Mongoose Database -- 
 const mongoose = require("mongoose");
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist",{ useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist",{ useNewUrlParser: true, useCreateIndex: true, useFindAndModify: true });
 let dbConn = mongoose.connection;
 // checks if connection with the database is successful
 dbConn.once("open", () => console.log("MongoDB connection open"));

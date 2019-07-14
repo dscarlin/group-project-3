@@ -9,12 +9,13 @@ const useStyles = makeStyles(theme => ({
         color: "#fff",
         margin: "40vh auto 0",
         textAlign: "center",
-        background: theme.palette.primary,
+        backgroundColor: theme.palette.primary.main,
+        border: "3px black solid",
         width: "fit-content",
-        padding: "4em",
+        padding: "2em 4em 4em",
     },
     header: {
-        font: "15vh"
+        fontSize: "15vh"
     }
     
 }));
@@ -29,7 +30,8 @@ export default withRouter((props) => {
         <Fragment >
             <div className={classes.root}>
                 <h1>Thanks for applying!</h1>
-                <Button  onClick={returnToHome}>Return to Homepage</Button>
+                <h2>Now just relax and wait for the offers to roll in!</h2>
+                <Button  variant="contained" onClick={returnToHome}>Return to Homepage</Button>
             </div>
         </Fragment>
     )

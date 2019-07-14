@@ -66,7 +66,7 @@ const positionOptions = [
     "BOH Manager",
     "Line Cook",
     "Dishwasher",
-    "Prep Cook",
+    "Prep Cook"
 ];
 const workedPositionOptions = [
     "Server",
@@ -89,6 +89,10 @@ const availabilityOptions = [
 class ApplicationForm extends Component {
     state = {
         positionError: false,
+        experienceError: false,
+        months1Error: false,
+        months2Error: false,
+        months3Error: false,
         anchorEl: null,
         extraValidationPass: false,
         selectedPositions: [],
@@ -145,8 +149,37 @@ class ApplicationForm extends Component {
     runExtraValidators = () => {
         let pass = true
         if (!this.state.selectedPositions.length){
-            this.setState({positionError: true})
+            this.setState({positionError: true});
+            pass = false
         }
+        else
+            this.setState({positionError: false});
+
+        if(this.state.industryExperience && this.state.industryExperience < 0){
+            this.setState({experienceError: true});
+            pass = false
+        }
+        else
+            this.setState({experienceError: false});
+
+        if(this.state.whMonths1 && this.state.whMonths1 < 0){
+            this.setState({months1Error: true});
+            pass = false
+        }
+        else    
+            this.setState({months1Error: false});
+        if(this.state.whMonths2 && this.state.whMonths2 < 0){
+            this.setState({months2Error: true});
+            pass = false
+        }
+        else
+            this.setState({months2Error: false});
+        if(this.state.whMonths3 && this.state.whMonths3 < 0){
+            this.setState({months3Error: true});
+            pass = false
+        }
+        else
+            this.setState({months3Error: false})
         if(pass)
             this.setState({extraValidationPass: true})
     }
@@ -158,12 +191,9 @@ class ApplicationForm extends Component {
             whMonths2: this.state.whMonths2 || 0,
             whMonths3: this.state.whMonths3 || 0,
         });
-        let payload = this.state;
-        delete payload.anchorEl;
-        delete payload.positionError;
-        delete payload.extraValidationPass;
+        const {anchorEl, positionError, experienceError, months1Error,
+            months2Error, months3Error, extraValidationPass, ...payload} = this.state;
         axios.post("/api/applicant",payload).then(res => console.log(res));
-        // maybe display the results to the applicant for feedback
         this.setState({name: "", email: "", phone: "", selectedPositions: [], availability: [], 
             restaurantName1: "", positionsWorked1: [], whMonths1:"", whDetails1: "", 
             restaurantName2: "", positionsWorked2: [], whMonths2:"", whDetails2: "", 
@@ -254,8 +284,9 @@ class ApplicationForm extends Component {
                         </Select>
                     </FormControl>
                     <FormControl className={`${classes.formControl}`}>
-                        <InputLabel htmlFor="industryExperience">Years of Industry Experience</InputLabel>
-                        <Input id="industryExperience" name="industryExperience" type="number" onChange={this.handleChange} value={this.state.industryExperience}/>
+                        <InputLabel className={this.state.experienceError? `${classes.red}`: ''} htmlFor="industryExperience">Years of Industry Experience</InputLabel>
+                        <Input className={this.state.experienceError? `${classes.redBorder}`: ''}id="industryExperience" name="industryExperience" type="number" onChange={this.handleChange} value={this.state.industryExperience}/>
+                        <FormHelperText className={this.state.experienceError? `${classes.red} ${classes.visible}` : classes.invisible}>this value must be positive</FormHelperText>
                     </FormControl>
 
                     <h3>Work History:</h3>
@@ -284,8 +315,9 @@ class ApplicationForm extends Component {
                         </Select>
                     </FormControl>
                     <FormControl className={` ${classes.formControl}`} >
-                        <InputLabel htmlFor="wh-months-1">Months of Experience</InputLabel>
-                        <Input id="wh-months-1" type="number" name="whMonths1" onChange={this.handleChange} value={this.state.whMonths1}/>
+                        <InputLabel className={this.state.months1Error? `${classes.red}`: ''} htmlFor="wh-months-1">Months of Experience</InputLabel>
+                        <Input className={this.state.months1Error? `${classes.redBorder}`: ''} id="wh-months-1" type="number" name="whMonths1" onChange={this.handleChange} value={this.state.whMonths1}/>
+                        <FormHelperText className={this.state.months1Error? `${classes.red} ${classes.visible}` : classes.invisible}>this value must be positive</FormHelperText>
                     </FormControl>
                     <TextField className={classes.formControl} id="wh-details-1" multiline label="Details" name="whDetails1" onChange={this.handleChange} value={this.state.whDetails1}/>
                     &nbsp;
@@ -314,8 +346,9 @@ class ApplicationForm extends Component {
                         </Select>
                     </FormControl>
                     <FormControl className={` ${classes.formControl}`} >
-                        <InputLabel htmlFor="wh-months-2">Months of Experience</InputLabel>
-                        <Input id="wh-months-2" type="number" name="whMonths2" onChange={this.handleChange} value={this.state.whMonths2}/>
+                        <InputLabel className={this.state.months2Error? `${classes.red}`: ''} htmlFor="wh-months-2">Months of Experience</InputLabel>
+                        <Input className={this.state.months2Error? `${classes.redBorder}`: ''} id="wh-months-2" type="number" name="whMonths2" onChange={this.handleChange} value={this.state.whMonths2}/>
+                        <FormHelperText className={this.state.months2Error? `${classes.red} ${classes.visible}` : classes.invisible}>this value must be positive</FormHelperText>
                     </FormControl>
                     <TextField className={classes.formControl} id="wh-details-2" multiline label="Details" name="whDetails2" onChange={this.handleChange} value={this.state.whDetails2}/>
                     &nbsp;
@@ -344,8 +377,9 @@ class ApplicationForm extends Component {
                         </Select>
                     </FormControl>
                     <FormControl className={` ${classes.formControl}`} >
-                        <InputLabel htmlFor="wh-months-3">Months of Experience</InputLabel>
-                        <Input id="wh-months-3" type="number" name="whMonths3" onChange={this.handleChange} value={this.state.whMonths3}/>
+                        <InputLabel className={this.state.months3Error? `${classes.red}`: ''} htmlFor="wh-months-3">Months of Experience</InputLabel>
+                        <Input className={this.state.months3Error? `${classes.redBorder}`: ''} id="wh-months-3" type="number" name="whMonths3" onChange={this.handleChange} value={this.state.whMonths3}/>
+                        <FormHelperText className={this.state.months3Error? `${classes.red} ${classes.visible}` : classes.invisible}>this value must be positive</FormHelperText>
                     </FormControl>
                     <TextField className={classes.formControl} id="wh-details-3" multiline label="Details" name="whDetails3" onChange={this.handleChange} value={this.state.whDetails3}/>
                     &nbsp;      

@@ -30,6 +30,7 @@
     "mongoose": "^5.6.2",
     "mongoose-relationship": "^0.1.5",
     "morgan": "^1.9.1",
+    "ms": "^2.1.2",
     "twilio": "^3.33.0"
   }
 }
