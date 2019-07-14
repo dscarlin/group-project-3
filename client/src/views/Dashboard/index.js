@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Container} from "@material-ui/core";
 import SearchForm from "../../components/SearchForm";
 import Results from "../../components/DashLayout/Results";
-import applicants from "../../dummyApps.json";
 import DetailContainer from "../../components/DashLayout/DetailContainer";
 
 
