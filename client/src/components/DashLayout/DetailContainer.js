@@ -86,7 +86,7 @@ export default (props) => {
                         <Divider className={classes.dividerFullWidth}/>
                         <Card className={classes.card} align="center">
                             <CardHeader title="Work History" className={classes.cardHeader} />
-                            <CardContent className={classes.CardContent} > 
+                            <CardContent className={classes.cardContent} > 
                                 {workHistory(applicants[SelectedApplicant])}
                             </CardContent>
                         </Card>           

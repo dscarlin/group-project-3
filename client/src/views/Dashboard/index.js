@@ -73,7 +73,8 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(8)
     },
     messageBtn: {
-        margin: theme.spacing(0)
+        margin: "auto",
+        boxShadow: "0px 1px 10px lightgray"
     }
 
 }));

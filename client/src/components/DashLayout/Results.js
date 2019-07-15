@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Grid, Card, CardHeader, CardContent, List } from "@material-ui/core";
+import { Grid, Card, CardHeader, CardContent, List, Typography } from "@material-ui/core";
 import ListItem from "../../components/ListItem";
 
 
@@ -41,21 +41,30 @@ export default (props) => {
         <Grid item sm={6}>
             <Card className={`${classes.card} ${classes.container}`} align="center">
                 <CardHeader title={cardTitle} className={classes.cardHeader} />
+                <Grid item className={classes.messageBtn} alignItems="center">
+                    <Typography variant="button">Select an applicant to view details.</Typography>
+                </Grid>
                 <CardContent  className={classes.containerContent}>
-                    <List component="ul" >
-                        <Fragment>
-                            {applicants.map((applicant, index) =>
-                                <ListItem 
-                                    messageApplicant={props.messageApplicant}
-                                    key={applicant._id}
-                                    applicant={applicant}
-                                    appState={props.appState}
-                                    setAppState={props.setAppState}
-                                    index={index}
-                                />
-                            )}
-                        </Fragment>
-                    </List>
+                    {applicants.length ?
+                        <List component="ul" >
+                            <Fragment>
+                                {applicants.map((applicant, index) =>
+                                    <ListItem 
+                                        messageApplicant={props.messageApplicant}
+                                        key={applicant._id}
+                                        applicant={applicant}
+                                        appState={props.appState}
+                                        setAppState={props.setAppState}
+                                        index={index}
+                                    />
+                                )}
+                            </Fragment>
+                        </List>
+                        
+                        : <Grid item>
+                            <Typography style={{color: "#999"}} variant="body1">No results found.</Typography>
+                        </Grid> 
+                    }
                 </CardContent>
             </Card>
         </Grid>
