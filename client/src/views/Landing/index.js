@@ -3,6 +3,7 @@ import { Button, Paper, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
 import { NavLink } from "react-router-dom";
+import auth0Client from "../../auth";
 
 
 const useStyles = makeStyles(theme => ({
@@ -76,10 +77,10 @@ export default function Landing(props) {
                             Apply for Jobs
                         </NavLink>
                     </Button>
-                    <Button variant="contained" className={`${classes.button} `} >
-                        <NavLink to="/list-view" exact={true} className={`${style.inherit}`}>
+                    <Button variant="contained" onClick={auth0Client.signIn} className={`${classes.button} `} >
+                        
                             Find Candidates
-                        </NavLink>
+                       
                     </Button>
                 </div>
             </main>
