@@ -7,7 +7,6 @@ import HideAppBar from "./components/HideAppBar";
 import Landing from "./views/Landing";
 import Apply from "./views/Apply";
 import Dashboard from "./views/Dashboard";
-import ListAndDetailContainer from "./views/ListAndDetailContainer";
 import SimpleModal from "./components/Modal";
 import LoginLoading from './components/LoginLoading';
 import SecuredRoute from './components/SecuredRoute';

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { Button, Select, FormHelperText, FormControl, MenuItem, InputLabel, Input  } from "@material-ui/core";
-import { ValidatorForm, SelectValidator, TextValidator} from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import auth0Client from "../../auth";
 import axios from "axios";
 

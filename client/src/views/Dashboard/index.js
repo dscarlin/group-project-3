@@ -51,7 +51,8 @@ const useStyles = makeStyles(theme => ({
         width: "45vw"
     },
     container: {
-        height: "100vh"
+        height: "100vh",
+        backgroundColor: "#fafafa"
     },
     coverLetter: {
         height: "35vh",
@@ -100,17 +101,17 @@ export default function Dashboard(props) {
     switch (props.appState.displayToggle) {
         
     case 1:
-        { 
-            applicants = props.appState.searchResult;
-            cardTitle = "Search Results";
-        }
+        
+        applicants = props.appState.searchResult;
+        cardTitle = "Search Results";
+        
         break;
     
     case 2:
-        {
-            applicants = props.appState.messagedResult;
-            cardTitle = "Messaged Candidates";
-        }
+        
+        applicants = props.appState.messagedResult;
+        cardTitle = "Messaged Candidates";
+        
         break;
                 
     default:
@@ -121,7 +122,7 @@ export default function Dashboard(props) {
     }
     console.log(applicants);
     return(
-        <Container maxWidth="false">
+        <Container maxWidth={false}>
             <Grid className={`${classes.root}`}>
                 <IconButton aria-label="info" className={classes.info} onClick={handleClickOpen}>
                     <InfoOutlined color="primary" fontSize="large" />            

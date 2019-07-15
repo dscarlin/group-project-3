@@ -25,7 +25,7 @@ export default function Info(props) {
                         <li>
                             <DialogContentText id="alert-dialog-slide-description">
                                 Toggle between search results, saved, and messaged candidates:
-                                <img src={ToggleImg} style={{maxWidth: "400px"}} align="center"/>
+                                <img src={ToggleImg} alt="toggle-img" style={{maxWidth: "400px"}} align="center"/>
                             </DialogContentText>
                         </li>
                         <li>

@@ -16,7 +16,7 @@ export default (props) => {
         <Grid item sm={6}>
             <Card className={`${classes.card} ${classes.container}`} align="center">
                 <CardHeader title={props.cardTitle} className={classes.cardHeader} />
-                <Grid item className={classes.messageBtn} alignItems="center">
+                <Grid item className={classes.messageBtn} align="center">
                     <Typography variant="body1">Select an applicant to view details.</Typography>
                 </Grid>
                 <CardContent  className={classes.containerContent}>

@@ -8,7 +8,6 @@ import { Grid, Paper, Typography, ButtonBase, Avatar } from "@material-ui/core";
 
 // Icons
 import Star from "@material-ui/icons/StarRounded";
-import Message from "@material-ui/icons/Message";
 
 //Popper
 import Popper from "../Popper";
@@ -87,19 +86,19 @@ export default function ListItem(props) {
         let y = Math.floor(t / 12);
         if (!t) return 0 + " Months";
         else if(r){
-            if(t == 13)
+            if(t === 13)
                 return y + "yr " + r + "mo";
-            else if(r == 1)
+            else if(r === 1)
                 return y + "yrs " + r + "mo";
             else 
                 return y + "yrs " + r + "mos";
         }
         else {
-            if(t == 1)
+            if(t === 1)
                 return t + "mo";
             else if(t < 12)
                 return t + "mos";
-            else if(t == 12)
+            else if(t === 12)
                 return y + "yr";
             else 
                 return y + "yrs";

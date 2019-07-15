@@ -31,7 +31,7 @@ export default function ControlledExpansionPanels(props) {
 
     return (
         <div className={classes.root}>
-            <ExpansionPanel expanded={expanded === "panel1"} square="true" onChange={handleChange("panel1")}>
+            <ExpansionPanel expanded={expanded === "panel1"} square onChange={handleChange("panel1")}>
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
@@ -44,12 +44,16 @@ export default function ControlledExpansionPanels(props) {
                 <ExpansionPanelDetails className={classes.panelDetails}>
                     <Grid>
                         <Grid item>
-                            <Typography className={classes.secondaryHeading} align="left"><strong>Positions:</strong>{` ${props.positions[props.index]} for ${props.months[props.index]} months`} </Typography>
+                            <Typography className={classes.secondaryHeading} align="left">
+                                <strong>Positions:</strong>
+                                {` ${props.positions[props.index]} for ${props.months[props.index]} months`} 
+                            </Typography>
                         </Grid>
                         <Grid item>
-                            <Typography align="left">
-                                <h4 className={classes.secondaryHeading}>Details:</h4>
-                                {props.details[props.index]}
+                            <Typography align="left" className={classes.secondaryHeading}>
+                                <strong>Details:</strong>
+                                <br />
+                                {` ${props.details[props.index]}`}
                             </Typography>
                         </Grid>
                     </Grid>
