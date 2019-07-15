@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import {withRouter} from "react-router-dom";
 import auth0Client from "../../auth";
 import axios from "axios";
-
+import "./style.css";
 class LoginLoading extends Component {
     async componentDidMount() {
         await auth0Client.handleAuthentication();
@@ -23,7 +23,7 @@ class LoginLoading extends Component {
     }
     render() {
         return (
-            <p>Loading profile...</p>
+            <Fragment><h1 style={{margin: "20vh auto",}}><div className="loader">Loading...</div>Loading Profile</h1> </Fragment>
         );
     }
 }

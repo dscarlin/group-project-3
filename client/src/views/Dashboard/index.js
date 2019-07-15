@@ -10,11 +10,14 @@ import Info from "../../components/Info";
 
 
 const useStyles = makeStyles(theme => ({
+    background: {
+        backgroundColor: "#9e9e9e80"
+    },
     root: {
         flexGrow: 1,
         position: "relative",
         // marginTop: theme.spacing(1),
-        padding: 10,
+        // padding: 10,
     },
     avatar: {
         padding: 6,
@@ -122,7 +125,7 @@ export default function Dashboard(props) {
     }
     console.log(applicants);
     return(
-        <Container maxWidth={false}>
+        <Container maxWidth={false} className={classes.background}>
             <Grid className={`${classes.root}`}>
                 <IconButton aria-label="info" className={classes.info} onClick={handleClickOpen}>
                     <InfoOutlined color="primary" fontSize="large" />            

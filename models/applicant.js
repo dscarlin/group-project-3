@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const ms = require("ms")
 const Schema = mongoose.Schema;
 const appSchema = new Schema({
   selectedPositions: {
@@ -14,7 +13,7 @@ const appSchema = new Schema({
     }
   ],
   name: { type: String, required: [true, "Name required"]},
-  email: { type: String, unique: true, trim: true, match: [/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/, "Email Invalid."] },
+  email: { type: String, trim: true, match: [/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/, "Email Invalid."] },
   phone: { type: String, required: [true, "Phone number required."] },
   industryExperience: { type: Number, min: [0, "Years of industry experience must be posititve."] },
   restaurantName1: { type: String },
@@ -45,12 +44,11 @@ const appSchema = new Schema({
   whMonths3: { type: Number, min: [0, "Work History 3 months of experience must be posititve."] },
   whDetails3: { type: String },
   coverLetter: { type: String },
-  // lifecycle: { type: Date, expires: '15s', default: Date }
   
 }, 
 {timestamps: true}
 );
-appSchema.index( { "createdAt": 1 }, { expireAfterSeconds: '30s' } )
+appSchema.index( { "createdAt": 1 }, { expireAfterSeconds: '90 days' } )
 
 
 const Applicant = mongoose.model("Applicant", appSchema);
