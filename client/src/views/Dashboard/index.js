@@ -95,7 +95,7 @@ export default function Dashboard(props) {
     }
 
     return(
-        <Container>
+        <Container maxWidth="false">
             <Grid className={`${classes.root}`}>
                 <IconButton aria-label="info" className={classes.info} onClick={handleClickOpen}>
                     <InfoOutlined color="primary" fontSize="large" />            
@@ -119,7 +119,7 @@ export default function Dashboard(props) {
                 />
             </Grid>
       
-            <Grid container spacing={2}>
+            <Grid container spacing={0}>
                 <Results 
                     useStyles={useStyles}
                     appState={props.appState}
