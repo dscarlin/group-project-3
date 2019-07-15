@@ -1,3 +1,7 @@
  .inherit {
-    all: inherit
+    all: inherit;
+    text-decoration: none
 } 
+.inherit:visited{
+    color: white;
+}
