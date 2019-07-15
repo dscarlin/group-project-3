@@ -31,6 +31,7 @@ const sendMessage = require("../twillio/send_sms");
 module.exports = {
     create: (req, res) => {
         db.Applicant
+            console.log(req.body)
             .create(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));

@@ -119,7 +119,7 @@ export default function ListItem(props) {
     };
     
     console.log(props.applicant);
-    const {name, selectedPositions, availability, whMonths1, whMonths2, whMonths3, _id} = props.applicant;
+    const {name, selectedPositions, availability, industryExperience, whMonths1, whMonths2, whMonths3, _id} = props.applicant;
     return (
         <li className={classes.root} onClick={() => props.setAppState({ SelectedApplicant: props.index})}>
             <Paper className={classes.paper}>
@@ -140,7 +140,7 @@ export default function ListItem(props) {
                                     <strong>Availability:</strong> {availability.join(", ")}
                                 </Typography>
                                 <Typography variant="body1">
-                                    <strong>Experience:</strong> {addExperience(whMonths1,whMonths2, whMonths3)}
+                                    <strong>Experience:</strong> {industryExperience || 0} {industryExperience > 2 ? "yrs." : "yr."}
                                 </Typography>
                             </Grid>
                         </Grid>

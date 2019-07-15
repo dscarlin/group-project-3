@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         position: "relative",
         // marginTop: theme.spacing(1),
-        padding: 10,
+        // padding: 10,
     },
     avatar: {
         padding: 6,

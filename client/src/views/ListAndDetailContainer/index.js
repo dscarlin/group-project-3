@@ -105,25 +105,6 @@ function ListAndDetailContainer(props) {
                 <SearchForm appState={props.appState} setAppState={props.setAppState}/>
             </Grid>
             <Grid container spacing={0} className={classes.root}>
-                {/* <List 
-                    key={applicant._id}
-                    applicant={applicant}
-                    handleClick={setSelectedApplicant}
-                    index={index}
-                />
-                <Details
-                    applicant={applicant}
-                    index={index}
-                    name={applicants[SelectedApplicant].name}
-                    getInitials={getInitials(applicants[SelectedApplicant].name)}
-                    applicationDate={applicants[SelectedApplicant].applicationDate}
-                    availableShifts={applicants[SelectedApplicant].availability}
-                    addExperience={addExperience(applicants[SelectedApplicant].whMonths1, applicants[SelectedApplicant].whMonths2, applicants[SelectedApplicant].whMonths3)}
-                    workHistory={workHistory(applicants[SelectedApplicant].positionsWorked1, applicants[SelectedApplicant].positionsWorked2, applicants[SelectedApplicant].positionsWorked3)}
-                    email={applicants[SelectedApplicant].email}
-                    phone={applicants[SelectedApplicant].phone}
-                    coverLetter={applicants[SelectedApplicant].coverLetter}
-                /> */}
                 <Grid item sm className={classes.control}>
                     <List component="ul">
                         {applicants.map((applicant, index) =>

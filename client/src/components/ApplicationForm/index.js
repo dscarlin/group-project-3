@@ -17,24 +17,30 @@ const styles = () => ({
         boxShadow: "5px 5px 20px 5px grey",
         padding: "2em"
     },
+    //form elements full width
     formControl: {
         width: "100%",
         marginBottom: ".4em"
     },
+    //center submit button
     button: {
         display: "block",
         margin: "2em auto"        
     },
+    //display error text
     visible: {
         display: "block",
         color: "#f44336"
     },
+    // hide error text
     invisible: {
         display: "none"
     },
+    //error text
     red: {
         color: "#f44336!important",
     },
+    //error underline
     redBorder: {
         borderColor: "#f44336",
         '&:after': {
@@ -48,6 +54,7 @@ const styles = () => ({
     }
 
 });
+// multi select styling props
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -88,6 +95,7 @@ const availabilityOptions = [
 
 class ApplicationForm extends Component {
     state = {
+        //validation state
         positionError: false,
         experienceError: false,
         months1Error: false,
@@ -95,6 +103,7 @@ class ApplicationForm extends Component {
         months3Error: false,
         anchorEl: null,
         extraValidationPass: false,
+        //form data state
         selectedPositions: [],
         availability: [],
         name: "",
@@ -118,11 +127,9 @@ class ApplicationForm extends Component {
     setApplState = value => this.setState(value);
     togglePopper = event => {
         this.setState({anchorEl: this.state.anchorEl ? null : this.refs.submitButton});
-    }
-    handleChange = event => {
-        let { name, value } = event.target;
-        if (name === "phone"){
-            let phoneNumber = value;
+    };
+    formatPhoneNumber = string => {
+        let phoneNumber = string;
             phoneNumber = phoneNumber.split('').filter(char => char.match(/[0-9]/g));
             if (phoneNumber.length > 9){
                 phoneNumber.splice(0,0,'(');
@@ -130,68 +137,74 @@ class ApplicationForm extends Component {
                 phoneNumber.splice(5,0,' ');
                 phoneNumber.splice(9,0,'-');
             }
-            value = phoneNumber.join('').slice(0,14);
-        }
+            return phoneNumber.join('').slice(0,14);
+    };
+    // change input values for selected input element
+    handleChange = event => {
+        let { name, value } = event.target;
+        if (name === "phone")
+            value = this.formatPhoneNumber(value);
         this.setState({ [name]: value });
     };
+    // initial submit runs validation checks
+    // if they pass, then the popper opens with 
+    // secondary final submit button
     handleSubmit = e => {
         if(!this.state.extraValidationPass)
             return window.scrollTo(0,0);
         e.preventDefault();
         this.togglePopper(e);
     };
+    // errors from npm validaton will trigger
+    // this function 
     handleError = errors => {
         window.scrollTo(0,0);
-        console.log(errors)
-    }
+        console.log(errors);
+    };
+    // custom validators not provided by npm
+    // validation package
     runExtraValidators = () => {
-        let pass = true
-        if (!this.state.selectedPositions.length){
-            this.setState({positionError: true});
-            pass = false
-        }
+        // selected position required
+        if (!this.state.selectedPositions.length)
+            this.setState({positionError: true, extraValidationPass: false});
         else
-            this.setState({positionError: false});
-
-        if(this.state.industryExperience && this.state.industryExperience < 0){
-            this.setState({experienceError: true});
-            pass = false
-        }
+            this.setState({positionError: false, extraValidationPass: true});
+        // must be positive
+        if(this.state.industryExperience && this.state.industryExperience < 0)
+            this.setState({experienceError: true, extraValidationPass: false});
         else
-            this.setState({experienceError: false});
-
-        if(this.state.whMonths1 && this.state.whMonths1 < 0){
-            this.setState({months1Error: true});
-            pass = false
-        }
+            this.setState({experienceError: false, extraValidationPass: true});
+        // must be positive
+        if(this.state.whMonths1 && this.state.whMonths1 < 0)
+            this.setState({months1Error: true, extraValidationPass: false});
         else    
-            this.setState({months1Error: false});
-        if(this.state.whMonths2 && this.state.whMonths2 < 0){
-            this.setState({months2Error: true});
-            pass = false
-        }
+            this.setState({months1Error: false, extraValidationPass: true});
+        // must be positive
+        if(this.state.whMonths2 && this.state.whMonths2 < 0)
+            this.setState({months2Error: true, extraValidationPass: false});
         else
-            this.setState({months2Error: false});
-        if(this.state.whMonths3 && this.state.whMonths3 < 0){
-            this.setState({months3Error: true});
-            pass = false
-        }
+            this.setState({months2Error: false, extraValidationPass: true});
+        // must be positive
+        if(this.state.whMonths3 && this.state.whMonths3 < 0)
+            this.setState({months3Error: true, extraValidationPass: false});
         else
-            this.setState({months3Error: false})
-        if(pass)
-            this.setState({extraValidationPass: true})
+            this.setState({months3Error: false, extraValidationPass: true}); 
     }
     finalSubmit = e => {
         e.preventDefault();
+        //change blank number inputs from string to number for backend validation pass
         this.setState({
             industryExperience: this.state.industryExperience || 0,
             whMonths1: this.state.whMonths1 || 0,
             whMonths2: this.state.whMonths2 || 0,
             whMonths3: this.state.whMonths3 || 0,
         });
+        //separate validation and form data vars
         const {anchorEl, positionError, experienceError, months1Error,
             months2Error, months3Error, extraValidationPass, ...payload} = this.state;
+        //post form data
         axios.post("/api/applicant",payload).then(res => console.log(res));
+        //clear form state
         this.setState({name: "", email: "", phone: "", selectedPositions: [], availability: [], 
             restaurantName1: "", positionsWorked1: [], whMonths1:"", whDetails1: "", 
             restaurantName2: "", positionsWorked2: [], whMonths2:"", whDetails2: "", 
@@ -202,7 +215,6 @@ class ApplicationForm extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
-                {/* <form className={classes.form}> */}
                 <ValidatorForm
                 className={classes.form}
                 ref="form"
@@ -237,8 +249,8 @@ class ApplicationForm extends Component {
                     onChange={this.handleChange}
                     name="phone"
                     value={this.state.phone}
-                    validators={[ 'minStringLength:13']}
-                    errorMessages={[ 'Phone Number Must Be 10 Digits']}
+                    validators={['required' ,'minStringLength:13']}
+                    errorMessages={[ 'this field is required','phone number must be 10 digits']}
                     />
                     <FormControl className={ `${classes.formControl}`} >
                         <InputLabel  className={this.state.positionError? `${classes.red}`: ''} htmlFor="select-multiple-checkbox">Position Applying For *</InputLabel>
