@@ -120,7 +120,7 @@ export default function Dashboard(props) {
     }
     console.log(applicants);
     return(
-        <Container>
+        <Container maxWidth="false">
             <Grid className={`${classes.root}`}>
                 <IconButton aria-label="info" className={classes.info} onClick={handleClickOpen}>
                     <InfoOutlined color="primary" fontSize="large" />            
