@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
         listStyleType: "none"
     },
     paper: {
-        // padding: theme.spacing(2),
         margin: "2em 0",
         maxWidth: "90%",
         textAlign: "left", 
@@ -140,7 +139,7 @@ export default function ListItem(props) {
                                     <strong>Availability:</strong> {availability.join(", ")}
                                 </Typography>
                                 <Typography variant="body1">
-                                    <strong>Experience:</strong> {industryExperience ?  `${industryExperience} ${industryExperience > 2 ? "yrs." : "yr."}` : null}
+                                    <strong>Experience:</strong> {industryExperience ?  `${industryExperience} ${industryExperience > 2 ? "yrs." : "yr."}` : `${addExperience(whMonths1,whMonths2, whMonths3)}`}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -158,56 +157,6 @@ export default function ListItem(props) {
                             </ButtonBase>
                         </Grid>
                     </Grid>
-                    {/* <Grid item>
-                        <ButtonBase> 
-                            <Star style={props.appState.userInfo.interested
-                                .indexOf(props.appState.searchResult[props.index]._id) < 0 ? 
-                                {color:"gray"} : {color: "#f5dc06"}} 
-                            onClick={favoriteApplicant}
-                            />
-                        </ButtonBase>
-                        <ButtonBase> 
-                            
-                            <Popper removeApplicant={removeApplicant}/>
-                        </ButtonBase>
-                    </Grid>
-                    <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs >
-                                <Typography gutterBottom variant="subtitle1">
-                                    {props.applicant.name}
-                                </Typography>
-                                <Typography variant="body2" gutterBottom>
-                                    {addExperience(props.applicant.whMonths1,props.applicant.whMonths2, props.applicant.whMonths3)}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary">
-                                    {props.applicant.availability}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs>
-                                <Typography gutterBottom variant="subtitle1">
-                                    {workHistory(props.applicant.positionsWorked1, props.applicant.positionsWorked2, props.applicant.positionsWorked3)}
-                                </Typography>
-                            </Grid>
-                        </Grid> */}
-                    {/* <Grid item>
-                            <ButtonBase>
-                                {props.appState.userInfo.messaged.indexOf(applicant._id) >= 0 ? 
-                                    <div>
-                                        <Message style={{color:"green"}} ></Message>
-                                        <span><strong>Messaged</strong></span>
-                                    </div>
-                                    :
-                                    <div>
-                                        <Message style={{color:"gray"}} onClick={() => props.messageApplicant(props.applicant)}></Message>
-                                        <span>SMS Invite to Schedule Interview</span>
-                                    </div>
-                                }
-                            </ButtonBase>
-                        </Grid> */}
-                    {/* </Grid> */}
                 </Grid>
             </Paper>
         </li>

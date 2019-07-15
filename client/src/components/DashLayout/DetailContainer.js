@@ -85,7 +85,6 @@ export default (props) => {
                         </Grid>
                         <Avatar className={classes.avatar}>{getInitials(applicants[SelectedApplicant].name)}</Avatar>
                         <Typography style={{display: "inline-block", color: "#555"}} variant="h3" align="center">{applicants[SelectedApplicant].name}</Typography>
-                        {/* <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p> */}
                         <p>
                             {applicants[SelectedApplicant].email ?  
                                 <span><Email fontSize="small" style={{color: "#3F51B5"}}/>{applicants[SelectedApplicant].email}</span>

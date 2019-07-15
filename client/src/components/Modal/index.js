@@ -6,7 +6,6 @@ import { Modal } from "@material-ui/core";
   
 const useStyles = makeStyles(theme => ({
     paper: {
-    //   position: 'absolute',
         margin: "10vh auto",
         verticalAlign: "center",
         width: "fit-content",
@@ -34,9 +33,9 @@ export default function SimpleModal(props) {
             >
                 <div  className={classes.paper}>
                     {passedProps? 
-                    <Component  />
-                    :  
-                    <Component passedProps={passedProps} />
+                        <Component  />
+                        :  
+                        <Component passedProps={passedProps} />
                     }
                 </div>
             </Modal>

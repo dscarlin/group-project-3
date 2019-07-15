@@ -6,7 +6,7 @@ import { AppBar, Toolbar, Typography, useScrollTrigger, Slide } from "@material-
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
 import auth0Client from "../../auth";
-import logo from "../../assets/onthefly2-S.png"
+import logo from "../../assets/onthefly2-S.png";
 
 function HideOnScroll(props) {
     const { children, window } = props;
