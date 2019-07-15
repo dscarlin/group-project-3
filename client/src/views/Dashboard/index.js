@@ -144,42 +144,23 @@ export default function Dashboard(props) {
                     align="center"
                 />
             </Grid>
-<<<<<<< HEAD
       
             <Grid container spacing={0}>
                 <Results 
+                    getSavedAndMessaged={props.getSavedAndMessaged}
                     useStyles={useStyles}
                     appState={props.appState}
                     setAppState={props.setAppState}
+                    applicants={applicants}
+                    cardTitle={cardTitle}
                 />
                 <DetailContainer 
                     useStyles={useStyles}
                     appState={props.appState}
                     messageApplicant={props.messageApplicant}
+                    applicants={applicants}
                 />
             </Grid>
-=======
-            {applicants.length ? 
-                <Grid container spacing={0}>
-                    <Results 
-                        getSavedAndMessaged={props.getSavedAndMessaged}
-                        useStyles={useStyles}
-                        appState={props.appState}
-                        setAppState={props.setAppState}
-                        applicants={applicants}
-                        cardTitle={cardTitle}
-                    />
-                    <DetailContainer 
-                        useStyles={useStyles}
-                        appState={props.appState}
-                        messageApplicant={props.messageApplicant}
-                        applicants={applicants}
-                    />
-                </Grid>
-                :
-                <h1 style={{margin:"auto", width: "fit-content"}}>no results</h1>
-            }
->>>>>>> master
            
         </Container>
     );

@@ -15,10 +15,9 @@ export default (props) => {
         
         <Grid item sm={6}>
             <Card className={`${classes.card} ${classes.container}`} align="center">
-<<<<<<< HEAD
-                <CardHeader title={cardTitle} className={classes.cardHeader} />
+                <CardHeader title={props.cardTitle} className={classes.cardHeader} />
                 <Grid item className={classes.messageBtn} alignItems="center">
-                    <Typography variant="button">Select an applicant to view details.</Typography>
+                    <Typography variant="body1">Select an applicant to view details.</Typography>
                 </Grid>
                 <CardContent  className={classes.containerContent}>
                     {applicants.length ?
@@ -27,11 +26,13 @@ export default (props) => {
                                 {applicants.map((applicant, index) =>
                                     <ListItem 
                                         messageApplicant={props.messageApplicant}
+                                        getSavedAndMessaged={props.getSavedAndMessaged}
                                         key={applicant._id}
                                         applicant={applicant}
                                         appState={props.appState}
                                         setAppState={props.setAppState}
                                         index={index}
+                                        applicants={applicants}
                                     />
                                 )}
                             </Fragment>
@@ -41,29 +42,8 @@ export default (props) => {
                             <Typography style={{color: "#999"}} variant="body1">No results found.</Typography>
                         </Grid> 
                     }
-=======
-                <CardHeader title={props.cardTitle} className={classes.cardHeader} />
-                <CardContent className={classes.resultList}>
-                    <List component="ul" >
-                        <Fragment>
-                            {applicants.map((applicant, index) =>
-                                <ListItem 
-                                    messageApplicant={props.messageApplicant}
-                                    getSavedAndMessaged={props.getSavedAndMessaged}
-                                    key={applicant._id}
-                                    applicant={applicant}
-                                    appState={props.appState}
-                                    setAppState={props.setAppState}
-                                    index={index}
-                                    applicants={applicants}
-                                />
-                            )}
-                        </Fragment>
-                    </List>
->>>>>>> master
                 </CardContent>
-            </Card> )
-             
+            </Card> 
         </Grid>
     );
 };
