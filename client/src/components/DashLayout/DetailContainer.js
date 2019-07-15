@@ -1,20 +1,13 @@
 import React from "react";
-<<<<<<< HEAD
 import moment from "moment";
 import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader, ListItem } from "@material-ui/core";
 import { Email, Phone, ExpandLess, ExpandMore } from "@material-ui/icons";
 import ExpansionPanel from "../ExpansionPanel";
-=======
-import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader } from "@material-ui/core";
-import { Email, Phone } from "@material-ui/icons";
-
->>>>>>> f77936284578721d2bc2c2efa30377fa2057ddde
 
 
 
 export default (props) => {
 
-<<<<<<< HEAD
     const workHistory = (applicant) => {
         
         let restaurants = [applicant.restaurantName1, applicant.restaurantName2, applicant.restaurantName3];
@@ -37,14 +30,6 @@ export default (props) => {
             <ul>{listItems}</ul>
         );
 
-=======
-    // const addExperience = (exp1, exp2, exp3) => {
-    //     return exp1 +exp2 + exp3;
-    // };
-    const workHistory = (jobOne, jobTwo, jobThree) => {
-        let workHistory = [jobOne, jobTwo, jobThree];
-        return workHistory;
->>>>>>> f77936284578721d2bc2c2efa30377fa2057ddde
     };
     const getInitials = (name) => {
         var splitName = name.split(" ");

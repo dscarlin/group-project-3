@@ -69,14 +69,6 @@ function ListAndDetailContainer(props) {
     
     // const [SelectedApplicant, setSelectedApplicant] = React.useState(0);
 
-<<<<<<< HEAD
-=======
-   
-    
-    // const addExperience = (exp1, exp2, exp3) => {
-    //     return exp1 +exp2 + exp3;
-    // };
->>>>>>> f77936284578721d2bc2c2efa30377fa2057ddde
     const workHistory = (jobOne, jobTwo, jobThree) => {
         let workHistory = [jobOne, jobTwo, jobThree];
         return workHistory;
