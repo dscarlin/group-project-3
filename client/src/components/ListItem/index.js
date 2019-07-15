@@ -140,7 +140,7 @@ export default function ListItem(props) {
                                     <strong>Availability:</strong> {availability.join(", ")}
                                 </Typography>
                                 <Typography variant="body1">
-                                    <strong>Experience:</strong> {industryExperience?  (industryExperience > 2 ? "yrs." : "yr.") : null}
+                                    <strong>Experience:</strong> {industryExperience ?  `${industryExperience} ${industryExperience > 2 ? "yrs." : "yr."}` : null}
                                 </Typography>
                             </Grid>
                         </Grid>
