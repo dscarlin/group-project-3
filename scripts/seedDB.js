@@ -8,6 +8,17 @@ mongoose.connect(
 
 applicantSeed = require("../sampleData/applicants.json");
 
+db.Employer
+  .deleteMany({})
+  .then(data => {
+    console.log("Employers deleted")
+    
+  })
+  .catch (err => {
+  console.error(err);
+});
+
+
 db.Applicant
   .deleteMany({})
   .then(() => db.Applicant.collection.insertMany(applicantSeed))
