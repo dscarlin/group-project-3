@@ -74,7 +74,8 @@ module.exports = {
         //send sms through twilio
         let { phoneNumber, message } = req.body
         // phoneNumber = `+1${phoneNumber.split('').filter(char => char.match(/[0-9]/g)).join('')}`;
-        // sendMessage(phoneNumber, message);
+        console.log(message)
+        sendMessage(phoneNumber, message);
         const user = { email: req.user.email }
         //update employer info that applicant has been messaged
         const messaged = { "$push" : { messaged: req.params._id }, "$addToSet" : {interested : req.params._id} };
