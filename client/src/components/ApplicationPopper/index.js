@@ -29,8 +29,7 @@ export default function applicationPopper(props) {
     const handleClick = e => props.togglePopper(e);
     const handleSubmit = e => {
         props.submit(e);
-        props.setViewState({applied: true})
-    }
+    };
     return (
         <Fragment>
             <Popper  id={id} open={open} anchorEl={props.applState.anchorEl} transition>

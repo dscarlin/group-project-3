@@ -192,24 +192,29 @@ class ApplicationForm extends Component {
     }
     finalSubmit = e => {
         e.preventDefault();
-        //change blank number inputs from string to number for backend validation pass
-        this.setState({
-            industryExperience: this.state.industryExperience || 0,
-            whMonths1: this.state.whMonths1 || 0,
-            whMonths2: this.state.whMonths2 || 0,
-            whMonths3: this.state.whMonths3 || 0,
-        });
         //separate validation and form data vars
         const {anchorEl, positionError, experienceError, months1Error,
             months2Error, months3Error, extraValidationPass, ...payload} = this.state;
+        //change blank number inputs from string to number for backend validation pass
+        payload.industryExperience = this.state.industryExperience || 0  
+        payload.whMonths1 = this.state.whMonths1 || 0  
+        payload.whMonths2 = this.state.whMonths2 || 0  
+        payload.whMonths3 = this.state.whMonths3 || 0  
+        payload.email = this.state.email || null
         //post form data
-        axios.post("/api/applicant",payload).then(res => console.log(res));
-        //clear form state
-        this.setState({name: "", email: "", phone: "", selectedPositions: [], availability: [], 
-            restaurantName1: "", positionsWorked1: [], whMonths1:"", whDetails1: "", 
-            restaurantName2: "", positionsWorked2: [], whMonths2:"", whDetails2: "", 
-            restaurantName3: "", positionsWorked3: [], whMonths3:"", whDetails3: "", 
-            coverLetter: ""});
+        console.log(payload)
+        axios.post("/api/applicant",payload).then(response => {
+            console.log(response)
+            if(response.status === 200){
+                //clear form state
+                this.setState({name: "", email: "", phone: "", selectedPositions: [], availability: [], 
+                    restaurantName1: "", positionsWorked1: [], whMonths1:"", whDetails1: "", 
+                    restaurantName2: "", positionsWorked2: [], whMonths2:"", whDetails2: "", 
+                    restaurantName3: "", positionsWorked3: [], whMonths3:"", whDetails3: "", 
+                    coverLetter: ""});
+                this.props.setViewState({applied: true})
+            }
+        });
     };
     render() {
         const { classes } = this.props;
@@ -396,7 +401,7 @@ class ApplicationForm extends Component {
                     <h3>Message To Employer:</h3>
                     <TextField className={classes.formControl} id="coverLetter" multiline label="CoverLetter" name="coverLetter" onChange={this.handleChange} value={this.state.coverLetter}/>
                     <Button onClick={this.runExtraValidators} ref="submitButton"  type="submit"   className={classes.button} >Apply</Button>
-                    <ApplicationPopper setViewState={this.props.setViewState} setApplState={this.setAppleState} applState={this.state} togglePopper={this.togglePopper} submit={this.finalSubmit}/>
+                    <ApplicationPopper  setApplState={this.setAppleState} applState={this.state} togglePopper={this.togglePopper} submit={this.finalSubmit}/>
                 {/* </form> */}
                 </ValidatorForm>
             </Fragment>

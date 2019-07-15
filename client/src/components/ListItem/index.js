@@ -134,7 +134,7 @@ export default function ListItem(props) {
                                     <strong>{name}</strong>
                                 </Typography>
                                 <Typography variant="body1">
-                                    <strong>Positions:</strong> {selectedPositions.join(", ")}
+                                    <strong>Applying For:</strong> {selectedPositions.join(", ")}
                                 </Typography>
                                 <Typography variant="body1">
                                     <strong>Availability:</strong> {availability.join(", ")}
