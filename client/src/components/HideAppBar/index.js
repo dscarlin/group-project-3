@@ -57,12 +57,9 @@ export default withRouter(function HideAppBar(props) {
     return (          
         <React.Fragment>
             {console.log(auth0Client)}
-            {/* {console.log(auth0Client.isAuthenticated())}  {console.log(auth0Client.handleAuthentication())} */}
             <HideOnScroll {...props}>
                 <AppBar>
-                    <Toolbar>
-                        
-                        {/* <Popper/> */}
+                    <Toolbar>   
                         <Typography variant="h6" className={`${classes.title} ${classes.root}`}>
                             {auth0Client.isAuthenticated() ?
                                 <NavLink to="/dashboard" exact={true} className={`${style.inheritLink}`}><img src={logo} alt="Logo" width="200px" ></img></NavLink>
@@ -70,14 +67,6 @@ export default withRouter(function HideAppBar(props) {
                                 <NavLink to="/" exact={true} className={`${style.inheritLink}`}><img src={logo} alt="Logo" width="200px" ></img></NavLink>
                             }
                         </Typography>
-                        
-                        {/* <div className={classes.centerBar}>
-                            {auth0Client.isAuthenticated() && props.location.pathname != "/signup" ? 
-                                <SearchForm />
-                                :
-                                null
-                            }
-                        </div> */}
                         <Typography variant="h6" className={classes.linkRight}>
                             {console.log(props.location.pathname)}
                             {auth0Client.isAuthenticated() ? 
@@ -89,7 +78,6 @@ export default withRouter(function HideAppBar(props) {
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
-            {/* <Toolbar /> */}
         </React.Fragment>
     );
 });

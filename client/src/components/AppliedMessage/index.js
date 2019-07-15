@@ -34,5 +34,5 @@ export default withRouter((props) => {
                 <Button  variant="contained" onClick={returnToHome}>Return to Homepage</Button>
             </div>
         </Fragment>
-    )
+    );
 });

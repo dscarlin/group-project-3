@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Paper, Grid, Typography } from "@material-ui/core";
+import { Button, Paper, Grid, Typography, Link } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
 import { NavLink } from "react-router-dom";
@@ -43,6 +43,10 @@ const useStyles = makeStyles(theme => ({
         paddingTop: 0,
         justifyContent: "center",
         textAlign: "center"
+    },
+    navLink: {
+        color: theme.palette.common.white,
+        textDecoration: "none"
     }
 }));
 
@@ -72,12 +76,12 @@ export default function Landing(props) {
                         Our goal is to make the hiring process in the restaurant industry easier for all involved.  Applicants can apply to all of our member restaurants at once by submitting our easy online questionaire.  Restaurant managers are then able to search our talent pool to find the perfect candidates to fufill their needs.   
                     </Typography>
                     <br />
-                    <Button variant="contained" className={`${classes.button} `} >
-                        <NavLink to="/apply" exact={true} className={`${style.inherit}`}>
+                    <Button variant="contained" className={classes.button} >
+                        <NavLink to="/apply" exact={true} className={classes.navLink}>
                             Apply for Jobs
                         </NavLink>
                     </Button>
-                    <Button variant="contained" onClick={auth0Client.signIn} className={`${classes.button} `} >
+                    <Button variant="contained" onClick={auth0Client.signIn} className={classes.button} >
                         
                             Find Candidates
                        

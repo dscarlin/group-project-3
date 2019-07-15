@@ -76,7 +76,6 @@ class App extends Component {
                             <EmployerSignupForm setAppState={this.appState}  {...props} />} />
                         <SecuredRoute path="/dashboard" component={(props) =>   
                             <Dashboard {...props} setAppState={this.appState} getSavedAndMessaged={this.getSavedAndMessaged} messageApplicant={this.messageApplicant} appState={this.state} />} />
-                        {/* need to make a no-match component  to go in this route */}
                         <Route component={ Landing }/> 
                     </Switch>
                 </Router>
