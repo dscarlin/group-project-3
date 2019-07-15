@@ -44,44 +44,66 @@ export default function ListItem(props) {
     const favoriteApplicant = async (e) => {
         e.stopPropagation();
         e.preventDefault();
-        let applicantId = props.appState.searchResult[props.index]._id;
+        let applicantId = props.applicant._id;
         let userInfo = props.appState.userInfo;
         let index = userInfo.interested.indexOf(applicantId);
-        if(index < 0)
+        if(index < 0){
             userInfo.interested.push(applicantId);
+        }
         else
             userInfo.interested.splice(index, 1);
         const result = await axios.put("/api/employer",userInfo,{
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
-        if(result.data.ok)
-            return props.setAppState({ userInfo });
+        if(result.data.ok){
+            props.setAppState({ userInfo });
+            props.getSavedAndMessaged();
+        }
+
     };
     const removeApplicant = async (e) => {
         e.stopPropagation();
         e.preventDefault();
-        let applicantId = props.appState.searchResult[props.index]._id;
+        let applicantId = props.applicants[props.index]._id;
         let userInfo = props.appState.userInfo;
         let searchResult = props.appState.searchResult;
-        let index = userInfo.notInterested.indexOf(applicantId);
-        if(index < 0){
-            userInfo.notInterested.push(applicantId);
-            searchResult.splice(props.index,1);
-        }
-        // else{
-        //     userInfo.notInterested.splice(index, 1);
-        //     // searchResult.unshift(props) //add back to search result
-        // }
+        let index = searchResult.map(applicant => applicant._id).indexOf(applicantId);
+        userInfo.notInterested.push(applicantId);
+        searchResult.splice(index,1);
         const result = await axios.put("/api/employer",userInfo,{
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
         console.log(userInfo);
-        if(result.data.ok)
-            return props.setAppState({ userInfo });
+        if(result.data.ok){
+            props.setAppState({ userInfo, searchResult });
+            props.getSavedAndMessaged();
+        }
+
         
     };
     const addExperience = (a, b, c) => {
-        return a + b + c;
+        let t = a + b + c;
+        let r = t % 12;
+        let y = Math.floor(t / 12);
+        if (!t) return 0 + " Months";
+        else if(r){
+            if(t == 13)
+                return y + "yr " + r + "mo";
+            else if(r == 1)
+                return y + "yrs " + r + "mo";
+            else 
+                return y + "yrs " + r + "mos";
+        }
+        else {
+            if(t == 1)
+                return t + "mo";
+            else if(t < 12)
+                return t + "mos";
+            else if(t == 12)
+                return y + "yr";
+            else 
+                return y + "yrs";
+        }
     };
     const getInitials = (name) => {
         var splitName = name.split(" ");
@@ -96,28 +118,30 @@ export default function ListItem(props) {
         var initials = firstInitial + lastInitial;
         return initials;
     };
-    const applicant = props.appState.searchResult[props.index];
+    
+    console.log(props.applicant);
+    const {name, selectedPositions, availability, whMonths1, whMonths2, whMonths3, _id} = props.applicant;
     return (
         <li className={classes.root} onClick={() => props.setAppState({ SelectedApplicant: props.index})}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
-                        <Avatar className={classes.avatar}>{getInitials(applicant.name)}</Avatar>
+                        <Avatar className={classes.avatar}>{getInitials(name)}</Avatar>
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                                 <Typography gutterBottom variant="h6" color="primary">
-                                    <strong>{props.applicant.name}</strong>
+                                    <strong>{name}</strong>
                                 </Typography>
                                 <Typography variant="body1">
-                                    <strong>Positions:</strong> {props.applicant.selectedPositions.join(", ")}
+                                    <strong>Positions:</strong> {selectedPositions.join(", ")}
                                 </Typography>
                                 <Typography variant="body1">
-                                    <strong>Availability:</strong> {props.applicant.availability.join(", ")}
+                                    <strong>Availability:</strong> {availability.join(", ")}
                                 </Typography>
                                 <Typography variant="body1">
-                                    <strong>Experience:</strong> {addExperience(props.applicant.whMonths1,props.applicant.whMonths2, props.applicant.whMonths3)} Months
+                                    <strong>Experience:</strong> {addExperience(whMonths1,whMonths2, whMonths3)}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -125,7 +149,7 @@ export default function ListItem(props) {
                             <ButtonBase> 
                                 <Star 
                                     style={props.appState.userInfo.interested
-                                        .indexOf(props.appState.searchResult[props.index]._id) < 0 ? 
+                                        .indexOf(_id) < 0 ? 
                                         {color:"gray"} : {color: "#f5dc06"}} 
                                     onClick={favoriteApplicant}
                                 />

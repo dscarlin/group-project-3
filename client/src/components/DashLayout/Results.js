@@ -8,56 +8,34 @@ export default (props) => {
     console.log(props.appState.displayToggle);
     
     const classes = props.useStyles();
-    let applicants;
-    let cardTitle;
-
-    switch (props.appState.displayToggle) {
-        
-    case 1:
-        { 
-            applicants = props.appState.searchResult;
-            cardTitle = "Search Results";
-        }
-        break;
-    
-    case 2:
-        {
-            applicants = props.appState.messagedResult;
-            cardTitle = "Messaged Candidates";
-        }
-        break;
-                
-    default:
-    {
-        applicants = props.appState.savedResult;
-        cardTitle = "Saved Candidates";
-    }
-    }
-    console.log(applicants);
-    applicants = props.appState.searchResult;
+   
+    let applicants = props.applicants;
 
     return (
         
         <Grid item sm={6}>
             <Card className={`${classes.card} ${classes.container}`} align="center">
-                <CardHeader title={cardTitle} className={classes.cardHeader} />
+                <CardHeader title={props.cardTitle} className={classes.cardHeader} />
                 <CardContent className={classes.resultList}>
                     <List component="ul" >
                         <Fragment>
                             {applicants.map((applicant, index) =>
                                 <ListItem 
                                     messageApplicant={props.messageApplicant}
+                                    getSavedAndMessaged={props.getSavedAndMessaged}
                                     key={applicant._id}
                                     applicant={applicant}
                                     appState={props.appState}
                                     setAppState={props.setAppState}
                                     index={index}
+                                    applicants={applicants}
                                 />
                             )}
                         </Fragment>
                     </List>
                 </CardContent>
-            </Card>
+            </Card> )
+             
         </Grid>
     );
 };

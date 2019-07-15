@@ -12,7 +12,7 @@ router
 router
     .route("/:_id")
     .delete(checkJwt, employerController.remove)
-    // .get(checkJwt, employerController. findAll);
+    .get(checkJwt, employerController. findAll);
 
 
 module.exports = router;

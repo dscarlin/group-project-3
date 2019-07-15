@@ -11,7 +11,7 @@ export default (props) => {
 
     function handleChange(event, newValue) {
         
-        props.setAppState({displayToggle: newValue});
+        props.setAppState({displayToggle: newValue, SelectedApplicant: 0});
         console.log("value: " + newValue);
     }
 
