@@ -200,7 +200,6 @@ class ApplicationForm extends Component {
         payload.whMonths1 = this.state.whMonths1 || 0  
         payload.whMonths2 = this.state.whMonths2 || 0  
         payload.whMonths3 = this.state.whMonths3 || 0  
-        payload.email = this.state.email || null
         //post form data
         console.log(payload)
         axios.post("/api/applicant",payload).then(response => {
