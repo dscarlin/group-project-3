@@ -1,17 +1,20 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Container} from "@material-ui/core";
+import { Grid, Container, IconButton, Slide} from "@material-ui/core";
+import { InfoOutlined } from "@material-ui/icons";
 import SearchForm from "../../components/SearchForm";
 import Results from "../../components/DashLayout/Results";
 import DetailContainer from "../../components/DashLayout/DetailContainer";
+import SearchSavedToggle from "../../components/SearchSavedToggle";
+import Info from "../../components/Info";
 
 
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         position: "relative",
-        marginTop: theme.spacing(8),
-        padding: 10
+        // marginTop: theme.spacing(1),
+        padding: 10,
     },
     avatar: {
         padding: 6,
@@ -33,9 +36,6 @@ const useStyles = makeStyles(theme => ({
         // border: "solid black 1px",
         paddingTop: "2em"
     },
-    detailView: {
-        overflow: "scroll"
-    },
     fixed: {
         position: "fixed",
         right: "0",
@@ -51,40 +51,115 @@ const useStyles = makeStyles(theme => ({
         width: "45vw"
     },
     container: {
-        height: "100vh"
+        height: "100vh",
+        backgroundColor: "#fafafa"
     },
     coverLetter: {
         height: "35vh",
         overflow: "auto"
     },
-    resultList: {
+    containerContent: {
         overflow: "auto",
         height: "85vh"
+    },
+    searchToggle: {
+        width: "fit-content",
+        backgroundColor: "white",
+        justifyContent: "center",
+        alignContent: "center",
+        margin: "2em auto"
+    },
+    info: {
+        position: "absolue",
+        marginTop: theme.spacing(8)
+    },
+    messageBtn: {
+        margin: "auto",
+        boxShadow: "0px 1px 10px lightgray"
     }
 
 }));
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default function Dashboard(props) {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
+    function handleClickOpen() {
+        setOpen(true);
+    }
+
+    function handleClose() {
+        setOpen(false);
+    }
+    let applicants;
+    let cardTitle;
+
+    switch (props.appState.displayToggle) {
+        
+    case 1:
+        
+        applicants = props.appState.searchResult;
+        cardTitle = "Search Results";
+        
+        break;
+    
+    case 2:
+        
+        applicants = props.appState.messagedResult;
+        cardTitle = "Messaged Candidates";
+        
+        break;
+                
+    default:
+    {
+        applicants = props.appState.savedResult;
+        cardTitle = "Saved Candidates";
+    }
+    }
+    console.log(applicants);
     return(
-        <Container maxWidth="false">
-            <Grid  className={`${classes.root}`}>
+        <Container maxWidth={false}>
+            <Grid className={`${classes.root}`}>
+                <IconButton aria-label="info" className={classes.info} onClick={handleClickOpen}>
+                    <InfoOutlined color="primary" fontSize="large" />            
+                </IconButton>
+                <Info 
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                />
                 <SearchForm redirect={true} 
                     setAppState={props.setAppState}
                     appState={props.appState}
                 />
-            </Grid>
-            <br />
-            <Grid container justify="space-evenly" spacing={0}>
-                <Results 
+                <SearchSavedToggle
+                    className={classes.searchToggle}
                     useStyles={useStyles}
                     appState={props.appState}
                     setAppState={props.setAppState}
-                    messageApplicant={props.messageApplicant}
+                    align="center"
+                />
+            </Grid>
+      
+            <Grid container spacing={0}>
+                <Results 
+                    getSavedAndMessaged={props.getSavedAndMessaged}
+                    useStyles={useStyles}
+                    appState={props.appState}
+                    setAppState={props.setAppState}
+                    applicants={applicants}
+                    cardTitle={cardTitle}
                 />
                 <DetailContainer 
                     useStyles={useStyles}
                     appState={props.appState}
+                    messageApplicant={props.messageApplicant}
+                    applicants={applicants}
                 />
             </Grid>
            

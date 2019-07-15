@@ -3,6 +3,7 @@ import { Button, Paper, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import style from "./style.module.css";
 import { NavLink } from "react-router-dom";
+import auth0Client from "../../auth";
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        minHeight: 400
+        minHeight: "75vh"
     },
     overlay: {
         position: "absolute",
@@ -33,7 +34,8 @@ const useStyles = makeStyles(theme => ({
     welcomeMessage: {
         position: "relative", 
         padding: 64,
-        marginTop: 50
+        marginTop: "20vh",
+        textShadow: "1px 1px black"
     },
     overview: {
         position: "relative",
@@ -56,7 +58,7 @@ export default function Landing(props) {
                         <Grid item md={12}>
                             <div className={classes.welcomeMessage}>
                                 <Typography variant="h1" color="inherit" align="center" >
-                                    On The Fly Staffing
+                                    <strong>On The Fly Staffing</strong>
                                 </Typography>
                                 <Typography variant="h5" color="inherit" align="center" >
                                     Helping the hospitality industry apply and hire with ease.
@@ -75,10 +77,10 @@ export default function Landing(props) {
                             Apply for Jobs
                         </NavLink>
                     </Button>
-                    <Button variant="contained" className={`${classes.button} `} >
-                        <NavLink to="/list-view" exact={true} className={`${style.inherit}`}>
+                    <Button variant="contained" onClick={auth0Client.signIn} className={`${classes.button} `} >
+                        
                             Find Candidates
-                        </NavLink>
+                       
                     </Button>
                 </div>
             </main>

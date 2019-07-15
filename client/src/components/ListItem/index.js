@@ -4,14 +4,10 @@ import auth0Client from "../../auth";
 
 //csss
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import { Grid, Paper, Typography, ButtonBase, Avatar } from "@material-ui/core";
 
 // Icons
 import Star from "@material-ui/icons/StarRounded";
-import Message from "@material-ui/icons/Message";
 
 //Popper
 import Popper from "../Popper";
@@ -26,6 +22,18 @@ const useStyles = makeStyles(theme => ({
         // padding: theme.spacing(2),
         margin: "2em 0",
         maxWidth: "90%",
+        textAlign: "left", 
+    },
+    avatar: {
+        padding: 6,
+        margin: "1.5em", 
+        display: "inline-block",
+        color: "white",
+        backgroundColor: theme.palette.primary.main,
+        textAlign: "center"
+    },
+    color: {
+        color: "primary"
     }
 }));
 
@@ -35,55 +43,122 @@ export default function ListItem(props) {
     const favoriteApplicant = async (e) => {
         e.stopPropagation();
         e.preventDefault();
-        let applicantId = props.appState.searchResult[props.index]._id;
+        let applicantId = props.applicant._id;
         let userInfo = props.appState.userInfo;
         let index = userInfo.interested.indexOf(applicantId);
-        if(index < 0)
+        if(index < 0){
             userInfo.interested.push(applicantId);
+        }
         else
             userInfo.interested.splice(index, 1);
         const result = await axios.put("/api/employer",userInfo,{
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
-        if(result.data.ok)
-            return props.setAppState({ userInfo });
+        if(result.data.ok){
+            props.setAppState({ userInfo });
+            props.getSavedAndMessaged();
+        }
+
     };
     const removeApplicant = async (e) => {
         e.stopPropagation();
         e.preventDefault();
-        let applicantId = props.appState.searchResult[props.index]._id;
+        let applicantId = props.applicants[props.index]._id;
         let userInfo = props.appState.userInfo;
         let searchResult = props.appState.searchResult;
-        let index = userInfo.notInterested.indexOf(applicantId);
-        if(index < 0){
-            userInfo.notInterested.push(applicantId);
-            searchResult.splice(props.index,1);
-        }
-        // else{
-        //     userInfo.notInterested.splice(index, 1);
-        //     // searchResult.unshift(props) //add back to search result
-        // }
+        let index = searchResult.map(applicant => applicant._id).indexOf(applicantId);
+        userInfo.notInterested.push(applicantId);
+        searchResult.splice(index,1);
         const result = await axios.put("/api/employer",userInfo,{
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
         console.log(userInfo);
-        if(result.data.ok)
-            return props.setAppState({ userInfo });
+        if(result.data.ok){
+            props.setAppState({ userInfo, searchResult });
+            props.getSavedAndMessaged();
+        }
+
         
     };
     const addExperience = (a, b, c) => {
-        return a + b + c;
+        let t = a + b + c;
+        let r = t % 12;
+        let y = Math.floor(t / 12);
+        if (!t) return 0 + " Months";
+        else if(r){
+            if(t === 13)
+                return y + "yr " + r + "mo";
+            else if(r === 1)
+                return y + "yrs " + r + "mo";
+            else 
+                return y + "yrs " + r + "mos";
+        }
+        else {
+            if(t === 1)
+                return t + "mo";
+            else if(t < 12)
+                return t + "mos";
+            else if(t === 12)
+                return y + "yr";
+            else 
+                return y + "yrs";
+        }
     };
-    const workHistory = (jobOne, jobTwo, jobThree) => {
-        let workHistory = [jobOne, jobTwo, jobThree];
-        return workHistory;
+    const getInitials = (name) => {
+        var splitName = name.split(" ");
+        var firstName = splitName[0];
+        var lastName = "";
+        if(splitName.length > 1)
+            lastName = splitName[1];
+        var firstInitial = firstName.split("")[0];
+        var lastInitial = "";
+        if(lastName)
+            lastInitial = lastName.split("")[0];
+        var initials = firstInitial + lastInitial;
+        return initials;
     };
-    const applicant = props.appState.searchResult[props.index]
+    
+    console.log(props.applicant);
+    const {name, selectedPositions, availability, whMonths1, whMonths2, whMonths3, _id} = props.applicant;
     return (
         <li className={classes.root} onClick={() => props.setAppState({ SelectedApplicant: props.index})}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
+                        <Avatar className={classes.avatar}>{getInitials(name)}</Avatar>
+                    </Grid>
+                    <Grid item xs={12} sm container>
+                        <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs>
+                                <Typography gutterBottom variant="h6" color="primary">
+                                    <strong>{name}</strong>
+                                </Typography>
+                                <Typography variant="body1">
+                                    <strong>Positions:</strong> {selectedPositions.join(", ")}
+                                </Typography>
+                                <Typography variant="body1">
+                                    <strong>Availability:</strong> {availability.join(", ")}
+                                </Typography>
+                                <Typography variant="body1">
+                                    <strong>Experience:</strong> {addExperience(whMonths1,whMonths2, whMonths3)}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item>
+                            <ButtonBase> 
+                                <Star 
+                                    style={props.appState.userInfo.interested
+                                        .indexOf(_id) < 0 ? 
+                                        {color:"gray"} : {color: "#f5dc06"}} 
+                                    onClick={favoriteApplicant}
+                                />
+                            </ButtonBase>
+                            <ButtonBase> 
+                                <Popper removeApplicant={removeApplicant}/>
+                            </ButtonBase>
+                        </Grid>
+                    </Grid>
+                    {/* <Grid item>
                         <ButtonBase> 
                             <Star style={props.appState.userInfo.interested
                                 .indexOf(props.appState.searchResult[props.index]._id) < 0 ? 
@@ -116,8 +191,8 @@ export default function ListItem(props) {
                                     {workHistory(props.applicant.positionsWorked1, props.applicant.positionsWorked2, props.applicant.positionsWorked3)}
                                 </Typography>
                             </Grid>
-                        </Grid>
-                        <Grid item>
+                        </Grid> */}
+                    {/* <Grid item>
                             <ButtonBase>
                                 {props.appState.userInfo.messaged.indexOf(applicant._id) >= 0 ? 
                                     <div>
@@ -131,8 +206,8 @@ export default function ListItem(props) {
                                     </div>
                                 }
                             </ButtonBase>
-                        </Grid>
-                    </Grid>
+                        </Grid> */}
+                    {/* </Grid> */}
                 </Grid>
             </Paper>
         </li>

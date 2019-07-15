@@ -1,5 +1,5 @@
 import auth0 from "auth0-js";
-
+console.log(process.env.REACT_APP_Var)
 const redirectUri = process.env.NODE_ENV === "development" ? 
     "http://localhost:3000/login" : "https://on-the-fly-staff.herokuapp.com/login"
 
