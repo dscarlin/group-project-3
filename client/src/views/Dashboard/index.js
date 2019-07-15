@@ -36,9 +36,6 @@ const useStyles = makeStyles(theme => ({
         // border: "solid black 1px",
         paddingTop: "2em"
     },
-    detailView: {
-        overflow: "scroll"
-    },
     fixed: {
         position: "fixed",
         right: "0",
@@ -54,13 +51,14 @@ const useStyles = makeStyles(theme => ({
         width: "45vw"
     },
     container: {
-        height: "100vh"
+        height: "100vh",
+        backgroundColor: "#fafafa"
     },
     coverLetter: {
         height: "35vh",
         overflow: "auto"
     },
-    resultList: {
+    containerContent: {
         overflow: "auto",
         height: "85vh"
     },
@@ -74,6 +72,10 @@ const useStyles = makeStyles(theme => ({
     info: {
         position: "absolue",
         marginTop: theme.spacing(8)
+    },
+    messageBtn: {
+        margin: "auto",
+        boxShadow: "0px 1px 10px lightgray"
     }
 
 }));
@@ -99,17 +101,17 @@ export default function Dashboard(props) {
     switch (props.appState.displayToggle) {
         
     case 1:
-        { 
-            applicants = props.appState.searchResult;
-            cardTitle = "Search Results";
-        }
+        
+        applicants = props.appState.searchResult;
+        cardTitle = "Search Results";
+        
         break;
     
     case 2:
-        {
-            applicants = props.appState.messagedResult;
-            cardTitle = "Messaged Candidates";
-        }
+        
+        applicants = props.appState.messagedResult;
+        cardTitle = "Messaged Candidates";
+        
         break;
                 
     default:
@@ -120,7 +122,7 @@ export default function Dashboard(props) {
     }
     console.log(applicants);
     return(
-        <Container maxWidth="false">
+        <Container maxWidth={false}>
             <Grid className={`${classes.root}`}>
                 <IconButton aria-label="info" className={classes.info} onClick={handleClickOpen}>
                     <InfoOutlined color="primary" fontSize="large" />            
@@ -143,26 +145,23 @@ export default function Dashboard(props) {
                     align="center"
                 />
             </Grid>
-            {applicants.length ? 
-                <Grid container spacing={0}>
-                    <Results 
-                        getSavedAndMessaged={props.getSavedAndMessaged}
-                        useStyles={useStyles}
-                        appState={props.appState}
-                        setAppState={props.setAppState}
-                        applicants={applicants}
-                        cardTitle={cardTitle}
-                    />
-                    <DetailContainer 
-                        useStyles={useStyles}
-                        appState={props.appState}
-                        messageApplicant={props.messageApplicant}
-                        applicants={applicants}
-                    />
-                </Grid>
-                :
-                <h1 style={{margin:"auto", width: "fit-content"}}>no results</h1>
-            }
+      
+            <Grid container spacing={0}>
+                <Results 
+                    getSavedAndMessaged={props.getSavedAndMessaged}
+                    useStyles={useStyles}
+                    appState={props.appState}
+                    setAppState={props.setAppState}
+                    applicants={applicants}
+                    cardTitle={cardTitle}
+                />
+                <DetailContainer 
+                    useStyles={useStyles}
+                    appState={props.appState}
+                    messageApplicant={props.messageApplicant}
+                    applicants={applicants}
+                />
+            </Grid>
            
         </Container>
     );
