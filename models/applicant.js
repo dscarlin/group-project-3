@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const ms = require("ms");
+
 const appSchema = new Schema({
   selectedPositions: {
       type: [String],
@@ -48,7 +50,7 @@ const appSchema = new Schema({
 }, 
 {timestamps: true}
 );
-appSchema.index( { "createdAt": 1 }, { expireAfterSeconds: '90 days' } )
+appSchema.index( { "createdAt": 1 }, { expireAfterSeconds: ms('90 days')/1000 } )
 
 
 const Applicant = mongoose.model("Applicant", appSchema);
