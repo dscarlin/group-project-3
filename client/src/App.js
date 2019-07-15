@@ -21,8 +21,8 @@ class App extends Component {
             modalOpen: false,
             userInfo: null,
             searchResult: [],
-            savedResult: ["saved"],
-            messagedResult: ["messaged"],
+            savedResult: [],
+            messagedResult: [],
             SelectedApplicant: 0,
             popperAnchorEl: null,
             displayToggle: 0
@@ -37,7 +37,11 @@ class App extends Component {
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
         console.log(result)
-        this.setState(result.data)
+        for (let key in result.data) {
+            result.data[key] = result.data[key].filter(applicant =>
+                this.state.userInfo.notInterested.indexOf(applicant._id) < 0);
+        }
+        this.setState(result.data);
     };
     appState = (arg) => {
         this.setState(arg)
@@ -55,6 +59,7 @@ class App extends Component {
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
         this.setState({userInfo: employer})
+        this.getSavedAndMessaged()
         console.log(result);
     };  
     render() {
@@ -71,11 +76,7 @@ class App extends Component {
                         <SecuredRoute path="/signup" component={ props =>  
                             <EmployerSignupForm setAppState={this.appState}  {...props} />} />
                         <SecuredRoute path="/dashboard" component={(props) =>   
-                            <Dashboard {...props} setAppState={this.appState} messageApplicant={this.messageApplicant} appState={this.state} />} />
-                        <SecuredRoute path="/list-view" component={(props) =>  
-                            <ListAndDetailContainer {...props} setAppState={this.appState} messageApplicant={this.messageApplicant} appState={this.state} />} />
-                        <SecuredRoute path="/list-view/saved" component={(props) =>  
-                            <ListAndDetailContainer {...props} setAppState={this.appState} appState={this.state} />} /> 
+                            <Dashboard {...props} setAppState={this.appState} getSavedAndMessaged={this.getSavedAndMessaged} messageApplicant={this.messageApplicant} appState={this.state} />} />
                         {/* need to make a no-match component  to go in this route */}
                         <Route component={ Landing }/> 
                     </Switch>

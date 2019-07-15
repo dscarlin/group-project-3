@@ -93,7 +93,32 @@ export default function Dashboard(props) {
     function handleClose() {
         setOpen(false);
     }
+    let applicants;
+    let cardTitle;
 
+    switch (props.appState.displayToggle) {
+        
+    case 1:
+        { 
+            applicants = props.appState.searchResult;
+            cardTitle = "Search Results";
+        }
+        break;
+    
+    case 2:
+        {
+            applicants = props.appState.messagedResult;
+            cardTitle = "Messaged Candidates";
+        }
+        break;
+                
+    default:
+    {
+        applicants = props.appState.savedResult;
+        cardTitle = "Saved Candidates";
+    }
+    }
+    console.log(applicants);
     return(
         <Container>
             <Grid className={`${classes.root}`}>
@@ -118,19 +143,26 @@ export default function Dashboard(props) {
                     align="center"
                 />
             </Grid>
-      
-            <Grid container spacing={2}>
-                <Results 
-                    useStyles={useStyles}
-                    appState={props.appState}
-                    setAppState={props.setAppState}
-                />
-                <DetailContainer 
-                    useStyles={useStyles}
-                    appState={props.appState}
-                    messageApplicant={props.messageApplicant}
-                />
-            </Grid>
+            {applicants.length ? 
+                <Grid container spacing={0}>
+                    <Results 
+                        getSavedAndMessaged={props.getSavedAndMessaged}
+                        useStyles={useStyles}
+                        appState={props.appState}
+                        setAppState={props.setAppState}
+                        applicants={applicants}
+                        cardTitle={cardTitle}
+                    />
+                    <DetailContainer 
+                        useStyles={useStyles}
+                        appState={props.appState}
+                        messageApplicant={props.messageApplicant}
+                        applicants={applicants}
+                    />
+                </Grid>
+                :
+                <h1 style={{margin:"auto", width: "fit-content"}}>no results</h1>
+            }
            
         </Container>
     );

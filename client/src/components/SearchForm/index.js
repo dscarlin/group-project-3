@@ -102,7 +102,7 @@ export default withRouter(function SearchForm(props) {
                 props.appState.userInfo.notInterested.indexOf(applicant._id) < 0);
             console.log("search: ",searchResult);
 
-            await props.setAppState({ searchResult });
+            await props.setAppState({ searchResult, displayToggle: 1 });
             if(props.redirect)
                 props.history.push("/dashboard");
         }

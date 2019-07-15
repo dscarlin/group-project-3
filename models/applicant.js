@@ -50,7 +50,7 @@ const appSchema = new Schema({
 }, 
 {timestamps: true}
 );
-appSchema.index( { "createdAt": 1 }, { expireAfterSeconds: ms('30s') } )
+appSchema.index( { "createdAt": 1 }, { expireAfterSeconds: '30s' } )
 
 
 const Applicant = mongoose.model("Applicant", appSchema);
