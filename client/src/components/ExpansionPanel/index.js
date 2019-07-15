@@ -23,15 +23,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function ControlledExpansionPanels(props) {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
-
-    const handleChange = panel => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
+  
 
     return (
         <div className={classes.root}>
-            <ExpansionPanel expanded={expanded === "panel1"} square onChange={handleChange("panel1")}>
+            <ExpansionPanel expanded={props.expanded === props.index} square onChange={props.handleChange(props.index)} >
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
@@ -46,7 +42,9 @@ export default function ControlledExpansionPanels(props) {
                         <Grid item>
                             <Typography className={classes.secondaryHeading} align="left">
                                 <strong>Positions:</strong>
-                                {` ${props.positions[props.index]} for ${props.months[props.index]} months`} 
+                                {props.positions[props.index]? 
+                                    ` ${props.positions[props.index]} for ${props.months[props.index]} months`
+                                    : null}
                             </Typography>
                         </Grid>
                         <Grid item>

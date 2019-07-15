@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Input, InputLabel, MenuItem, FormControl, 
+import { Input, InputLabel, Paper, MenuItem, FormControl, 
     FormControlLabel, ListItemText, Select, 
     Checkbox, Button } from "@material-ui/core";
 import auth0Client from "../../auth";
@@ -27,6 +27,11 @@ const useStyles = makeStyles(() => ({
     },
     button: {
         verticalAlign: "bottom",
+    },
+    paper: {
+        margin: "0 auto 2em",
+        padding: "2em",
+        width: "fit-content"
     }
 }));
   
@@ -109,6 +114,7 @@ export default withRouter(function SearchForm(props) {
         submitForm();        
     };
     return (
+        <Paper className={classes.paper}>
         <form className={classes.root} >
             <FormControl className={classes.formControl}>
                 <InputLabel className={`${classes.white}`} htmlFor="select-multiple-checkbox">Position to fill</InputLabel>
@@ -159,6 +165,6 @@ export default withRouter(function SearchForm(props) {
             />            
             <Button onClick={handleSubmit} className={`${classes.white} ${classes.button}`} color="primary" >Search</Button>             
         </form>
-
+        </Paper>
     );
 });

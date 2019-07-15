@@ -33,7 +33,8 @@ module.exports = {
         db.Applicant
             .create(req.body)
             .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+            .catch(err => {console.log(err); res.status(422).json(err)});
+            
     },
     findAll: (req, res) => {
         //remove position query if none selected to match all positions
@@ -73,7 +74,8 @@ module.exports = {
         //send sms through twilio
         let { phoneNumber, message } = req.body
         // phoneNumber = `+1${phoneNumber.split('').filter(char => char.match(/[0-9]/g)).join('')}`;
-        // sendMessage(phoneNumber, message);
+        console.log(message)
+        sendMessage(phoneNumber, message);
         const user = { email: req.user.email }
         //update employer info that applicant has been messaged
         const messaged = { "$push" : { messaged: req.params._id }, "$addToSet" : {interested : req.params._id} };

@@ -7,6 +7,11 @@ import Message from "@material-ui/icons/Message";
 
 
 export default (props) => {
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleChange = panel => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
 
     const workHistory = (applicant) => {
         let restaurants = [applicant.restaurantName1, applicant.restaurantName2, applicant.restaurantName3];
@@ -15,6 +20,8 @@ export default (props) => {
         let details = [applicant.whDetails1, applicant.whDetails2, applicant.whDetails3];
         const listItems = restaurants.map((restaurant, index) => 
             <ExpansionPanel  
+                expanded={expanded}
+                handleChange={handleChange}
                 key={`${restaurant}-Item`} 
                 index={index} 
                 restaurant={restaurant} 
@@ -79,7 +86,9 @@ export default (props) => {
                         <Typography style={{display: "inline-block", color: "#555"}} variant="h3" align="center">{applicants[SelectedApplicant].name}</Typography>
                         {/* <p><strong style={{color: "#3F51B5"}}>Years of Hospitality Experience: </strong>{applicants[SelectedApplicant].industryExperience} </p> */}
                         <p>
-                            <span><Email fontSize="small" style={{color: "#3F51B5"}}/>{applicants[SelectedApplicant].email}</span>
+                            {applicants[SelectedApplicant].email ?  
+                                <span><Email fontSize="small" style={{color: "#3F51B5"}}/>{applicants[SelectedApplicant].email}</span>
+                                : null}
                             <span><Phone fontSize="small" style={{color: "#3F51B5"}}/>{applicants[SelectedApplicant].phone}</span>
                         </p>
                         <p style={{color: "#555"}}><strong style={{color: "#3F51B5"}}>Available Shifts: </strong>{applicants[SelectedApplicant].availability.join(", ")}</p>
@@ -87,7 +96,7 @@ export default (props) => {
                       
                         <Divider className={classes.dividerFullWidth}/>
                         <Card className={classes.card} align="center">
-                            <CardHeader title="Work History" className={classes.cardHeader} />
+                            <CardHeader title="Recent Work History" className={classes.cardHeader} />
                             <CardContent className={classes.cardContent} > 
                                 {workHistory(applicants[SelectedApplicant])}
                             </CardContent>

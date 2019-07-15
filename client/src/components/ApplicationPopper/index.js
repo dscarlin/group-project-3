@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {Popper, Typography, Button, Fade, Paper } from "@material-ui/core";
-// import Delete from "@material-ui/icons/Delete";
-// import { red } from "@material-ui/core/colors";
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -30,8 +29,7 @@ export default function applicationPopper(props) {
     const handleClick = e => props.togglePopper(e);
     const handleSubmit = e => {
         props.submit(e);
-        props.setViewState({applied: true})
-    }
+    };
     return (
         <Fragment>
             <Popper  id={id} open={open} anchorEl={props.applState.anchorEl} transition>
