@@ -75,7 +75,7 @@ export default function Landing(props) {
                     </Grid>
                 </Paper>
                 <div className={classes.overview}>
-                    <Typography variant="p" color="inherit">
+                    <Typography variant="body1" color="inherit">
                         Our goal is to make the hiring process in the restaurant industry easier for all involved.  Applicants can apply to all of our member restaurants at once by submitting our easy online questionaire.  Restaurant managers are then able to search our talent pool to find the perfect candidates to fufill their needs.   
                     </Typography>
                     <br />
