@@ -1,8 +1,4 @@
 const mongoose = require("mongoose");
-<<<<<<< HEAD
-// const ms = require("ms")
-=======
->>>>>>> 2b346556e9aee488c74405dad1f7404dd39284cd
 const Schema = mongoose.Schema;
 const appSchema = new Schema({
   selectedPositions: {

@@ -11,6 +11,7 @@ import SimpleModal from "./components/Modal";
 import LoginLoading from './components/LoginLoading';
 import SecuredRoute from './components/SecuredRoute';
 import EmployerSignupForm from './components/EmployerSignupForm';
+import NoMatch from "./components/NoMatch";
 
 import "./App.css";
 
@@ -77,7 +78,8 @@ class App extends Component {
                         <SecuredRoute path="/dashboard" component={(props) =>   
                             <Dashboard {...props} setAppState={this.appState} getSavedAndMessaged={this.getSavedAndMessaged} messageApplicant={this.messageApplicant} appState={this.state} />} />
                         {/* need to make a no-match component  to go in this route */}
-                        <Route component={ Landing }/> 
+                        <Route component={ Landing }/>
+                        {/* <Route component={NoMatch}/>  */}
                     </Switch>
                 </Router>
                 <SimpleModal component={EmployerSignupForm} passedProps={{noShadow: true}} open={this.state.modalOpen} appState={this.appState} togglOpen={this.toggleModal}/>
