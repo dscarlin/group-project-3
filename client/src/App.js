@@ -50,7 +50,7 @@ class App extends Component {
         employer.messaged.push(applicant._id)
         if(employer.interested.indexOf(applicant._id) < 0)
             employer.interested.push(applicant._id)
-        const message = `Congrats ${applicant.name}, ${employer.businessName} found you on On The Fly and would like ` +
+        const message = `Congrats ${applicant.name}, ${employer.businessName} found you though On The Fly and would like ` +
             `to set up an interview! Contact them at ${employer.phone}. Their ` +
             `address is:  ${employer.streetAddress}  ${employer.city}, ${employer.state} ${employer.zipcode}.`
         const payload = { message, phoneNumber: applicant.phone}
