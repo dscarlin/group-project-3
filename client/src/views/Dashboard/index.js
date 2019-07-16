@@ -16,8 +16,6 @@ const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
         position: "relative",
-        // marginTop: theme.spacing(1),
-        // padding: 10,
     },
     avatar: {
         padding: 6,
@@ -36,7 +34,6 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "#3F51B5",
     },
     control: {
-        // border: "solid black 1px",
         paddingTop: "2em"
     },
     fixed: {
@@ -46,7 +43,6 @@ const useStyles = makeStyles(theme => ({
         height: "100vh"     
     },
     paper: {
-        // padding: theme.spacing(2),
         padding: 30,
         margin: 10
     },

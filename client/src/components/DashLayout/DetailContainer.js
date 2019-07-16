@@ -73,7 +73,7 @@ export default (props) => {
                             :
                             <ButtonBase onClick={() => props.messageApplicant(applicants[SelectedApplicant])}>
                             
-                                <Message fontSize="large" color="action" aria-label="Send SMS Interview Invitation"/>
+                                <Message fontSize="default" color="action" aria-label="Send SMS Interview Invitation"/>
                                 <Typography variant="button">Send SMS Interview Invitation</Typography>
                         
                             </ButtonBase>
