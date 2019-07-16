@@ -1,10 +1,9 @@
 import React from "react";
 import moment from "moment";
-import { Grid, Typography, Avatar, Divider, Card, CardContent, ButtonBase, CardHeader } from "@material-ui/core";
-import { Email, Phone } from "@material-ui/icons";
+import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader, ButtonBase, ListItem } from "@material-ui/core";
+import { Email, Phone, ExpandLess, ExpandMore } from "@material-ui/icons";
 import ExpansionPanel from "../ExpansionPanel";
 import Message from "@material-ui/icons/Message";
-
 
 
 export default (props) => {
@@ -23,7 +22,7 @@ export default (props) => {
             <ExpansionPanel  
                 expanded={expanded}
                 handleChange={handleChange}
-                key={`${restaurant}-Item`} 
+                key={index} 
                 index={index} 
                 restaurant={restaurant} 
                 details={details} 

@@ -6,7 +6,8 @@ const style = {
     backgroundImage: "url('http://themomnerd.com/wp-content/uploads/unbelievable-modern-restaurant-design-you-have-to-check-out-6-concept-ideas.jpg')",
     backgroundSize: "cover",
     backgroundAttachment: "fixed",
-    minHeight: "100vh"
+    minHeight: "100vh",
+    paddingBottom: "5em",
 }
 
 class Apply extends Component {

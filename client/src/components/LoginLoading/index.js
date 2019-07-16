@@ -23,7 +23,7 @@ class LoginLoading extends Component {
     }
     render() {
         return (
-            <Fragment><h1 style={{margin: "20vh auto",}}><div className="loader">Loading...</div>Loading Profile</h1> </Fragment>
+            <Fragment><h1 style={{margin: "20vh auto"}} align="center"><div className="loader">Loading...</div>Loading Profile</h1> </Fragment>
         );
     }
 }

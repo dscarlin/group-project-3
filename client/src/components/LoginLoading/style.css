@@ -1,8 +1,9 @@
 .loader {
-    color: black;
+    color: #3F51B5;
     font-size: 24px;
     text-indent: -9999em;
     display: inline-block;
+
     width: 1em;
     height: 1em;
     border-radius: 50%;
