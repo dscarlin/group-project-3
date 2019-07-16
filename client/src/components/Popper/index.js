@@ -45,7 +45,7 @@ export default function SimplePopper(props) {
                                 <br/><small>Appplicant will be removed from all future searches</small>
                                 <br/><small>* This operation cannot be undone </small>
                             </Typography>
-                            <Button  onClick={props.removeApplicant}>Delete</Button>
+                            <Button  onClick={props.removeApplicant}>Remove</Button>
                             <Button className="removeButton" onClick={handleClick}>Cancel</Button>
                         </Paper>
                     </Fade>

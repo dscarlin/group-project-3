@@ -10,11 +10,7 @@ import ApplicationPopper from "../ApplicationPopper";
 const styles = () => ({
     form: {
         background: "#fffffff8",
-<<<<<<< HEAD
         margin: "5em auto 0",
-=======
-        margin: "8em auto",
->>>>>>> f934b3277271cac46bf43914d17590c6f6c13d2c
         width: "760px",
         maxWidth: "90vw",
         minWidth: "50vw",

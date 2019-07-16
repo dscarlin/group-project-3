@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Container, IconButton, Slide} from "@material-ui/core";
+import { Grid, Container, IconButton, Slide, Snackbar, SnackbarContent} from "@material-ui/core";
 import { InfoOutlined } from "@material-ui/icons";
 import SearchForm from "../../components/SearchForm";
 import Results from "../../components/DashLayout/Results";
@@ -165,7 +165,6 @@ export default function Dashboard(props) {
                     applicants={applicants}
                 />
             </Grid>
-           
         </Container>
     );
 }
