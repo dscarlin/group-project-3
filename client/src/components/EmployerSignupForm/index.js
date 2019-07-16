@@ -11,10 +11,8 @@ import axios from "axios";
 const styles = () => ({
     form: {
         margin: "2em auto",
-        // width: "fit-conteant",
         maxWidth: "90vw",
-        minWidth: "30vw",
-        
+        minWidth: "30vw",     
         padding: "2em"
     },
     shadow: {

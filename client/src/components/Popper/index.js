@@ -36,9 +36,6 @@ export default function SimplePopper(props) {
     return (
         <div>
             <Delete aria-describedby={id} variant="contained" onClick={handleClick}/>
-            {/* <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-        Toggle Popper
-      </Button> */}
             <Popper id={id} open={open} anchorEl={anchorEl} transition>
                 {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={350}>
