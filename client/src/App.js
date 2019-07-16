@@ -11,7 +11,6 @@ import SimpleModal from "./components/Modal";
 import LoginLoading from './components/LoginLoading';
 import SecuredRoute from './components/SecuredRoute';
 import EmployerSignupForm from './components/EmployerSignupForm';
-import NoMatch from "./components/NoMatch";
 
 import "./App.css";
 

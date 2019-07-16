@@ -22,7 +22,7 @@ export default (props) => {
             <ExpansionPanel  
                 expanded={expanded}
                 handleChange={handleChange}
-                key={`${restaurant}-Item`} 
+                key={index} 
                 index={index} 
                 restaurant={restaurant} 
                 details={details} 
