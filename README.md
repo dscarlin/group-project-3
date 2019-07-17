@@ -23,6 +23,9 @@ https://github.com/dscarlin/group-project-3
 * Express
 * Auth0
 * Twilio
+* MomentJS
+* Morgan
+* MS
 
 ## Authors
 
