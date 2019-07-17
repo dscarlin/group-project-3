@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
-import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader, ButtonBase, ListItem } from "@material-ui/core";
-import { Email, Phone, ExpandLess, ExpandMore } from "@material-ui/icons";
+import { Grid, Typography, Avatar, Divider, Card, CardContent, CardHeader, ButtonBase } from "@material-ui/core";
+import { Email, Phone } from "@material-ui/icons";
 import ExpansionPanel from "../ExpansionPanel";
 import Message from "@material-ui/icons/Message";
 

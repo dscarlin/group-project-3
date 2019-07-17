@@ -57,9 +57,11 @@ class App extends Component {
         const result = await axios.post(`/api/applicant/${applicant._id}`,payload,{
             headers: { "Authorization": `Bearer ${auth0Client.getIdToken()}` }
         });
+        this.setState({userInfo: employer})
+        this.getSavedAndMessaged()
         console.log(result);
     };
-    
+  
     render() {
         return (
             <React.Fragment>
