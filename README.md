@@ -1,29 +1,33 @@
-# Create React Express App
+# On The Fly Staffing
 
-## About This Boilerplate
+## About 
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
-
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
-
-## Starting the app locally
-
-Start by installing front and backend dependencies. While in this directory, run the following command:
-
-```
-npm install
-```
-
-This should install node modules within the server and the client folder.
-
-After both installations complete, run the following command in your terminal:
-
-```
-npm start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+On The Fly Staffing was developed to make the hiring process in the restaurant industry easier for all involved.  Applicants can submit a single application that will be archived in a database that is searchable by employers.  Employers are able to search the pool of applicants by position or availablity.  They are also able to save a candidate's profile and send an SMS invite to schedule an interview. 
 
 ## Deployment (Heroku)
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+https://on-the-fly-staff.herokuapp.com/
+
+## View Code
+
+https://github.com/dscarlin/group-project-3
+
+## Technologies
+
+* React 
+* React-router-dom
+* Material-UI
+* MongoDB
+* Mongoose
+* Axios
+* Express
+* Auth0
+* Twilio
+
+## Authors
+
+* Bryan Valencia
+* David Carlin
+* Joshua Lewis
+* Paul Nelson
+
